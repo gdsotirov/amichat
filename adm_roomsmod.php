@@ -13,11 +13,11 @@
 
   function PrintAction() {
     if ( isset($_POST['SubmitAdd']) )
-        echo "Добавяне";
+        echo "Р”РѕР±Р°РІСЏРЅРµ";
     elseif( isset($_POST['SubmitEdit']) )
-        echo "Редакция";
+        echo "Р РµРґР°РєС†РёСЏ";
     elseif( isset($_POST['SubmitDel']) || isset($_POST['Delete']) || isset($_POST['CancelDelete']) )
-        echo "Изтриване";
+        echo "РР·С‚СЂРёРІР°РЅРµ";
   }
 
   function PrintOK($msg) {
@@ -26,7 +26,7 @@
     print("<tr><td>$msg</td></tr>\n");
     print("<tr><td>&nbsp;</td></tr>\n");
     print("<tr><td align=\"center\">\n");
-    print("<input type=\"submit\" name=\"Submit\" value=\"Добре\" />");
+    print("<input type=\"submit\" name=\"Submit\" value=\"Р”РѕР±СЂРµ\" />");
     print("</td></tr>\n");
   }
 
@@ -42,17 +42,17 @@
 
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=windows-1251" />
-<title><?php echo CHAT_NAME ?> Административни страници: Стаи -> <?php PrintAction() ?></title>
+<title><?php echo CHAT_NAME ?> РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅРё СЃС‚СЂР°РЅРёС†Рё: РЎС‚Р°Рё -> <?php PrintAction() ?></title>
 <link href="chat.css" rel="stylesheet" type="text/css" />
 <script defer="defer" src="common.js" type="text/javascript"></script>
 </head>
 
 <body class="Admin" onload="javascript: focusFirst(); return true">
-<p align="center" class="midhdr">Административни страници:
-<a href="adm_rooms.php" class="aMidHdr">Стаи</a> -&gt; <?php PrintAction() ?></p>
+<p align="center" class="midhdr">РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅРё СЃС‚СЂР°РЅРёС†Рё:
+<a href="adm_rooms.php" class="aMidHdr">РЎС‚Р°Рё</a> -&gt; <?php PrintAction() ?></p>
 <table align="center" class="tbThinBorder" cellspacing="0" width="100%">
 <?php PrintTabs('rooms') ?><tr><td colspan="6" class="tdData">
-<p align="center" class="smlhdr"><?php PrintAction() ?> на стаи</p>
+<p align="center" class="smlhdr"><?php PrintAction() ?> РЅР° СЃС‚Р°Рё</p>
 <?php
   if ( isset($_POST['SubmitAdd']) ) { /* Process add request */
     $Error     = FALSE;
@@ -81,8 +81,8 @@
             $query .= " CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
             @mysql_query($query, $lnk);
             if ( @mysql_affected_rows($lnk) == 1 )
-              PrintOK("Стаята ".$_POST['Name']." е добавена успешно.");
-            else PrintOK("Стаята НЕ е добавенa!");
+              PrintOK("РЎС‚Р°СЏС‚Р° ".$_POST['Name']." Рµ РґРѕР±Р°РІРµРЅР° СѓСЃРїРµС€РЅРѕ.");
+            else PrintOK("РЎС‚Р°СЏС‚Р° РќР• Рµ РґРѕР±Р°РІРµРЅa!");
             @mysql_close($lnk);
           }
           else {
@@ -98,18 +98,18 @@
     }
     if ( !isset($_POST['CheckForm']) || $Error ) {
       // Print form with or without errors
-?><p align="center"><span class="required">*</span> - задължително поле</p>
+?><p align="center"><span class="required">*</span> - Р·Р°РґСЉР»Р¶РёС‚РµР»РЅРѕ РїРѕР»Рµ</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr valign="top">
-<td align="right" width="50%">Име <span class="required">*</span></td>
+<td align="right" width="50%">РРјРµ <span class="required">*</span></td>
 <td><input type="text" name="Name" maxlength="16" size="16"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Name']."\" /><br />\n");
     print($Name_Err);
   }
   else print(" />"); ?></td></tr>
-<tr valign="top"><td align="right">Описание</td>
+<tr valign="top"><td align="right">РћРїРёСЃР°РЅРёРµ</td>
 <td><input type="text" name="Descr" maxlength="255" size="32"<?php
   if ( $Error )
     print(" value=\"".$_POST['Descr']."\" /><br />\n");
@@ -117,9 +117,9 @@
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr><td align="center" colspan="2">
 <input type="hidden" name="CheckForm" value="1" />
-<input type="submit" name="SubmitAdd" value="Добави" />
-<input type="reset" name="Reset" value="Изчисти" />
-<input type="submit" name="CancelAdd" value="Откажи" />
+<input type="submit" name="SubmitAdd" value="Р”РѕР±Р°РІРё" />
+<input type="reset" name="Reset" value="РР·С‡РёСЃС‚Рё" />
+<input type="submit" name="CancelAdd" value="РћС‚РєР°Р¶Рё" />
 </td></tr><?php
     }
   }
@@ -161,11 +161,11 @@
               } // while
               @mysql_close($lnk);
               if ( $EditCount == $RoomCount )
-                PrintOK("Стаите са редактирани успешно.");
+                PrintOK("РЎС‚Р°РёС‚Рµ СЃР° СЂРµРґР°РєС‚РёСЂР°РЅРё СѓСЃРїРµС€РЅРѕ.");
               elseif( $EditCount > 0 && $EditCount < $RoomCount )
-                PrintOK("Някои от стаите са редактирани успешно!");
+                PrintOK("РќСЏРєРѕРё РѕС‚ СЃС‚Р°РёС‚Рµ СЃР° СЂРµРґР°РєС‚РёСЂР°РЅРё СѓСЃРїРµС€РЅРѕ!");
               elseif( $EditCount == 0 )
-                PrintOK("Стаите НЕ са редактирани успешно!");
+                PrintOK("РЎС‚Р°РёС‚Рµ РќР• СЃР° СЂРµРґР°РєС‚РёСЂР°РЅРё СѓСЃРїРµС€РЅРѕ!");
             }
             else {
               PrintError(202);
@@ -187,14 +187,14 @@
             MakeQueryList($RoomIds, $query);
             $res = @mysql_query($query, $lnk);
             if ( @mysql_num_rows($res) > 0 ) { ?>
-<p align="center"><span class="required">*</span> - задължително поле</p>
+<p align="center"><span class="required">*</span> - Р·Р°РґСЉР»Р¶РёС‚РµР»РЅРѕ РїРѕР»Рµ</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
               $Index = 0;
               while ( $RoomDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) { ?>
 <tr valign="top"><td align="right">
 <input type="hidden" name="RoomIds[]" value="<?php echo $RoomDetails['RoomID'] ?>" />
-<b>Име</b> <span class="required">*</span></td>
+<b>РРјРµ</b> <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="16" size="16"<?php
   if ( $Error[$Index] ) {
     print(" value=\"".$Name[$Index]."\" /><br />\n");
@@ -202,7 +202,7 @@
   }
   else print(" value=\"".$RoomDetails['RoomName']."\" />"); ?></td></tr>
 <tr valign="top">
-<td align="right">Описание</td>
+<td align="right">РћРїРёСЃР°РЅРёРµ</td>
 <td><input type="text" name="Descr[]" maxlength="255" size="32"<?php
   if ( $Error[$Index] ) {
     print(" value=\"".$Descr[$Index]."\" /><br />\n");
@@ -213,8 +213,8 @@
 <?php         } // while ?>
 <tr><td align="center" colspan="2">
 <input type="hidden" name="CheckForms" value="1" />
-<input type="submit" name="SubmitEdit" value="Редактирай" />
-<input type="submit" name="CancelEdit" value="Откажи" /></td></tr><?php
+<input type="submit" name="SubmitEdit" value="Р РµРґР°РєС‚РёСЂР°Р№" />
+<input type="submit" name="CancelEdit" value="РћС‚РєР°Р¶Рё" /></td></tr><?php
             } // if ( num_rows > 0...
             @mysql_free_result($res);
             //@mysql_close($lnk);
@@ -246,7 +246,7 @@
           $res = @mysql_query($query, $lnk); ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
-<tr><td>Желаете ли да изтриете тези стаи?</td></tr>
+<tr><td>Р–РµР»Р°РµС‚Рµ Р»Рё РґР° РёР·С‚СЂРёРµС‚Рµ С‚РµР·Рё СЃС‚Р°Рё?</td></tr>
 <tr><td><ul><?php
           while ( $RoomDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
             print("<li>".$RoomDetails['RoomName']);
@@ -258,8 +258,8 @@
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td align="center">
-<input type="submit" name="Delete" value="Да" />
-<input type="submit" name="CancelDelete" value="Не" />
+<input type="submit" name="Delete" value="Р”Р°" />
+<input type="submit" name="CancelDelete" value="РќРµ" />
 </td></tr><?php
         }
         else {
@@ -289,11 +289,11 @@
           $DelCount = @mysql_affected_rows($lnk);
           @mysql_close($lnk);
           if ( $DelCount == $RoomCount )
-            PrintOK("Стаите са изтрити успешно.");
+            PrintOK("РЎС‚Р°РёС‚Рµ СЃР° РёР·С‚СЂРёС‚Рё СѓСЃРїРµС€РЅРѕ.");
           elseif( $DelCount > 0 && $DelCount < $RoomCount )
-            PrintOK("Някои от стаите са изтрити успешно!");
+            PrintOK("РќСЏРєРѕРё РѕС‚ СЃС‚Р°РёС‚Рµ СЃР° РёР·С‚СЂРёС‚Рё СѓСЃРїРµС€РЅРѕ!");
           elseif( $DelCount == 0 )
-            PrintOK("Стаите НЕ са изтрити успешно!");
+            PrintOK("РЎС‚Р°РёС‚Рµ РќР• СЃР° РёР·С‚СЂРёС‚Рё СѓСЃРїРµС€РЅРѕ!");
         }
         else {
           PrintError(202);
@@ -317,7 +317,7 @@ height="31" width="88" /></a>
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003
+<p align="center" class="copyright">РђРІС‚РѕСЂ &copy; 2003
 <a class="aCopyright" href="mailto: <?php echo CHAT_CONTACT ?>">
 <?php echo CHAT_AUTHOR ?></a></p>
 </body>

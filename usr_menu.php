@@ -27,13 +27,13 @@
 <tr><td align="left">
 <?php
   $USR_NICK = $_SESSION['USR_NICK'];
-  print("Псевдоним: <b>$USR_NICK</b>&nbsp;");
-  print("Стая: <b>Обща</b>\n");
+  print("РџСЃРµРІРґРѕРЅРёРј: <b>$USR_NICK</b>&nbsp;");
+  print("РЎС‚Р°СЏ: <b>РћР±С‰Р°</b>\n");
 ?>
 </td>
 <td align="right">
-<a class="aButton" href="usr_pref.php" target="_top">Настройки</a>
-<a class="aButton" href="logout.php" target="_top">Изход</a></td></tr>
+<a class="aButton" href="usr_pref.php" target="_top">РќР°СЃС‚СЂРѕР№РєРё</a>
+<a class="aButton" href="logout.php" target="_top">РР·С…РѕРґ</a></td></tr>
 </table>
 </body>
 

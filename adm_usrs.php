@@ -20,30 +20,30 @@
 
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=windows-1251" />
-<title><?php echo CHAT_NAME ?> Административни страници: Потребители</title>
+<title><?php echo CHAT_NAME ?> РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅРё СЃС‚СЂР°РЅРёС†Рё: РџРѕС‚СЂРµР±РёС‚РµР»Рё</title>
 <link href="chat.css" rel="stylesheet" type="text/css" />
 <script defer="defer" src="common.js" type="text/javascript"></script>
 </head>
 
 <body class="Admin" onload="javascript: focusFirst(); return true">
-<p align="center" class="midhdr">Административни страници: Потребители</p>
+<p align="center" class="midhdr">РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅРё СЃС‚СЂР°РЅРёС†Рё: РџРѕС‚СЂРµР±РёС‚РµР»Рё</p>
 <table align="center" class="tbThinBorder" cellspacing="0" width="100%">
 <?php PrintTabs('users'); ?>
 <tr>
 <td colspan="6" class="tdData">
-<p align="center" class="smlhdr">Записани потребители</p>
+<p align="center" class="smlhdr">Р—Р°РїРёСЃР°РЅРё РїРѕС‚СЂРµР±РёС‚РµР»Рё</p>
 <form action="adm_usrsmod.php" method="post">
 <table align="center" cellspacing="0" class="tbInfo" width="100%">
 <tr>
-<th>Избор</th>
-<th>Потр. име</th>
-<th>Псевдоним</th>
-<th>Име</th>
-<th>Е-поща</th>
-<th>Учител</th>
-<th>Цвят</th>
-<th>Записан</th>
-<th>Записан от</th>
+<th>РР·Р±РѕСЂ</th>
+<th>РџРѕС‚СЂ. РёРјРµ</th>
+<th>РџСЃРµРІРґРѕРЅРёРј</th>
+<th>РРјРµ</th>
+<th>Р•-РїРѕС‰Р°</th>
+<th>РЈС‡РёС‚РµР»</th>
+<th>Р¦РІСЏС‚</th>
+<th>Р—Р°РїРёСЃР°РЅ</th>
+<th>Р—Р°РїРёСЃР°РЅ РѕС‚</th>
 </tr>
 <?php
   include("passwd.inc.php");
@@ -102,9 +102,9 @@
 </table>
 <table width="100%">
 <tr><td>&nbsp;</td></tr>
-<tr><td><input name="SubmitAdd" type="submit" value="Добави" />
-<input name="SubmitEdit" type="submit" value="Редактирай" />
-<input name="SubmitDel" type="submit" value="Изтрий" />
+<tr><td><input name="SubmitAdd" type="submit" value="Р”РѕР±Р°РІРё" />
+<input name="SubmitEdit" type="submit" value="Р РµРґР°РєС‚РёСЂР°Р№" />
+<input name="SubmitDel" type="submit" value="РР·С‚СЂРёР№" />
 </td></tr></table></form></td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
 <p align="center"><a href="http://validator.w3.org/check/referer">
@@ -114,7 +114,7 @@ height="31" width="88" /></a>
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003
+<p align="center" class="copyright">РђРІС‚РѕСЂ &copy; 2003
 <a class="aCopyright" href="mailto: <?php echo CHAT_CONTACT ?>">
 <?php echo CHAT_AUTHOR ?></a></p>
 </body>

@@ -14,7 +14,7 @@
     print("<tr><td>$msg</td></tr>\n");
     print("<tr><td>&nbsp;</td></tr>\n");
     print("<tr><td align=\"center\">\n");
-    print("<input type=\"submit\" name=\"Submit\" value=\"Добре\" />\n");
+    print("<input type=\"submit\" name=\"Submit\" value=\"Р”РѕР±СЂРµ\" />\n");
     print("</td></tr>\n");
   }
 
@@ -38,7 +38,7 @@
         $Password_Err  = CheckStringField($Error, $_POST['Password'], 6, 32, true);
         $Password2_Err = CheckStringField($Error, $_POST['Password2'], 6, 32, true);
         if ( strcmp($_POST['Password'],$_POST['Password2']) != 0 ) {
-          $Password2_Err = "<span class=\"error\">Паролите не съвпадат!</span>";
+          $Password2_Err = "<span class=\"error\">РџР°СЂРѕР»РёС‚Рµ РЅРµ СЃСЉРІРїР°РґР°С‚!</span>";
           $Error = TRUE;
         }
       }
@@ -78,9 +78,9 @@
             @mysql_query($query, $lnk);
             if ( @mysql_affected_rows($lnk) == 1 ) {
               $_SESSION['USR_NICK'] = $_POST['Nick'];
-              PrintOK("Вашите данни са променени успешно.");
+              PrintOK("Р’Р°С€РёС‚Рµ РґР°РЅРЅРё СЃР° РїСЂРѕРјРµРЅРµРЅРё СѓСЃРїРµС€РЅРѕ.");
             }
-            else PrintOK("Вашите данни НЕ са променени!");
+            else PrintOK("Р’Р°С€РёС‚Рµ РґР°РЅРЅРё РќР• СЃР° РїСЂРѕРјРµРЅРµРЅРё!");
             @mysql_close($lnk);
             if ( isset($_POST['Refresh']) )
               $_SESSION['USR_REFRESH'] = $_POST['Refresh'];
@@ -129,7 +129,7 @@
 </head>
 
 <body class="User" onload="javascript: previewColor();">
-<p align="center" class="smlhdr">Редактиране на потребителски настройки</p>
+<p align="center" class="smlhdr">Р РµРґР°РєС‚РёСЂР°РЅРµ РЅР° РїРѕС‚СЂРµР±РёС‚РµР»СЃРєРё РЅР°СЃС‚СЂРѕР№РєРё</p>
 <?php  
     if ( !isset($_POST['CheckForm']) || $Error ) {
       include("passwd.inc.php");
@@ -145,16 +145,16 @@
 
           $UsrDetails = @mysql_fetch_array($UsrRes, MYSQL_ASSOC);
 ?>
-<p align="center"><span class="required">*</span> - задължително поле<br />
-<span class="required">**</span> - задължително само ако другото поле за
-парола е попълнено</p>
+<p align="center"><span class="required">*</span> - Р·Р°РґСЉР»Р¶РёС‚РµР»РЅРѕ РїРѕР»Рµ<br />
+<span class="required">**</span> - Р·Р°РґСЉР»Р¶РёС‚РµР»РЅРѕ СЃР°РјРѕ Р°РєРѕ РґСЂСѓРіРѕС‚Рѕ РїРѕР»Рµ Р·Р°
+РїР°СЂРѕР»Р° Рµ РїРѕРїСЉР»РЅРµРЅРѕ</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
-<tr><th align="left" colspan="2">Системна информация</th></tr>
-<tr><td align="right">Потребителско име</td>
+<tr><th align="left" colspan="2">РЎРёСЃС‚РµРјРЅР° РёРЅС„РѕСЂРјР°С†РёСЏ</th></tr>
+<tr><td align="right">РџРѕС‚СЂРµР±РёС‚РµР»СЃРєРѕ РёРјРµ</td>
 <td><b><?php echo $UsrDetails['Username'] ?></b></td>
 </tr>
-<tr valign="top"><td align="right">Парола <span class="required">**</span></td>
+<tr valign="top"><td align="right">РџР°СЂРѕР»Р° <span class="required">**</span></td>
 <td><input type="password" name="Password" maxlength="32" size="32"<?php
   if ( $Error ) {
     print(" /><br />");
@@ -162,15 +162,15 @@
   }
   else print(" />\n"); ?></td></tr>
 <tr valign="top">
-<td align="right">Парола (повторете) <span class="required">**</span></td>
+<td align="right">РџР°СЂРѕР»Р° (РїРѕРІС‚РѕСЂРµС‚Рµ) <span class="required">**</span></td>
 <td><input type="password" name="Password2" maxlength="32" size="32"<?php
   if ( $Error ) {
     print(" /><br />");
     print($Password2_Err);
   }
   else print(" />\n"); ?></td></tr>
-<tr><th align="left" colspan="2">Лична информация</th></tr>
-<tr valign="top"><td align="right">Псевдоним <span class="required">*</span></td>
+<tr><th align="left" colspan="2">Р›РёС‡РЅР° РёРЅС„РѕСЂРјР°С†РёСЏ</th></tr>
+<tr valign="top"><td align="right">РџСЃРµРІРґРѕРЅРёРј <span class="required">*</span></td>
 <td><input id="Nickname" type="text" name="Nick" maxlength="96" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Nick']."\" /><br />");
@@ -181,7 +181,7 @@
     print("<input type=\"hidden\" name=\"OrigNick\" value=\"");
     print($UsrDetails['Nickname']."\" />\n");
   } ?></td></tr>
-<tr valign="top"><td align="right">Име <span class="required">*</span></td>
+<tr valign="top"><td align="right">РРјРµ <span class="required">*</span></td>
 <td><input type="text" name="Name" maxlength="96" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Name']."\" /><br />");
@@ -192,7 +192,7 @@
     print("<input type=\"hidden\" name=\"OrigName\" value=\"");
     print($UsrDetails['UsrName']."\" />\n");
   } ?></td></tr>
-<tr valign="top"><td align="right">Е-поща</td>
+<tr valign="top"><td align="right">Р•-РїРѕС‰Р°</td>
 <td><input type="text" name="Email" maxlength="255" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Email']."\" />");
@@ -202,10 +202,10 @@
     print("<input type=\"hidden\" name=\"OrigEmail\" value=\"");
     print($UsrDetails['Email']."\" />\n");
   } ?></td></tr>
-<tr valign="top"><td align="right">Цвят</td>
+<tr valign="top"><td align="right">Р¦РІСЏС‚</td>
 <td>
 <select id="ColorPicker" name="Color" onchange="javascript: previewColor();">
-<option value="">-- Моля, изберете цвят --</option>
+<option value="">-- РњРѕР»СЏ, РёР·Р±РµСЂРµС‚Рµ С†РІСЏС‚ --</option>
 <?php
           if ( @mysql_num_rows($ClrRes) > 0 )
             while ( $Clr = @mysql_fetch_array($ClrRes, MYSQL_ASSOC) ) {
@@ -226,8 +226,8 @@
   print($UsrDetails['ColorID']."\" />\n");
 ?>
 </td></tr>
-<tr><th align="left" colspan="2">Настройки за текущата сесия</th></tr>
-<tr><td align="right">Опресняване на всеки</td>
+<tr><th align="left" colspan="2">РќР°СЃС‚СЂРѕР№РєРё Р·Р° С‚РµРєСѓС‰Р°С‚Р° СЃРµСЃРёСЏ</th></tr>
+<tr><td align="right">РћРїСЂРµСЃРЅСЏРІР°РЅРµ РЅР° РІСЃРµРєРё</td>
 <td><select name="Refresh">
 <?php
   $RefreshArr = array("5", "10", "15", "20");
@@ -240,8 +240,8 @@
     print(">$val</option>\n");
   }
 ?>
-</select> секунди </td></tr>
-<tr><td align="right">Показвай</td>
+</select> СЃРµРєСѓРЅРґРё </td></tr>
+<tr><td align="right">РџРѕРєР°Р·РІР°Р№</td>
 <td><select name="MsgCount">
 <?php
   $MsgCntArr = array("10", "15", "20", "25", "30", "35", "40", "45", "50");
@@ -254,12 +254,12 @@
     print(">$val</option>\n");
   }
 ?>
-</select> съобщения</td></tr>
+</select> СЃСЉРѕР±С‰РµРЅРёСЏ</td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr><td align="center" colspan="2">
 <input type="hidden" name="CheckForm" value="1" />
-<input type="submit" name="SubmitEdit" value="Редактирай" />
-<input type="submit" name="CancelEdit" value="Откажи" />
+<input type="submit" name="SubmitEdit" value="Р РµРґР°РєС‚РёСЂР°Р№" />
+<input type="submit" name="CancelEdit" value="РћС‚РєР°Р¶Рё" />
 </td></tr>
 <?php
           @mysql_free_result($ClrRes);

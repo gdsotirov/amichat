@@ -1,19 +1,19 @@
 <?php
   $Tabs = array(
             0 => array('name' => 'admins',
-                       'title'=> 'Àäìèíèñòðàòîðè',
+                       'title'=> 'ÐÐ´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð°Ñ‚Ð¾Ñ€Ð¸',
                        'link' => 'adm_adms.php'),
             1 => array('name' => 'users',
-                       'title'=> 'Ïîòðåáèòåëè',
+                       'title'=> 'ÐŸÐ¾Ñ‚Ñ€ÐµÐ±Ð¸Ñ‚ÐµÐ»Ð¸',
                        'link' => 'adm_usrs.php'),
             2 => array('name' => 'colors',
-                       'title'=> 'Öâåòîâå',
+                       'title'=> 'Ð¦Ð²ÐµÑ‚Ð¾Ð²Ðµ',
                        'link' => 'adm_clrs.php'),
             3 => array('name' => 'rooms',
-                       'title'=> 'Ñòàè',
+                       'title'=> 'Ð¡Ñ‚Ð°Ð¸',
                        'link' => 'adm_rooms.php'),
             4 => array('name' => 'exit',
-                       'title'=> 'Èçõîä',
+                       'title'=> 'Ð˜Ð·Ñ…Ð¾Ð´',
                        'link' => 'adm_exit.php')
   );
 

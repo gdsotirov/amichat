@@ -6,8 +6,8 @@
 
   $TITLE = CHAT_NAME;
   if ( isset($ADMLOGIN) )
-    $TITLE = $TITLE." - Вход за администратори ";
-  else $TITLE = $TITLE." - Вход за потребители ";
+    $TITLE = $TITLE." - Р’С…РѕРґ Р·Р° Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРё ";
+  else $TITLE = $TITLE." - Р’С…РѕРґ Р·Р° РїРѕС‚СЂРµР±РёС‚РµР»Рё ";
 
   print("<?xml version=\"1.0\" encoding=\"Windows-1251\"?>\n");
 ?>
@@ -29,17 +29,17 @@
 <form action="login.php" name="LoginForm" method="post">
 <table align="center">
 <tr>
-<td>Потребителско име</td>
+<td>РџРѕС‚СЂРµР±РёС‚РµР»СЃРєРѕ РёРјРµ</td>
 <td><input type="text" name="Username" size="32" maxlength="32" /></td>
 </tr>
 <tr>
-<td>Парола</td>
+<td>РџР°СЂРѕР»Р°</td>
 <td><input type="password" name="Password" size="32" maxlength="32" /></td>
 </tr>
 <tr>
 <td align="center" colspan="2">
-<input type="submit" name="Submit" value="Вход" />
-<input type="reset" name="Reset" value="Изчисти" />
+<input type="submit" name="Submit" value="Р’С…РѕРґ" />
+<input type="reset" name="Reset" value="РР·С‡РёСЃС‚Рё" />
 <?php
   if ( isset($ADMLOGIN) )
     print("<input type=\"hidden\" name=\"Admin\" value=\"1\" />");
@@ -51,8 +51,8 @@
 <?php
   print("<a href=\"".$_SERVER['PHP_SELF']);
   if ( !isset($ADMLOGIN) )
-    print("?admin=1\">Вход за администратори");
-  else print("?\">Вход за потребители");
+    print("?admin=1\">Р’С…РѕРґ Р·Р° Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРё");
+  else print("?\">Р’С…РѕРґ Р·Р° РїРѕС‚СЂРµР±РёС‚РµР»Рё");
   print("</a><br />\n");
 ?>
 </td></tr></table></form>
@@ -64,7 +64,7 @@ height="31" width="88" /></a>
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003
+<p align="center" class="copyright">РђРІС‚РѕСЂ &copy; 2003
 <a href="mailto: <?php echo CHAT_CONTACT ?>" class="aCopyright">
 <?php echo CHAT_AUTHOR ?></a></p>
 </body>

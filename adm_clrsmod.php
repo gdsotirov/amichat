@@ -13,11 +13,11 @@
 
   function PrintAction() {
     if ( isset($_POST['SubmitAdd']) )
-      echo "Добавяне";
+      echo "Р”РѕР±Р°РІСЏРЅРµ";
     elseif ( isset($_POST['SubmitEdit']) )
-      echo "Редакция";
+      echo "Р РµРґР°РєС†РёСЏ";
     elseif ( isset($_POST['SubmitDel']) || isset($_POST['Delete']) || isset($_POST['CancelDelete']) )
-      echo "Изтриване";
+      echo "РР·С‚СЂРёРІР°РЅРµ";
   }
 
   function PrintOK($msg) {
@@ -26,7 +26,7 @@
     print("<tr><td>$msg</td></tr>\n");
     print("<tr><td>&nbsp;</td></tr>\n");
     print("<tr><td align=\"center\">\n");
-    print("<input type=\"submit\" name=\"Submit\" value=\"Добре\" />");
+    print("<input type=\"submit\" name=\"Submit\" value=\"Р”РѕР±СЂРµ\" />");
     print("</td></tr>\n");
   }
 
@@ -43,7 +43,7 @@
 
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=windows-1251" />
-<title><?php echo CHAT_NAME ?> Административни страници: Цветове -> <?php PrintAction() ?></title>
+<title><?php echo CHAT_NAME ?> РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅРё СЃС‚СЂР°РЅРёС†Рё: Р¦РІРµС‚РѕРІРµ -> <?php PrintAction() ?></title>
 <link href="chat.css" rel="stylesheet" type="text/css" />
 <script defer="defer" src="common.js" type="text/javascript"></script>
 <script type="text/javascript"><!--
@@ -63,11 +63,11 @@
 </head>
 
 <body class="Admin" onload="javascript: focusFirst(); previewColor(); return true">
-<p align="center" class="midhdr">Административни страници:
-<a href="adm_clrs.php" class="aMidHdr">Цветове</a> -&gt; <?php PrintAction() ?></p>
+<p align="center" class="midhdr">РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅРё СЃС‚СЂР°РЅРёС†Рё:
+<a href="adm_clrs.php" class="aMidHdr">Р¦РІРµС‚РѕРІРµ</a> -&gt; <?php PrintAction() ?></p>
 <table align="center" class="tbThinBorder" cellspacing="0" width="100%">
 <?php PrintTabs('colors') ?><tr><td colspan="6" class="tdData">
-<p align="center" class="smlhdr"><?php PrintAction() ?> на цветове</p>
+<p align="center" class="smlhdr"><?php PrintAction() ?> РЅР° С†РІРµС‚РѕРІРµ</p>
 <?php
   if ( isset($_POST['SubmitAdd']) ) { /* Process add request */
     $Error     = FALSE;
@@ -81,9 +81,9 @@
       $Green = $_POST['Green'][0];
       $Blue  = $_POST['Blue'][0];
       $Name_Err  = CheckStringField($Error, $Name, 1, 16);
-      $Red_Err   = CheckNumField($Error, $Red, 0, 255, "единици");
-      $Green_Err = CheckNumField($Error, $Green, 0, 255, "единици");
-      $Blue_Err  = CheckNumField($Error, $Blue, 0, 255, "единици");
+      $Red_Err   = CheckNumField($Error, $Red, 0, 255, "РµРґРёРЅРёС†Рё");
+      $Green_Err = CheckNumField($Error, $Green, 0, 255, "РµРґРёРЅРёС†Рё");
+      $Blue_Err  = CheckNumField($Error, $Blue, 0, 255, "РµРґРёРЅРёС†Рё");
       if ( !$Error ) {
         include("passwd.inc.php");
         if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
@@ -107,8 +107,8 @@
             $query .= "CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
             @mysql_query($query, $lnk);
             if ( @mysql_affected_rows($lnk) == 1 )
-              PrintOK("Цветът ".$Name." е добавен успешно.");
-            else PrintOK("Цветът НЕ е добавен!");
+              PrintOK("Р¦РІРµС‚СЉС‚ ".$Name." Рµ РґРѕР±Р°РІРµРЅ СѓСЃРїРµС€РЅРѕ.");
+            else PrintOK("Р¦РІРµС‚СЉС‚ РќР• Рµ РґРѕР±Р°РІРµРЅ!");
             @mysql_close($lnk);
           }
           else {
@@ -125,11 +125,11 @@
     if ( !isset($_POST['CheckForm']) || $Error ) {
       // Print form with or without errors
 ?>
-<p align="center"><span class="required">*</span> - задължително поле</p>
+<p align="center"><span class="required">*</span> - Р·Р°РґСЉР»Р¶РёС‚РµР»РЅРѕ РїРѕР»Рµ</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr valign="top">
-<td align="right">Име <span class="required">*</span></td>
+<td align="right">РРјРµ <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="16" size="16"<?php
   if ( $Error ) {
     print(" value=\"".$Name."\" /><br />\n");
@@ -137,8 +137,8 @@
   }
   else print(" />"); ?></td>
 <td class="ColorPreviewCell" id="ColorPreview" name="ColorPreview" rowspan="4">
-Представяне на цвета</td></tr>
-<tr valign="top"><td align="right">Червено <span class="required">*</span></td>
+РџСЂРµРґСЃС‚Р°РІСЏРЅРµ РЅР° С†РІРµС‚Р°</td></tr>
+<tr valign="top"><td align="right">Р§РµСЂРІРµРЅРѕ <span class="required">*</span></td>
 <td><input onkeypress="javascript: previewColor();" type="text" name="Red[]"
  maxlength="3" size="3"<?php
   if ( $Error ) {
@@ -146,7 +146,7 @@
     print($Red_Err);
   }
   else print(" />"); ?></td></tr>
-<tr valign="top"><td align="right">Зелено <span class="required">*</span></td>
+<tr valign="top"><td align="right">Р—РµР»РµРЅРѕ <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Green[]"
  maxlength="3" size="3"<?php
   if ( $Error ) {
@@ -154,7 +154,7 @@
     print($Green_Err);
   }
   else print(" />"); ?></td></tr>
-<tr valign="top"><td align="right">Синьо <span class="required">*</span></td>
+<tr valign="top"><td align="right">РЎРёРЅСЊРѕ <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Blue[]"
  maxlength="3" size="3"<?php
   if ( $Error ) {
@@ -165,9 +165,9 @@
 <tr><td colspan="3">&nbsp;</td></tr>
 <tr><td align="center" colspan="3">
 <input type="hidden" name="CheckForm" value="1" />
-<input type="submit" name="SubmitAdd" value="Добави" />
-<input type="reset" name="Reset" value="Изчисти" />
-<input type="submit" name="CancelAdd" value="Откажи" />
+<input type="submit" name="SubmitAdd" value="Р”РѕР±Р°РІРё" />
+<input type="reset" name="Reset" value="РР·С‡РёСЃС‚Рё" />
+<input type="submit" name="CancelAdd" value="РћС‚РєР°Р¶Рё" />
 </td></tr>
 <?php
     }
@@ -193,9 +193,9 @@
         /* check values in arrays */
         while ( list($ClrKey, $ClrID) = each($ColorIds) ) {
           $Name_Err[$ClrKey]  = CheckStringField($Error[$ClrKey], $Name[$ClrKey], 1, 16);
-          $Red_Err[$ClrKey]   = CheckNumField($Error[$ClrKey], $Red[$ClrKey], 0, 255, "единици");
-          $Green_Err[$ClrKey] = CheckNumField($Error[$ClrKey], $Green[$ClrKey], 0, 255, "единици");
-          $Blue_Err[$ClrKey]  = CheckNumField($Error[$ClrKey], $Blue[$ClrKey], 0, 255, "единици");
+          $Red_Err[$ClrKey]   = CheckNumField($Error[$ClrKey], $Red[$ClrKey], 0, 255, "РµРґРёРЅРёС†Рё");
+          $Green_Err[$ClrKey] = CheckNumField($Error[$ClrKey], $Green[$ClrKey], 0, 255, "РµРґРёРЅРёС†Рё");
+          $Blue_Err[$ClrKey]  = CheckNumField($Error[$ClrKey], $Blue[$ClrKey], 0, 255, "РµРґРёРЅРёС†Рё");
         } // while
         reset($Error);
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
@@ -219,11 +219,11 @@
               } // while
               @mysql_close($lnk);
               if ( $EditCount == $ClrCount )
-                PrintOK("Цветовете са редактирани успешно.");
+                PrintOK("Р¦РІРµС‚РѕРІРµС‚Рµ СЃР° СЂРµРґР°РєС‚РёСЂР°РЅРё СѓСЃРїРµС€РЅРѕ.");
               elseif ( $EditCount > 0 && $EditCount < $ClrCount )
-                PrintOK("Някои от цветовете са редактирани успешно!");
+                PrintOK("РќСЏРєРѕРё РѕС‚ С†РІРµС‚РѕРІРµС‚Рµ СЃР° СЂРµРґР°РєС‚РёСЂР°РЅРё СѓСЃРїРµС€РЅРѕ!");
               elseif ( $EditCount == 0 )
-                PrintOK("Цветовете НЕ са редактирани успешно!");
+                PrintOK("Р¦РІРµС‚РѕРІРµС‚Рµ РќР• СЃР° СЂРµРґР°РєС‚РёСЂР°РЅРё СѓСЃРїРµС€РЅРѕ!");
             }
             else {
               PrintError(202);
@@ -249,14 +249,14 @@
 
             if ( @mysql_num_rows($res) > 0 ) {
 ?>
-<p align="center"><span class="required">*</span> - задължително поле</p>
+<p align="center"><span class="required">*</span> - Р·Р°РґСЉР»Р¶РёС‚РµР»РЅРѕ РїРѕР»Рµ</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
               $Index = 0;
               while ( $ClrDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) { ?>
 <tr valign="top"><td align="right">
 <input type="hidden" name="ColorIds[]" value="<?php echo $ClrDetails['ColorID'] ?>" />
-<b>Име</b><span class="required">*</span></td>
+<b>РРјРµ</b><span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="16" size="16"<?php
   if ( $Error[$Index] ) {
     print(" value=\"".$Name[$Index]."\" /><br />\n");
@@ -264,9 +264,9 @@
   }
   else print(" value=\"".$ClrDetails['ClrName']."\" />"); ?></td>
 <td class="ColorPreviewCell" id="ColorPreview" name="ColorPreview" rowspan="4">
-Представяне на цвета</td></tr>
+РџСЂРµРґСЃС‚Р°РІСЏРЅРµ РЅР° С†РІРµС‚Р°</td></tr>
 <tr valign="top">
-<td align="right">Червено <span class="required">*</span></td>
+<td align="right">Р§РµСЂРІРµРЅРѕ <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Red[]"
  maxlength="3" size="3"<?php
   if ( $Error[$Index] ) {
@@ -275,7 +275,7 @@
   }
   else print(" value=\"".$ClrDetails['Red']."\" />"); ?></td></tr>
 <tr valign="top">
-<td align="right">Зелено <span class="required">*</span></td>
+<td align="right">Р—РµР»РµРЅРѕ <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Green[]"
  maxlength="3" size="3"<?php
   if ( $Error[$Index] ) {
@@ -284,7 +284,7 @@
   }
   else print(" value=\"".$ClrDetails['Green']."\" />"); ?></td></tr>
 <tr valign="top">
-<td align="right">Синьо <span class="required">*</span></td>
+<td align="right">РЎРёРЅСЊРѕ <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Blue[]"
  maxlength="3" size="3"<?php
   if ( $Error[$Index] ) {
@@ -296,8 +296,8 @@
 <?php         } // while ?>
 <tr><td align="center" colspan="3">
 <input type="hidden" name="CheckForms" value="1" />
-<input type="submit" name="SubmitEdit" value="Редактирай" />
-<input type="submit" name="CancelEdit" value="Откажи" /></td></tr>
+<input type="submit" name="SubmitEdit" value="Р РµРґР°РєС‚РёСЂР°Р№" />
+<input type="submit" name="CancelEdit" value="РћС‚РєР°Р¶Рё" /></td></tr>
 <?php
             } // if ( num_rows > 0...
             @mysql_free_result($res);
@@ -330,7 +330,7 @@
           $res = @mysql_query($query, $lnk); ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post"">
 <table align="center">
-<tr><td>Желаете ли да изтриете тези цветове?</td></tr>
+<tr><td>Р–РµР»Р°РµС‚Рµ Р»Рё РґР° РёР·С‚СЂРёРµС‚Рµ С‚РµР·Рё С†РІРµС‚РѕРІРµ?</td></tr>
 <tr><td><ul>
 <?php
           while ( $ClrDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
@@ -344,8 +344,8 @@
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td align="center">
-<input type="submit" name="Delete" value="Да" />
-<input type="submit" name="CancelDelete" value="Не" />
+<input type="submit" name="Delete" value="Р”Р°" />
+<input type="submit" name="CancelDelete" value="РќРµ" />
 </td></tr>
 <?php
         }
@@ -376,11 +376,11 @@
           $DelCount = @mysql_affected_rows($lnk);
           @mysql_close($lnk);
           if ( $DelCount == $ClrCount )
-            PrintOK("Цветовете са изтрити успешно.");
+            PrintOK("Р¦РІРµС‚РѕРІРµС‚Рµ СЃР° РёР·С‚СЂРёС‚Рё СѓСЃРїРµС€РЅРѕ.");
           elseif( $DelCount > 0 && $DelCount < $ClrCount )
-            PrintOK("Някои от цветовете са изтрити успешно!");
+            PrintOK("РќСЏРєРѕРё РѕС‚ С†РІРµС‚РѕРІРµС‚Рµ СЃР° РёР·С‚СЂРёС‚Рё СѓСЃРїРµС€РЅРѕ!");
           elseif( $DelCount == 0 )
-            PrintOK("Цветовете НЕ са изтрити успешно!");
+            PrintOK("Р¦РІРµС‚РѕРІРµС‚Рµ РќР• СЃР° РёР·С‚СЂРёС‚Рё СѓСЃРїРµС€РЅРѕ!");
         }
         else {
           PrintError(202);
@@ -405,7 +405,7 @@ height="31" width="88" /></a>
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003
+<p align="center" class="copyright">РђРІС‚РѕСЂ &copy; 2003
 <a class="aCopyright" href="mailto: <?php echo CHAT_CONTACT ?>">
 <?php echo CHAT_AUTHOR ?></a></p>
 </body>

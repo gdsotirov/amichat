@@ -19,27 +19,27 @@
 
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=windows-1251" />
-<title><?php echo CHAT_NAME ?> Административни страници: Администратори</title>
+<title><?php echo CHAT_NAME ?> РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅРё СЃС‚СЂР°РЅРёС†Рё: РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРё</title>
 <link href="chat.css" rel="stylesheet" type="text/css" />
 <script defer="defer" src="common.js" type="text/javascript"></script>
 </head>
 
 <body class="Admin" onload="javascript: focusFirst(); return true">
-<p align="center" class="midhdr">Административни страници: Администратори</p>
+<p align="center" class="midhdr">РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅРё СЃС‚СЂР°РЅРёС†Рё: РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРё</p>
 <table align="center" class="tbThinBorder" cellspacing="0" width="100%">
 <?php PrintTabs('admins'); ?>
 <tr><td colspan="6" class="tdData">
-<p align="center" class="smlhdr">Записани администратори</p>
+<p align="center" class="smlhdr">Р—Р°РїРёСЃР°РЅРё Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРё</p>
 <form action="adm_admsmod.php" method="post" name="AdminsForm">
 <table align="center" cellspacing="0" class="tbInfo" width="100%">
 <tr>
-<th>Избор</th>
-<th>Потр. име</th>
-<th>Име</th>
-<th>Е-поща</th>
-<th>Телефон</th>
-<th>Записан</th>
-<th>Записан от</th>
+<th>РР·Р±РѕСЂ</th>
+<th>РџРѕС‚СЂ. РёРјРµ</th>
+<th>РРјРµ</th>
+<th>Р•-РїРѕС‰Р°</th>
+<th>РўРµР»РµС„РѕРЅ</th>
+<th>Р—Р°РїРёСЃР°РЅ</th>
+<th>Р—Р°РїРёСЃР°РЅ РѕС‚</th>
 </tr>
 <?php
   include("passwd.inc.php");
@@ -71,7 +71,7 @@
           print("<td>".$AdmDetails['Phone']."</td>\n");
           print("<td>".$AdmDetails['ModDate']." ".$AdmDetails['ModTime']."</td>\n");
           if ( $AdmDetails['AdminID'] == SUPERUSER_ID ) {
-            print("<td>автоматично</td>\n");
+            print("<td>Р°РІС‚РѕРјР°С‚РёС‡РЅРѕ</td>\n");
           }
           else {
             $query  = "SELECT Username FROM administrators";
@@ -90,7 +90,7 @@
       }
       else {
         print("<tr>\n");
-        print("<td>Празно.</td>\n");
+        print("<td>РџСЂР°Р·РЅРѕ.</td>\n");
         print("</tr>\n");
       }
     }
@@ -107,9 +107,9 @@
 </table>
 <table width="100%">
 <tr><td>&nbsp;</td></tr>
-<tr><td><input type="submit" name="SubmitAdd" value="Добави" />
-<input type="submit" name="SubmitEdit" value="Редактирай" />
-<input type="submit" name="SubmitDel" value="Изтрий" />
+<tr><td><input type="submit" name="SubmitAdd" value="Р”РѕР±Р°РІРё" />
+<input type="submit" name="SubmitEdit" value="Р РµРґР°РєС‚РёСЂР°Р№" />
+<input type="submit" name="SubmitDel" value="РР·С‚СЂРёР№" />
 </td></tr></table></form></td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
 <p align="center"><a href="http://validator.w3.org/check/referer">
@@ -119,7 +119,7 @@ height="31" width="88" /></a>
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003
+<p align="center" class="copyright">РђРІС‚РѕСЂ &copy; 2003
 <a class="aCopyright" href="mailto: <?php echo CHAT_CONTACT ?>">
 <?php echo CHAT_AUTHOR ?></a></p>
 </body>

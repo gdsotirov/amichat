@@ -13,11 +13,11 @@
 
   function PrintAction() {
     if ( isset($_POST['SubmitAdd']) )
-      echo "Добавяне";
+      echo "Р”РѕР±Р°РІСЏРЅРµ";
     elseif ( isset($_POST['SubmitEdit']) )
-      echo "Редакция";
+      echo "Р РµРґР°РєС†РёСЏ";
     elseif ( isset($_POST['SubmitDel']) || isset($_POST['Delete']) || isset($_POST['CancelDelete']) )
-      echo "Изтриване";
+      echo "РР·С‚СЂРёРІР°РЅРµ";
   }
 
   function PrintOK($msg) {
@@ -26,7 +26,7 @@
     print("<tr><td>$msg</td></tr>\n");
     print("<tr><td>&nbsp;</td></tr>\n");
     print("<tr><td align=\"center\">\n");
-    print("<input type=\"submit\" name=\"Submit\" value=\"Добре\" />");
+    print("<input type=\"submit\" name=\"Submit\" value=\"Р”РѕР±СЂРµ\" />");
     print("</td></tr>\n");
   }
 
@@ -43,17 +43,17 @@
 
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=windows-1251" />
-<title><?php echo CHAT_NAME ?> Административни страници: Администратори -> <?php PrintAction() ?></title>
+<title><?php echo CHAT_NAME ?> РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅРё СЃС‚СЂР°РЅРёС†Рё: РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРё -> <?php PrintAction() ?></title>
 <link href="chat.css" rel="stylesheet" type="text/css" />
 <script defer="defer" src="common.js" type="text/javascript"></script>
 </head>
 
 <body class="Admin" onload="javascript: focusFirst(); return true">
-<p align="center" class="midhdr">Административни страници:
-<a href="adm_adms.php" class="aMidHdr">Администратори</a> -&gt; <?php PrintAction() ?></p>
+<p align="center" class="midhdr">РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅРё СЃС‚СЂР°РЅРёС†Рё:
+<a href="adm_adms.php" class="aMidHdr">РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРё</a> -&gt; <?php PrintAction() ?></p>
 <table align="center" class="tbThinBorder" cellspacing="0" width="100%">
 <?php PrintTabs('admins') ?><tr><td colspan="6" class="tdData">
-<p align="center" class="smlhdr"><?php PrintAction() ?> на администратори</p>
+<p align="center" class="smlhdr"><?php PrintAction() ?> РЅР° Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРё</p>
 <?php
   if ( isset($_POST['SubmitAdd']) ) { /* Process add request */
     $Error         = FALSE;
@@ -67,7 +67,7 @@
       $Password_Err  = CheckStringField($Error, $_POST['Password'], 6, 32, true);
       $Password2_Err = CheckStringField($Error, $_POST['Password2'], 6, 32, true);
       if (strcmp($_POST['Password'],$_POST['Password2']) != 0) {
-        $Password2_Err = "<span class=\"error\">Паролите не съвпадат!</span>";
+        $Password2_Err = "<span class=\"error\">РџР°СЂРѕР»РёС‚Рµ РЅРµ СЃСЉРІРїР°РґР°С‚!</span>";
         $Error = TRUE;
       }
       $Name_Err  = CheckStringField($Error, $_POST['Name'], 1, 96);
@@ -96,8 +96,8 @@
             $query .= " CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
             @mysql_query($query, $lnk);
             if ( @mysql_affected_rows($lnk) == 1 )
-              PrintOK("Администратора ".$_POST['Username']." (".$_POST['Name'].") е добавен успешно.");
-            else PrintOK("Администратора НЕ е добавен!");
+              PrintOK("РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂР° ".$_POST['Username']." (".$_POST['Name'].") Рµ РґРѕР±Р°РІРµРЅ СѓСЃРїРµС€РЅРѕ.");
+            else PrintOK("РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂР° РќР• Рµ РґРѕР±Р°РІРµРЅ!");
             @mysql_close($lnk);
           }
           else {
@@ -113,12 +113,12 @@
     }
     if ( !isset($_POST['CheckForm']) || $Error ) {
       // Print form with or without errors
-?><p align="center"><span class="required">*</span> - задължително поле</p>
+?><p align="center"><span class="required">*</span> - Р·Р°РґСЉР»Р¶РёС‚РµР»РЅРѕ РїРѕР»Рµ</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
-<tr><th colspan="2">Системна информация</th></tr>
+<tr><th colspan="2">РЎРёСЃС‚РµРјРЅР° РёРЅС„РѕСЂРјР°С†РёСЏ</th></tr>
 <tr valign="top">
-<td align="right" width="50%">Потребителско име
+<td align="right" width="50%">РџРѕС‚СЂРµР±РёС‚РµР»СЃРєРѕ РёРјРµ
 <span class="required">*</span></td>
 <td><input type="text" name="Username" maxlength="32" size="32"<?php
   if ( $Error ) {
@@ -126,7 +126,7 @@
     print($Username_Err);
   }
   else print(" />"); ?></td></tr>
-<tr valign="top"><td align="right">Парола <span class="required">*</span></td>
+<tr valign="top"><td align="right">РџР°СЂРѕР»Р° <span class="required">*</span></td>
 <td><input type="password" name="Password" maxlength="32" size="32"<?php
   if ( $Error ) {
     print(" /><br />\n");
@@ -134,29 +134,29 @@
   }
   else print(" />"); ?></td></tr>
 <tr valign="top">
-<td align="right">Парола (повторете) <span class="required">*</span></td>
+<td align="right">РџР°СЂРѕР»Р° (РїРѕРІС‚РѕСЂРµС‚Рµ) <span class="required">*</span></td>
 <td><input type="password" name="Password2" maxlength="32" size="32"<?php
   if ( $Error ) {
     print(" /><br />\n");
     print($Password2_Err);
   }
   else print(" />"); ?></td></tr>
-<tr><th colspan="2">Лична информация</th></tr>
-<tr valign="top"><td align="right">Име <span class="required">*</span></td>
+<tr><th colspan="2">Р›РёС‡РЅР° РёРЅС„РѕСЂРјР°С†РёСЏ</th></tr>
+<tr valign="top"><td align="right">РРјРµ <span class="required">*</span></td>
 <td><input type="text" name="Name" maxlength="96" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Name']."\" /><br />\n");
     print($Name_Err);
   }
   else print(" />"); ?></td></tr>
-<tr valign="top"><td align="right">Е-поща <span class="required">*</span></td>
+<tr valign="top"><td align="right">Р•-РїРѕС‰Р° <span class="required">*</span></td>
 <td><input type="text" name="Email" maxlength="255" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Email']."\" /><br />\n");
     print($Email_Err);
   }
   else print(" />"); ?></td></tr>
-<tr valign="top"><td align="right">Телефон</td>
+<tr valign="top"><td align="right">РўРµР»РµС„РѕРЅ</td>
 <td><input type="text" name="Phone" maxlength="255" size="32"<?php
   if ( $Error )
     print(" value=\"".$_POST['Phone']."\" />");
@@ -164,9 +164,9 @@
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr><td align="center" colspan="2">
 <input type="hidden" name="CheckForm" value="1" />
-<input type="submit" name="SubmitAdd" value="Добави" />
-<input type="reset" name="Reset" value="Изчисти" />
-<input type="submit" name="CancelAdd" value="Откажи" />
+<input type="submit" name="SubmitAdd" value="Р”РѕР±Р°РІРё" />
+<input type="reset" name="Reset" value="РР·С‡РёСЃС‚Рё" />
+<input type="submit" name="CancelAdd" value="РћС‚РєР°Р¶Рё" />
 </td></tr><?php
     }
   }
@@ -201,7 +201,7 @@
             $Pass2_Err[$AdmKey] =
               CheckStringField($Error[$AdmKey], $Password2[$AdmKey], 6, 32, true);
             if ( strcmp($Password[$AdmKey], $Password2[$AdmKey]) != 0 ) {
-              $Pass2_Err[$AdmKey] = "<span class=\"error\">Паролите не съвпадат!</span>";
+              $Pass2_Err[$AdmKey] = "<span class=\"error\">РџР°СЂРѕР»РёС‚Рµ РЅРµ СЃСЉРІРїР°РґР°С‚!</span>";
               $Error[$AdmKey] = TRUE;
             }
           }
@@ -235,11 +235,11 @@
               } // while
               @mysql_close($lnk);
               if ( $EditCount == $AdmCount )
-                PrintOK("Администраторите са редактирани успешно.");
+                PrintOK("РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРёС‚Рµ СЃР° СЂРµРґР°РєС‚РёСЂР°РЅРё СѓСЃРїРµС€РЅРѕ.");
               elseif ( $EditCount > 0 && $EditCount < $AdmCount )
-                PrintOK("Някои от администраторите са редактирани успешно!");
+                PrintOK("РќСЏРєРѕРё РѕС‚ Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРёС‚Рµ СЃР° СЂРµРґР°РєС‚РёСЂР°РЅРё СѓСЃРїРµС€РЅРѕ!");
               elseif ( $EditCount == 0 )
-                PrintOK("Администраторите НЕ са редактирани успешно!");
+                PrintOK("РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРёС‚Рµ РќР• СЃР° СЂРµРґР°РєС‚РёСЂР°РЅРё СѓСЃРїРµС€РЅРѕ!");
             }
             else {
               PrintError(202);
@@ -261,16 +261,16 @@
             MakeQueryList($AdminIds, $query);
             $res = @mysql_query($query, $lnk);
             if ( @mysql_num_rows($res) > 0 ) { ?>
-<p align="center"><span class="required">*</span> - задължително поле<br />
-<span class="required">**</span> - задължително само ако другото поле за
-парола е попълнено</p>
+<p align="center"><span class="required">*</span> - Р·Р°РґСЉР»Р¶РёС‚РµР»РЅРѕ РїРѕР»Рµ<br />
+<span class="required">**</span> - Р·Р°РґСЉР»Р¶РёС‚РµР»РЅРѕ СЃР°РјРѕ Р°РєРѕ РґСЂСѓРіРѕС‚Рѕ РїРѕР»Рµ Р·Р°
+РїР°СЂРѕР»Р° Рµ РїРѕРїСЉР»РЅРµРЅРѕ</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
               $Index = 0;
               while ( $AdmDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) { ?>
-<tr><th align="center" colspan="2">Администратор: <?php echo $AdmDetails['Username']?>
+<tr><th align="center" colspan="2">РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ: <?php echo $AdmDetails['Username']?>
 <input type="hidden" name="AdminIds[]" value="<?php echo $AdmDetails['AdminID'] ?>" /></th></tr>
-<tr><td align="right">Парола <span class="required">**</span></td>
+<tr><td align="right">РџР°СЂРѕР»Р° <span class="required">**</span></td>
 <td><input type="password" name="Password[]" maxlength="32" size="32" /><?php
   if ( $Error[$Index] ) {
     print("<br />\n");
@@ -278,14 +278,14 @@
   } ?>
 </td></tr>
 <tr valign="top">
-<td align="right">Парола (повторете) <span class="required">**</span></td>
+<td align="right">РџР°СЂРѕР»Р° (РїРѕРІС‚РѕСЂРµС‚Рµ) <span class="required">**</span></td>
 <td><input type="password" name="Password2[]" maxlength="32" size="32" /><?php
   if ( $Error[$Index] ) {
     print("<br />\n");
     print($Pass2_Err[$Index]);
   } ?></td></tr>
 <tr valign="top">
-<td align="right">Име <span class="required">*</span></td>
+<td align="right">РРјРµ <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="96" size="32"<?php
   if ( $Error[$Index] ) {
     print(" value=\"".$Name[$Index]."\" /><br />\n");
@@ -293,7 +293,7 @@
   }
   else print(" value=\"".$AdmDetails['AdmName']."\" />"); ?></td></tr>
 <tr valign="top">
-<td align="right">Е-поща <span class="required">*</span></td>
+<td align="right">Р•-РїРѕС‰Р° <span class="required">*</span></td>
 <td><input type="text" name="Email[]" maxlength="255" size="32"<?php
   if ( $Error[$Index] ) {
     print(" value=\"".$Email[$Index]."\" /><br />\n");
@@ -301,7 +301,7 @@
   }
   else print(" value=\"".$AdmDetails['Email']."\" />"); ?></td></tr>
 <tr valign="top">
-<td align="right">Телефон</td>
+<td align="right">РўРµР»РµС„РѕРЅ</td>
 <td><input type="text" name="Phone[]" maxlength="255" size="32"<?php
   if ( $Error[$Index] )
     print(" value=\"".$Phone[$Index]."\" />\n");
@@ -311,8 +311,8 @@
               } // while ?>
 <tr><td align="center" colspan="2">
 <input type="hidden" name="CheckForms" value="1" />
-<input type="submit" name="SubmitEdit" value="Редактирай" />
-<input type="submit" name="CancelEdit" value="Откажи" /></td></tr><?php
+<input type="submit" name="SubmitEdit" value="Р РµРґР°РєС‚РёСЂР°Р№" />
+<input type="submit" name="CancelEdit" value="РћС‚РєР°Р¶Рё" /></td></tr><?php
             } // if ( num_rows > 0...
             @mysql_free_result($res);
             //@mysql_close($lnk);
@@ -352,7 +352,7 @@
           $res = @mysql_query($query, $lnk); ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
-<tr><td>Желаете ли да изтриете тези администратори?</td></tr>
+<tr><td>Р–РµР»Р°РµС‚Рµ Р»Рё РґР° РёР·С‚СЂРёРµС‚Рµ С‚РµР·Рё Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРё?</td></tr>
 <tr><td><ul><?php
           while ( $AdminDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
             print("<li>".$AdminDetails['Username']);
@@ -365,8 +365,8 @@
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td align="center">
-<input type="submit" name="Delete" value="Да" />
-<input type="submit" name="CancelDelete" value="Не" />
+<input type="submit" name="Delete" value="Р”Р°" />
+<input type="submit" name="CancelDelete" value="РќРµ" />
 </td></tr><?php
         }
         else {
@@ -404,11 +404,11 @@
           $DelCount = @mysql_affected_rows($lnk);
           @mysql_close($lnk);
           if ( $DelCount == $AdmCount )
-            PrintOK("Администраторите са изтрити успешно.");
+            PrintOK("РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРёС‚Рµ СЃР° РёР·С‚СЂРёС‚Рё СѓСЃРїРµС€РЅРѕ.");
           elseif ( $DelCount > 0 && $DelCount < $AdmCount )
-            PrintOK("Някои от администраторите са изтрити успешно!");
+            PrintOK("РќСЏРєРѕРё РѕС‚ Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРёС‚Рµ СЃР° РёР·С‚СЂРёС‚Рё СѓСЃРїРµС€РЅРѕ!");
           elseif ( $DelCount == 0 )
-            PrintOK("Администраторите НЕ са изтрити успешно!");
+            PrintOK("РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂРёС‚Рµ РќР• СЃР° РёР·С‚СЂРёС‚Рё СѓСЃРїРµС€РЅРѕ!");
         }
         else {
           PrintError(202);
@@ -432,7 +432,7 @@ height="31" width="88" /></a>
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003
+<p align="center" class="copyright">РђРІС‚РѕСЂ &copy; 2003
 <a href="mailto: <?php echo CHAT_CONTACT ?>" class="aCopyright">
 <?php echo CHAT_AUTHOR ?></a></p>
 </body>

@@ -55,7 +55,7 @@
 style="padding: 5px 0px 0px 5px;">
 <form action="<?php echo $HTTP_SERVER_VARS['PHP_SELF'] ?>" method="post" name="MsgPost">
 <input type="text" name="Message" size="65" maxlength="255" />
-<input type="submit" name="Submit" value="Èçïðàòè" /></form>
+<input type="submit" name="Submit" value="Ð˜Ð·Ð¿Ñ€Ð°Ñ‚Ð¸" /></form>
 </body>
 
 </html>

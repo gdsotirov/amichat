@@ -2,7 +2,7 @@
   // constants
   define("CHAT_NAME", "AMI Chat");
 
-  define("CHAT_AUTHOR", "Георги Д. Сотиров");
+  define("CHAT_AUTHOR", "Р“РµРѕСЂРіРё Р”. РЎРѕС‚РёСЂРѕРІ");
   define("CHAT_CONTACT", "astronom@dir.bg");
 
   define("CHAT_VER_MAJOR", 0);
@@ -42,9 +42,9 @@
     if ( !isset($Bool) || $Bool == '' )
       return "n/a";
     else if ( $Bool == 1 || $Bool == '1' || strtolower($Bool) == 'yes' || strtolower($Bool) == 'y' )
-      return "Да";
+      return "Р”Р°";
     else if ( $Bool == 0 || $Bool == '0' || strtolower($Bool) == 'no' || strtolower($Bool) == 'n' )
-      return "Не";
+      return "РќРµ";
     else return "";
   }
 
@@ -63,21 +63,21 @@
     if ( isset($Value) && strlen($Value) > 0 ) {
       if ( $CheckCorrectInput == true ) {
         if ( !CheckValidChars($Value) ) {
-          $FieldErr = "<span class=\"error\">Полето съдържа неразрешени ";
-          $FieldErr .= "символи! Разрешените символи са _ (долно тире), ";
-          $FieldErr .= "малки и големи английски букви (a-z, A-Z) и арабските ";
-          $FieldErr .= "цифри (0-9).</span><br />";
+          $FieldErr = "<span class=\"error\">РџРѕР»РµС‚Рѕ СЃСЉРґСЉСЂР¶Р° РЅРµСЂР°Р·СЂРµС€РµРЅРё ";
+          $FieldErr .= "СЃРёРјРІРѕР»Рё! Р Р°Р·СЂРµС€РµРЅРёС‚Рµ СЃРёРјРІРѕР»Рё СЃР° _ (РґРѕР»РЅРѕ С‚РёСЂРµ), ";
+          $FieldErr .= "РјР°Р»РєРё Рё РіРѕР»РµРјРё Р°РЅРіР»РёР№СЃРєРё Р±СѓРєРІРё (a-z, A-Z) Рё Р°СЂР°Р±СЃРєРёС‚Рµ ";
+          $FieldErr .= "С†РёС„СЂРё (0-9).</span><br />";
           $Error = TRUE;
         }
       }
       if ( strlen($Value) < $Min || strlen($Value) > $Max ) {
-        $FieldErr .= "<span class=\"error\">Дължината на това поле трябва";
-        $FieldErr .= " да бъде между $Min и $Max символа.</span>";
+        $FieldErr .= "<span class=\"error\">Р”СЉР»Р¶РёРЅР°С‚Р° РЅР° С‚РѕРІР° РїРѕР»Рµ С‚СЂСЏР±РІР°";
+        $FieldErr .= " РґР° Р±СЉРґРµ РјРµР¶РґСѓ $Min Рё $Max СЃРёРјРІРѕР»Р°.</span>";
         $Error = TRUE;
       }
     }
     else {
-      $FieldErr = "<span class=\"error\">Моля, попълнете това поле!</span>";
+      $FieldErr = "<span class=\"error\">РњРѕР»СЏ, РїРѕРїСЉР»РЅРµС‚Рµ С‚РѕРІР° РїРѕР»Рµ!</span>";
       $Error = TRUE;
     }
     return $FieldErr;
@@ -88,13 +88,13 @@
     $FieldErr = "";
     if ( isset($Value) ) {
       if ( $Value < $Min || $Value > $Max ) {
-        $FieldErr = "<span class=\"error\">Стйността в това поле трябва";
-        $FieldErr .= " да бъде между $Min и $Max $Unit.</span>";
+        $FieldErr = "<span class=\"error\">РЎС‚Р№РЅРѕСЃС‚С‚Р° РІ С‚РѕРІР° РїРѕР»Рµ С‚СЂСЏР±РІР°";
+        $FieldErr .= " РґР° Р±СЉРґРµ РјРµР¶РґСѓ $Min Рё $Max $Unit.</span>";
         $Error = TRUE;
       }
     }
     else {
-      $FieldErr = "<span class=\"error\">Моля, попълнете това поле!</span>";
+      $FieldErr = "<span class=\"error\">РњРѕР»СЏ, РїРѕРїСЉР»РЅРµС‚Рµ С‚РѕРІР° РїРѕР»Рµ!</span>";
       $Error = TRUE;
     }
     return $FieldErr;
