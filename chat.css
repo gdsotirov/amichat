@@ -44,6 +44,8 @@ body.Output {
     font: normal normal normal 12pt Arial, Helvetica, sans-serif;
 }
 
+form.inline { display: inline; }
+
 input[type="submit"]:hover, input[type="submit"]:focus { color: #0000FF; }
 input[type="reset"]:hover, input[type="reset"]:focus { color: #0000FF; }
 
