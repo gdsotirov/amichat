@@ -38,7 +38,7 @@
     }
   }
 
-  echo "<?xml version=\"1.0\" encoding=\"windows-1251\"?>\n";
+  echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -46,7 +46,7 @@
 
 <head>
 <title><?php echo CHAT_NAME ?> - Send message</title>
-<meta http-equiv="Centent-type" content="text/html; charset=windows-1251" />
+<meta http-equiv="Centent-type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="chat.css" />
 <script src="common.js" type="text/javascript"></script>
 </head>

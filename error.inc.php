@@ -24,7 +24,7 @@
     print("<head>\n");
     print("<title>Error</title>\n");
     print("<meta http-equiv=\"Centent-type\" content=\"text/html;");
-    print(" charset=windows-1251\" />\n");
+    print(" charset=UTF-8\" />\n");
     print("</head>\n");
     print("<body>\n");
     print("<p align=\"left\" style=\"font-size: 22pt;\"><b>");
