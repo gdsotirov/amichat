@@ -1,0 +1,31 @@
+KNOWN BUGS
+
+HTML Validator on www.w3.org results:
+
+File            : adm_clrsmod.php
+Content-Type    : text/html
+Encoding        : windows-1251
+Doctype         : XHTML 1.0 Transitional
+Root Namespace  : http://www.w3.org/1999/xhtml
+Errors          : 3
+
+
+This page is not Valid XHTML 1.0 Transitional!
+
+Below are the results of attempting to parse this document with an SGML parser.
+
+1. Line 52, column 52: there is no attribute "name" (explain...).
+
+  <td class="ColorPreviewCell" id="ColorPreview" name="ColorPreview" rowspan="4">
+                                                      ^
+
+2. Line 72, column 33: ID "ColorPreview" already defined (explain...).
+
+  <td class="ColorPreviewCell" id="ColorPreview" name="ColorPreview" rowspan="4">
+                                   ^
+
+3. Line 52, column 33: ID "ColorPreview" first defined here (explain...).
+
+  <td class="ColorPreviewCell" id="ColorPreview" name="ColorPreview" rowspan="4">
+                                   ^
+

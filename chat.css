@@ -1,0 +1,112 @@
+/* Chat Styles
+ * Written by George D. Sotirov, astronom@dir.bg
+ */
+
+a, a:link, a:visited, a:hover,
+a.aTabInactive, a.aTabInactive:link, a.aTabInactive:visited, a.aTabInactive:hover,
+a.aCopyright:link, a.aCopyright:visited {
+    background-color: transparent;
+    font: 12pt Arial, Helvetica, sans-serif;
+    text-decoration: none;
+}
+a:link, a:visited { color: #0000FF; }
+a:hover { color: #0033FF; }
+a.aButton, a.aButton:link, a.aButton:visited, a.aButton:hover {
+    background-color: #CCCCCC;
+    font: normal normal normal 11pt Arial, Helvetica, sans-serif;
+    padding: 2px 10px 2px 10px;
+    text-decoration: none;
+}
+a.aButton, a.aButton:link, a.aButton:visited { color: #000000; }
+a.aButton:hover { color: #0000FF; }
+a.aTabInactive, a.aTabInactive:link, a.aTabInactive:visited,
+a.aTabInactive:hover { font-weight: bold; }
+a.aTabInactive:link, a.aTabInactive:visited { color: #000000; }
+a.aTabInactive:hover { color: #0000FF; }
+a.aCopyright:link,
+a.aCopyright:visited { color: #C0C0C0; }
+a.aMidHdr, a.aMidHdr:link, a.aMidHdr:visited, a.aMidHdr:hover {
+    background-color: transparent;
+    font: normal normal bold 18pt Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: #0000FF;
+}
+body {
+    background-color: #FFFFFF;
+    color: #000000;
+    margin: 0px 0px 0px 0px;
+    padding: 5px 5px 5px 5px;
+}
+body.Admin { margin: 2% 2% 2% 2%; }
+body.User {	background: #8080FF; }
+body.Output {
+    background: #D0D0FF;
+    font: normal normal normal 12pt Arial, Helvetica, sans-serif;
+}
+
+input[type="submit"]:hover, input[type="submit"]:focus { color: #0000FF; }
+input[type="reset"]:hover, input[type="reset"]:focus { color: #0000FF; }
+
+table {
+    border-style: none;
+    empty-cells: show;
+    font: normal normal normal 12pt Arial, Helvetica, sans-serif;
+}
+table.tbThinBorder td.tdTabActive, table.tbThinBorder td.tdTabActiveFirst,
+table.tbThinBorder td.tdTabInactive, table.tbThinBorder td.tdTabInactiveLast,
+table.tbThinBorder td.tdData {
+    border-color: #000000;
+    border-style: solid;
+    color: #000000;
+    padding: 5px 5px 5px 5px;
+}
+table.tbThinBorder td.tdTabActive, table.tbThinBorder td.tdTabActiveFirst,
+table.tbThinBorder td.tdTabInactive,
+table.tbThinBorder td.tdTabInactiveLast { font-weight: bold; }
+table.tbThinBorder td.tdTabActive,
+table.tbThinBorder td.tdTabActiveFirst { background: #C5D2DE; }
+table.tbThinBorder td.tdTabActive { border-width: 1px 1px 0px 0px; }
+table.tbThinBorder td.tdTabActiveFirst { border-width: 1px 1px 0px 1px; }
+table.tbThinBorder td.tdTabInactive,
+table.tbThinBorder td.tdTabInactiveLast { background: #9CAABD; }
+table.tbThinBorder td.tdTabInactive { border-width: 0px 1px 1px 0px; }
+table.tbThinBorder td.tdTabInactiveLast { border-width: 0px 0px 1px 0px; }
+table.tbThinBorder td.tdData {
+    border-width: 0px 1px 1px 1px;
+    background: transparent;
+}
+table.tbInfo th, table.tbOnline th {
+    background: #CCCCCC;
+    font-weight: bold;
+    text-align: left;
+    padding: 3px 3px 3px 3px;
+}
+table.tbInfo tr { background: #DDDDDD; }
+table.tbInfo tr.trOdd { background: #FFFFFF; }
+table.tbInfo td,
+table.tbOnline td { padding: 3px 3px 3px 3px; }
+table.tbOnline td {
+    font-weight: normal;
+    font-size: 10pt;
+}
+
+.bighdr { font: normal normal bold 22pt Arial, Helvetica, sans-serif; }
+.midhdr { font: normal normal bold 18pt Arial, Helvetica, sans-serif; }
+.smlhdr { font: normal normal bold 14pt Arial, Helvetica, sans-serif; }
+.copyright, .error, .required, .text {
+    font: normal normal normal 12pt Arial, Helvetica, sans-serif;
+}
+.copyright { color: #C0C0C0; }
+.error { color: #FF0000; }
+.required {
+    color: #FF0000;
+    font-weight: bold;
+}
+.ColorPreviewCell {
+    border: 1px solid #000000;
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+    width: 80px;
+    vertical-align: middle;
+}
+
