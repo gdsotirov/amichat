@@ -18,8 +18,8 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 <title><?php echo $TITLE ?></title>
-<meta name="Author" content="George D. Sotirov" />
-<meta name="Contact" content="astronom@dir.bg" />
+<meta name="Author" content="Georgi D. Sotirov" />
+<meta name="Contact" content="gdsotirov@dir.bg" />
 <link href="chat.css" rel="stylesheet" type="text/css" />
 <script src="common.js" type="text/javascript" defer="defer"></script>
 </head>
