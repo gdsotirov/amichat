@@ -1,10 +1,13 @@
-KNOWN BUGS
+KNOWN ISSUES
 
-HTML Validator on www.w3.org results:
+* The login form is confusing. Users are sometimes trying to log as
+administrators and vice versa.
+
+* HTML Validator on www.w3.org results:
 
 File            : adm_clrsmod.php
 Content-Type    : text/html
-Encoding        : windows-1251
+Encoding        : utf-8
 Doctype         : XHTML 1.0 Transitional
 Root Namespace  : http://www.w3.org/1999/xhtml
 Errors          : 3
