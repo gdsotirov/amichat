@@ -8,7 +8,27 @@
     exit;
   }
 
+  if ( isset($_POST['Submit']) ) {
+    $_SESSION['USR_ROOMID'] = $_POST['Room'];
+  }
+
   include("common.inc.php");
+  include("passwd.inc.php");
+  if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+    if ( @mysql_select_db(DB_NAME, $lnk) ) {
+      $query  = "SELECT rooms.RoomID,rooms.RoomName";
+      $query .= "  FROM rooms";
+      $res = @mysql_query($query, $lnk);
+    }
+    else {
+      PrintError(202);
+      exit;
+    }
+  }
+  else {
+    PrintError(201);
+    exit;
+  }
 
   echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 ?>
@@ -28,7 +48,33 @@
 <?php
   $USR_NICK = $_SESSION['USR_NICK'];
   print("Псевдоним: <b>$USR_NICK</b>&nbsp;");
-  print("Стая: <b>Обща</b>\n");
+  $USR_ROOMNAME = "няма";
+  while ( $RoomDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+    if ( $_SESSION['USR_ROOMID'] == $RoomDetails['RoomID'] )
+      $USR_ROOMNAME = $RoomDetails['RoomName'];
+  } // while
+  print("Стая: <b>$USR_ROOMNAME</b>\n");
+
+  if ( mysql_data_seek($res, 0) ) {
+    if ( @mysql_num_rows($res) > 0 ) {
+      print("<form action=\"\" class=\"inline\" method=\"post\" name=\"RoomPost\">");
+      print("<label for=\"Room\">Нова стая:&nbsp;</label>");
+      print("<select id=\"Room\" name=\"Room\">\n");
+      while ( $RoomDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+        print("<option value=\"".$RoomDetails['RoomID']."\"");
+        if ( $_SESSION['USR_ROOMID'] == $RoomDetails['RoomID'] )
+          print(" selected=\"selected\">\n");
+        else
+          print(">\n");
+        print($RoomDetails['RoomName']."</option>\n");
+      } // while
+      print("</select>\n");
+      print("<input type=\"submit\" name=\"Submit\" value=\"Смяна\" />\n");
+      print("</form>\n");
+    }
+  }
+
+  @mysql_free_result($res);
 ?>
 </td>
 <td align="right">
