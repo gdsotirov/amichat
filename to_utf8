@@ -1,0 +1,13 @@
+#!/bin/sh
+
+for src in `ls *.php`; do
+  echo -n "Processing file '$src' "
+  enc=`file --mime $src | awk -F'[:=]' '{ print $3 }'`
+  echo -n "(charset=$enc) "
+  if [ "$enc" = "iso-8859-1" ]; then
+    iconv -f cp1251 -t utf8 -o "$src.new" "$src"
+    mv -f "$src.new" "$src"
+  fi
+  echo " Done."
+done
+
