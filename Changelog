@@ -39,3 +39,10 @@
 ------------------------------------------------------------------------------
  - Convert sources to UTF-8, change encoding and charset
 
+0.3.4 (2005-05-08 22:59 EEST)
+------------------------------------------------------------------------------
+ - New feature to change chat room (initially forgotten)
+ - Update BUGS, README
+ - Change author name and email
+ - Change valid XHTML icon with PNG, validate CSS by referer
+
