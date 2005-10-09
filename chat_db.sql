@@ -1,6 +1,6 @@
 /* Chat DB SQL Script
  * Written by    : Georgi D. Sotirov <gdsotirov@dir.bg>
- * Last modified : $Date: 2005/02/13 16:34:18 $
+ * Last modified : $Date: 2005/10/09 09:04:12 $
  * Designed for  : MySQL 3.23 and above
  * Conformance   : SQL-92 (SQL-2)
  */
@@ -11,7 +11,7 @@
 CREATE TABLE administrators (
     AdminID     INT /*!UNSIGNED */ UNIQUE NOT NULL /*!AUTO_INCREMENT*/,
     Username    VARCHAR(32)        UNIQUE NOT NULL,
-    Password    VARCHAR(32)               NOT NULL,
+    Password    VARCHAR(64)               NOT NULL,
     AdmName     VARCHAR(96)               NOT NULL,
     Email       VARCHAR(255)              NOT NULL,
     Phone       VARCHAR(32)               NOT NULL,
@@ -70,7 +70,7 @@ INSERT INTO rooms (RoomName,Descr,ModDate,ModTime) VALUES ("Public", "Public cha
 CREATE TABLE users (
     UserID      INT /*!UNSIGNED */ UNIQUE NOT NULL /*!AUTO_INCREMENT */,
     Username    VARCHAR(32)        UNIQUE NOT NULL,
-    Password    VARCHAR(32)               NOT NULL,
+    Password    VARCHAR(64)               NOT NULL,
     Nickname    VARCHAR(32)        UNIQUE NOT NULL,
     UsrName     VARCHAR(96)               NOT NULL,
     Email       VARCHAR(255)              NOT NULL DEFAULT 'no@mail',
