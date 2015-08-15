@@ -44,10 +44,10 @@
 <b>Стаи</b> - добавяне, изтриване и редакция на стаи.<br />
 </td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center"><a href="http://validator.w3.org/check/referer">
+<p align="center"><a href="https://validator.w3.org/check/referer">
 <img border="0" src="valid-xhtml.png" alt="Valid XHTML 1.0!"
 height="31" width="88" /></a>
-<a class="right" href="http://jigsaw.w3.org/css-validator/check/referer">
+<a class="right" href="https://jigsaw.w3.org/css-validator/check/referer">
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
