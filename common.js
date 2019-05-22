@@ -1,4 +1,3 @@
-<!--
 /* Function      : isEmpty
  * Purpose       : Check for empty string value.
  * Compatibility : JavaScript 1.2 (whiteout the first line JavaScript 1.0),
@@ -98,5 +97,3 @@ function changeBgColor(element, red, green, blue) {
 
     return 0;
 }
-//-->
-
