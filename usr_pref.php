@@ -46,7 +46,7 @@
       $Name_Err  = CheckStringField($Error, $_POST['Name'], 1, 96);
       /*$Email_Err = CheckStringField($Error, $_POST['Email'], 2, 255);*/
       if ( empty($_POST['Color']) )
-        $_POST['Color'] = $DEFAULT_COLOR_ID;
+          $_POST['Color'] = DEF_COLORID;
       
       if ( !$Error ) {
         include("passwd.inc.php");
@@ -155,20 +155,22 @@
 <td><b><?php echo $UsrDetails['Username'] ?></b></td>
 </tr>
 <tr valign="top"><td align="right">Парола <span class="required">**</span></td>
-<td><input type="password" name="Password" maxlength="32" size="32"<?php
+<td><input type="password" name="Password" maxlength="32" size="32" />
+<?php
   if ( $Error ) {
-    print(" /><br />");
+    print("<br />");
     print($Password_Err);
   }
-  else print(" />\n"); ?></td></tr>
+?></td></tr>
 <tr valign="top">
 <td align="right">Парола (повторете) <span class="required">**</span></td>
-<td><input type="password" name="Password2" maxlength="32" size="32"<?php
+<td><input type="password" name="Password2" maxlength="32" size="32" />
+<?php
   if ( $Error ) {
     print(" /><br />");
     print($Password2_Err);
   }
-  else print(" />\n"); ?></td></tr>
+?></td></tr>
 <tr><th align="left" colspan="2">Лична информация</th></tr>
 <tr valign="top"><td align="right">Псевдоним <span class="required">*</span></td>
 <td><input id="Nickname" type="text" name="Nick" maxlength="96" size="32"<?php
@@ -278,6 +280,7 @@
     }
 ?>
 </table>
+</form>
 </body>
 
 </html>
