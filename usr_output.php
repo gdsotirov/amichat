@@ -25,7 +25,7 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 <title><?php echo CHAT_NAME ?> - Messages window</title>
-<meta http-equiv="Refresh" content="<?php echo $REFRESH ?>; URL=<?php echo $HTTP_SERVER_VARS['PHP_SELF'] ?>" />
+<meta http-equiv="Refresh" content="<?php echo $REFRESH ?>; URL=<?php echo $_SERVER['PHP_SELF'] ?>" />
 <link rel="stylesheet" type="text/css" href="chat.css" />
 </head>
 

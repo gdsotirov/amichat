@@ -20,7 +20,7 @@
 <head>
 <meta http-equiv="Centent-type" content="text/html; charset=UTF-8" />
 <title><?php echo CHAT_NAME ?> - Users online</title>
-<meta http-equiv="Refresh" content="5; URL=<?php echo $HTTP_SERVER_VARS['PHP_SELF'] ?>" />
+<meta http-equiv="Refresh" content="5; URL=<?php echo $_SERVER['PHP_SELF'] ?>" />
 <link rel="stylesheet" type="text/css" href="chat.css" />
 </head>
 

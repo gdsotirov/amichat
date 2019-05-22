@@ -53,7 +53,7 @@
 
 <body class="User" onload="javascript: focusFirst(); return true"
 style="padding: 5px 0px 0px 5px;">
-<form action="<?php echo $HTTP_SERVER_VARS['PHP_SELF'] ?>" method="post" name="MsgPost">
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="MsgPost">
 <input type="text" name="Message" size="65" maxlength="255" />
 <input type="submit" name="Submit" value="Изпрати" /></form>
 </body>
