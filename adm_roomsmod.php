@@ -187,6 +187,8 @@
             MakeQueryList($RoomIds, $query);
             $res = @mysql_query($query, $lnk);
             if ( @mysql_num_rows($res) > 0 ) { ?>
+</table>
+</form>
 <p align="center"><span class="required">*</span> - задължително поле</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
@@ -206,7 +208,7 @@
 <td><input type="text" name="Descr[]" maxlength="255" size="32"<?php
   if ( $Error[$Index] ) {
     print(" value=\"".$Descr[$Index]."\" /><br />\n");
-    print($Descr_Err[$Index]);
+    print($Descr[$Index]);
   }
   else print(" value=\"".$RoomDetails['Descr']."\" />"); ?></td></tr>
 <tr><td>&nbsp;</td></tr>
@@ -244,6 +246,8 @@
           $query = "SELECT RoomID,RoomName FROM rooms WHERE RoomID";
           MakeQueryList($RoomIds, $query);
           $res = @mysql_query($query, $lnk); ?>
+</table>
+</form>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези стаи?</td></tr>
