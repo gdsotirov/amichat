@@ -136,7 +136,7 @@
     print($Name_Err);
   }
   else print(" />"); ?></td>
-<td class="ColorPreviewCell" id="ColorPreview" name="ColorPreview" rowspan="4">
+<td class="ColorPreviewCell" id="ColorPreview" rowspan="4">
 Представяне на цвета</td></tr>
 <tr valign="top"><td align="right">Червено <span class="required">*</span></td>
 <td><input onkeypress="javascript: previewColor();" type="text" name="Red[]"
@@ -249,6 +249,8 @@
 
             if ( @mysql_num_rows($res) > 0 ) {
 ?>
+</table>
+</form>
 <p align="center"><span class="required">*</span> - задължително поле</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
@@ -263,7 +265,7 @@
     print($Name_Err[$Index]);
   }
   else print(" value=\"".$ClrDetails['ClrName']."\" />"); ?></td>
-<td class="ColorPreviewCell" id="ColorPreview" name="ColorPreview" rowspan="4">
+<td class="ColorPreviewCell" id="ColorPreview" rowspan="4">
 Представяне на цвета</td></tr>
 <tr valign="top">
 <td align="right">Червено <span class="required">*</span></td>
@@ -328,7 +330,9 @@
           $query = "SELECT ColorID,ClrName FROM colors WHERE ColorID";
           MakeQueryList($ColorIds, $query);
           $res = @mysql_query($query, $lnk); ?>
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post"">
+</table>
+</form>
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези цветове?</td></tr>
 <tr><td><ul>
