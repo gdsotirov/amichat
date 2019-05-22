@@ -352,6 +352,8 @@
 
             if ( @mysql_num_rows($UsrRes) > 0 ) {
 ?>
+</table>
+</form>
 <p align="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
 парола е попълнено</p>
@@ -475,6 +477,8 @@
           MakeQueryList($UserIds, $query);
           $res = @mysql_query($query, $lnk);
 ?>
+</table>
+</form>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези потребители?</td></tr>

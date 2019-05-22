@@ -261,6 +261,8 @@
             MakeQueryList($AdminIds, $query);
             $res = @mysql_query($query, $lnk);
             if ( @mysql_num_rows($res) > 0 ) { ?>
+</table>
+</form>
 <p align="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
 парола е попълнено</p>
@@ -350,6 +352,8 @@
           $query = "SELECT AdminID,Username FROM administrators WHERE AdminID";
           MakeQueryList($AdminIds, $query);
           $res = @mysql_query($query, $lnk); ?>
+</table>
+</form>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези администратори?</td></tr>
