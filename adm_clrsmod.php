@@ -28,6 +28,7 @@
     print("<tr><td align=\"center\">\n");
     print("<input type=\"submit\" name=\"Submit\" value=\"Добре\" />");
     print("</td></tr>\n");
+    print("</table></form>\n");
   }
 
   include("admin.inc.php");
@@ -48,13 +49,16 @@
 <script defer="defer" src="common.js" type="text/javascript"></script>
 <script type="text/javascript"><!--
     function previewColor() {
-        var ColorPreview = document.getElementsByName("ColorPreview");
         var Red          = document.getElementsByName("Red[]");
         var Green        = document.getElementsByName("Green[]");
         var Blue         = document.getElementsByName("Blue[]");
 
-        for ( var i = 0; i < ColorPreview.length; ++i )
-            changeBgColor(ColorPreview[i], Red[i].value, Green[i].value, Blue[i].value);
+        var i = 0;
+        var ColorPrevElem;
+        while ( (ColorPrevElem = document.getElementById("ColorPreview" + i)) ) {
+            changeBgColor(ColorPrevElem, Red[i].value, Green[i].value, Blue[i].value);
+            i++;
+        }
 
         return 0;
     }
@@ -132,36 +136,60 @@
 <td align="right">Име <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="16" size="16"<?php
   if ( $Error ) {
-    print(" value=\"".$Name."\" /><br />\n");
+    print(" value=\"".$Name."\"");
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Name_Err);
   }
-  else print(" />"); ?></td>
-<td class="ColorPreviewCell" id="ColorPreview" rowspan="4">
+?>
+</td>
+<td class="ColorPreviewCell" id="ColorPreview0" rowspan="4">
 Представяне на цвета</td></tr>
 <tr valign="top"><td align="right">Червено <span class="required">*</span></td>
 <td><input onkeypress="javascript: previewColor();" type="text" name="Red[]"
  maxlength="3" size="3"<?php
   if ( $Error ) {
-    print(" value=\"".$Red."\" /><br />\n");
+    print(" value=\"".$Red."\"");
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Red_Err);
   }
-  else print(" />"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top"><td align="right">Зелено <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Green[]"
  maxlength="3" size="3"<?php
   if ( $Error ) {
-    print(" value=\"".$Green."\" /><br />\n");
+    print(" value=\"".$Green."\"");
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Green_Err);
   }
-  else print(" />"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top"><td align="right">Синьо <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Blue[]"
  maxlength="3" size="3"<?php
   if ( $Error ) {
-    print(" value=\"".$Blue."\" /><br />\n");
+    print(" value=\"".$Blue."\"");
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Blue_Err);
   }
-  else print(" />"); ?></td></tr>
+?>
+</td></tr>
 <tr><td colspan="3">&nbsp;</td></tr>
 <tr><td align="center" colspan="3">
 <input type="hidden" name="CheckForm" value="1" />
@@ -169,6 +197,8 @@
 <input type="reset" name="Reset" value="Изчисти" />
 <input type="submit" name="CancelAdd" value="Откажи" />
 </td></tr>
+</table>
+</form>
 <?php
     }
   }
@@ -191,7 +221,7 @@
         $Blue  = $_POST['Blue'];
         reset($ColorIds);
         /* check values in arrays */
-        while ( list($ClrKey, $ClrID) = each($ColorIds) ) {
+        while ( list($ClrKey) = each($ColorIds) ) {
           $Name_Err[$ClrKey]  = CheckStringField($Error[$ClrKey], $Name[$ClrKey], 1, 16);
           $Red_Err[$ClrKey]   = CheckNumField($Error[$ClrKey], $Red[$ClrKey], 0, 255, "единици");
           $Green_Err[$ClrKey] = CheckNumField($Error[$ClrKey], $Green[$ClrKey], 0, 255, "единици");
@@ -204,7 +234,7 @@
           if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
             if ( @mysql_select_db(DB_NAME, $lnk) ) {
-              while ( list($ErrKey, $ErrVal) = each($Error) ) {
+              while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE colors SET ";
                 $query .= "ClrName='".$Name[$ErrKey]."',";
                 $query .= "Red=".$Red[$ErrKey].",";
@@ -249,8 +279,6 @@
 
             if ( @mysql_num_rows($res) > 0 ) {
 ?>
-</table>
-</form>
 <p align="center"><span class="required">*</span> - задължително поле</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
@@ -261,45 +289,73 @@
 <b>Име</b><span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="16" size="16"<?php
   if ( $Error[$Index] ) {
-    print(" value=\"".$Name[$Index]."\" /><br />\n");
+    print(" value=\"".$Name[$Index]."\"");
+  }
+  else print(" value=\"".$ClrDetails['ClrName']."\""); ?>
+/>
+<?php
+  if ( $Error[$Index] ) {
+    print("<br />\n");
     print($Name_Err[$Index]);
   }
-  else print(" value=\"".$ClrDetails['ClrName']."\" />"); ?></td>
-<td class="ColorPreviewCell" id="ColorPreview" rowspan="4">
+?>
+</td>
+<td class="ColorPreviewCell" id="ColorPreview<?php print($Index) ?>" rowspan="4">
 Представяне на цвета</td></tr>
 <tr valign="top">
 <td align="right">Червено <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Red[]"
  maxlength="3" size="3"<?php
   if ( $Error[$Index] ) {
-    print(" value=\"".$Red[$Index]."\" /><br />\n");
+    print(" value=\"".$Red[$Index]."\"");
+  }
+  else print(" value=\"".$ClrDetails['Red']."\""); ?> />
+<?php
+  if ( $Error[$Index] ) {
+    print("<br />\n");
     print($Red_Err[$Index]);
   }
-  else print(" value=\"".$ClrDetails['Red']."\" />"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top">
 <td align="right">Зелено <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Green[]"
  maxlength="3" size="3"<?php
   if ( $Error[$Index] ) {
-    print(" value=\"".$Green[$Index]."\" /><br />\n");
+    print(" value=\"".$Green[$Index]."\"");
+  }
+  else print(" value=\"".$ClrDetails['Green']."\""); ?> />
+<?php
+  if ( $Error[$Index] ) {
+    print("<br />\n");
     print($Green_Err[$Index]);
   }
-  else print(" value=\"".$ClrDetails['Green']."\" />"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top">
 <td align="right">Синьо <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Blue[]"
  maxlength="3" size="3"<?php
   if ( $Error[$Index] ) {
-    print(" value=\"".$Blue[$Index]."\" /><br />\n");
+    print(" value=\"".$Blue[$Index]."\"");
+  }
+  else print(" value=\"".$ClrDetails['Blue']."\""); ?> />
+<?php
+  if ( $Error[$Index] ) {
+    print("<br />\n");
     print($Blue_Err[$Index]);
   }
-  else print(" value=\"".$ClrDetails['Blue']."\" />"); ?></td></tr>
-<tr><td>&nbsp;</td></tr>
-<?php         } // while ?>
+?>
+</td></tr>
+<tr><td>&nbsp;</td></tr><?php         
+                $Index++;
+              } // while ?>
 <tr><td align="center" colspan="3">
 <input type="hidden" name="CheckForms" value="1" />
 <input type="submit" name="SubmitEdit" value="Редактирай" />
 <input type="submit" name="CancelEdit" value="Откажи" /></td></tr>
+</table>
+</form>
 <?php
             } // if ( num_rows > 0...
             @mysql_free_result($res);
@@ -330,8 +386,6 @@
           $query = "SELECT ColorID,ClrName FROM colors WHERE ColorID";
           MakeQueryList($ColorIds, $query);
           $res = @mysql_query($query, $lnk); ?>
-</table>
-</form>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези цветове?</td></tr>
@@ -351,6 +405,8 @@
 <input type="submit" name="Delete" value="Да" />
 <input type="submit" name="CancelDelete" value="Не" />
 </td></tr>
+</table>
+</form>
 <?php
         }
         else {
@@ -399,7 +455,6 @@
     else Redirect("adm_clrs.php");
   } // elseif
 ?>
-</table></form>
 </td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
 <p align="center"><a href="https://validator.w3.org/check/referer">
