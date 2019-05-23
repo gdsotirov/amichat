@@ -28,6 +28,7 @@
     print("<tr><td align=\"center\">\n");
     print("<input type=\"submit\" name=\"Submit\" value=\"Добре\" />");
     print("</td></tr>\n");
+    print("</table></form>");
   }
 
   include("admin.inc.php");
