@@ -28,6 +28,7 @@
     print("<tr><td align=\"center\">\n");
     print("<input type=\"submit\" name=\"Submit\" value=\"Добре\" />\n");
     print("</td></tr>\n");
+    print("</table></form>");
   }
 
   include("admin.inc.php");
@@ -46,8 +47,7 @@
 <title><?php echo CHAT_NAME ?> Административни страници: Потребители -> <?php PrintAction() ?></title>
 <link href="chat.css" rel="stylesheet" type="text/css" />
 <script defer="defer" src="common.js" type="text/javascript"></script>
-<script type="text/javascript">
-<!--
+<script type="text/javascript"><!--
     function previewColor() {
         var Nickname    = document.getElementsByName("Nick[]");
         var ColorPicker = document.getElementsByName("Color[]");
@@ -166,52 +166,81 @@
 <span class="required">*</span></td>
 <td><input type="text" name="Username[]" maxlength="32" size="32"<?php
   if ( $Error ) {
-    print(" value=\"".$Username."\" /><br />");
+    print(" value=\"".$Username."\"");
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Username_Err);
   }
-  else print(" />\n"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top"><td align="right">Парола <span class="required">*</span></td>
-<td><input type="password" name="Password[]" maxlength="32" size="32"<?php
+<td><input type="password" name="Password[]" maxlength="32" size="32" />
+<?php
   if ( $Error ) {
-    print(" /><br />");
+    print("<br />\n");
     print($Password_Err);
   }
-  else print(" />\n"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top">
 <td align="right">Парола (повторете) <span class="required">*</span></td>
-<td><input type="password" name="Password2[]" maxlength="32" size="32"<?php
+<td><input type="password" name="Password2[]" maxlength="32" size="32" />
+<?php
   if ( $Error ) {
-    print(" /><br />");
+    print("<br />\n");
     print($Password2_Err);
   }
-  else print(" />\n"); ?></td></tr>
+?>
+</td></tr>
 <tr><th colspan="2">Лична информация</th></tr>
 <tr valign="top"><td align="right">Псевдоним <span class="required">*</span></td>
 <td><input type="text" name="Nick[]" maxlength="96" size="32"<?php
   if ( $Error ) {
-    print(" value=\"".$Nick."\" /><br />");
+    print(" value=\"".$Nick."\"");
+    
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Nick_Err);
   }
-  else print(" />\n"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top"><td align="right">Име <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="96" size="32"<?php
   if ( $Error ) {
-    print(" value=\"".$Name."\" /><br />");
+    print(" value=\"".$Name."\"");
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Name_Err);
   }
-  else print(" />\n"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top"><td align="right">Е-поща <!-- <span class="required">*</span> --></td>
 <td><input type="text" name="Email[]" maxlength="255" size="32"<?php
   if ( $Error ) {
-    print(" value=\"".$Email."\" /><br />");
+    print(" value=\"".$Email."\"");
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     //print($Email_Err);
   }
-  else print(" />\n"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top"><td align="right">Учител</td>
 <td><input type="checkbox" name="Teacher[]"<?php
   if ( $Error && isset($Teacher) )
-    print(" checked=\"checked\" />\n");
-  else print(" />\n"); ?></td></tr>
+    print(" checked=\"checked\"");
+?> /></td></tr>
 <tr valign="top"><td align="right">Цвят</td>
 <td>
 <select name="Color[]" onchange="javascript: previewColor();">
@@ -247,6 +276,8 @@
 <input type="reset" name="Reset" value="Изчисти" />
 <input type="submit" name="CancelAdd" value="Откажи" />
 </td></tr>
+</table>
+</form>
 <?php
     }
   }
@@ -275,7 +306,7 @@
         $Color     = $_POST['Color'];
         reset($UserIds);
         /* check values in arrays */
-        while ( list($UsrKey, $UsrID) = each($UserIds) ) {
+        while ( list($UsrKey) = each($UserIds) ) {
           if ( !empty($Password[$UsrKey]) || !empty($Password2[$UsrKey]) ) {
             $Pass_Err[$UsrKey]  =
               CheckStringField($Error[$UsrKey], $Password[$UsrKey], 6, 32, true);
@@ -300,7 +331,7 @@
           if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
             if ( @mysql_select_db(DB_NAME, $lnk) ) {
-              while ( list($ErrKey, $ErrVal) = each($Error) ) {
+              while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE users SET ";
                 if ( !empty($Password[$ErrKey]) ) {
                   $query .= "Password=password('".$Password[$ErrKey]."'),";
@@ -352,8 +383,6 @@
 
             if ( @mysql_num_rows($UsrRes) > 0 ) {
 ?>
-</table>
-</form>
 <p align="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
 парола е попълнено</p>
@@ -389,32 +418,51 @@
 <td><input type="text" name="Nick[]" maxlength="32" size="32"
 <?php
   if ( $Error[$Index] ) {
-    print(" value=\"".$Nick[$Index]."\" /><br />");
+    print(" value=\"".$Nick[$Index]."\"");
+  }
+  else print(" value=\"".$UsrDetails['Nickname']."\""); ?> />
+<?php
+  if ( $Error[$Index] ) {
+    print("<br />\n");
     print($Nick_Err[$Index]);
   }
-  else print(" value=\"".$UsrDetails['Nickname']."\" />\n"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top">
 <td align="right">Име <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="96" size="32"<?php
   if ( $Error[$Index] ) {
-    print(" value=\"".$Name[$Index]."\" /><br />");
+    print(" value=\"".$Name[$Index]."\"");
+    
+  }
+  else print(" value=\"".$UsrDetails['UsrName']."\""); ?> />
+<?php
+  if ( $Error[$Index] ) {
+    print("<br />\n");
     print($Name_Err[$Index]);
   }
-  else print(" value=\"".$UsrDetails['UsrName']."\" />\n"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top">
 <td align="right">Е-поща <!-- <span class="required">*</span> --></td>
 <td><input type="text" name="Email[]" maxlength="255" size="32"<?php
   if ( $Error[$Index] ) {
-    print(" value=\"".$Email[$Index]."\" /><br />");
+    print(" value=\"".$Email[$Index]."\"");
+  }
+  else print(" value=\"".$UsrDetails['Email']."\""); ?> />
+<?php
+  if ( $Error[$Index] ) {
+    print("<br />\n");
     //print($Email_Err[$Index]);
   }
-  else print(" value=\"".$UsrDetails['Email']."\" />\n"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top">
 <td align="right">Учител</td>
 <td><input type="checkbox" name="Teacher[]"<?php
   if ( $Error[$Index] && isset($Teacher[$Index]) )
-    print(" checked=\"checked\" />\n");
-  else print(" />\n"); ?></td></tr>
+    print(" checked=\"checked\"");
+?> /></td></tr>
 <tr valign="top"><td align="right">Цвят</td>
 <td>
 <select name="Color[]" onchange="javascript: previewColor();">
@@ -445,6 +493,8 @@
 <input type="hidden" name="CheckForms" value="1" />
 <input type="submit" name="SubmitEdit" value="Редактирай" />
 <input type="submit" name="CancelEdit" value="Откажи" /></td></tr>
+</table>
+</form>
 <?php
             } // if ( num_rows > 0...
             @mysql_free_result($UsrRes);
@@ -477,8 +527,6 @@
           MakeQueryList($UserIds, $query);
           $res = @mysql_query($query, $lnk);
 ?>
-</table>
-</form>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези потребители?</td></tr>
@@ -498,6 +546,8 @@
 <input type="submit" name="Delete" value="Да" />
 <input type="submit" name="CancelDelete" value="Не" />
 </td></tr>
+</table>
+</form>
 <?php
         }
         else {
@@ -546,7 +596,6 @@
     else Redirect("adm_usrs.php");
   } // elseif
 ?>
-</table></form>
 </td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
 <p align="center"><a href="https://validator.w3.org/check/referer">
