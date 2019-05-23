@@ -28,6 +28,7 @@
     print("<tr><td align=\"center\">\n");
     print("<input type=\"submit\" name=\"Submit\" value=\"Добре\" />");
     print("</td></tr>\n");
+    print("</table></form>");
   }
 
   include("admin.inc.php");
@@ -105,22 +106,32 @@
 <td align="right" width="50%">Име <span class="required">*</span></td>
 <td><input type="text" name="Name" maxlength="16" size="16"<?php
   if ( $Error ) {
-    print(" value=\"".$_POST['Name']."\" /><br />\n");
+    print(" value=\"".$_POST['Name']."\"");
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Name_Err);
   }
-  else print(" />"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top"><td align="right">Описание</td>
 <td><input type="text" name="Descr" maxlength="255" size="32"<?php
   if ( $Error )
-    print(" value=\"".$_POST['Descr']."\" /><br />\n");
-  else print(" />"); ?></td></tr>
+    print(" value=\"".$_POST['Descr']."\"");
+?> />
+</td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr><td align="center" colspan="2">
 <input type="hidden" name="CheckForm" value="1" />
 <input type="submit" name="SubmitAdd" value="Добави" />
 <input type="reset" name="Reset" value="Изчисти" />
 <input type="submit" name="CancelAdd" value="Откажи" />
-</td></tr><?php
+</td></tr>
+</table>
+</form>
+<?php
     }
   }
   elseif( isset($_POST['SubmitEdit']) ) { /* Process EDIT request */
@@ -137,7 +148,7 @@
         $Descr = $_POST['Descr'];
         reset($RoomIds);
         /* check values in arrays */
-        while ( list($RoomKey, $RoomID) = each($RoomIds) ) {
+        while ( list($RoomKey) = each($RoomIds) ) {
           $Name_Err[$RoomKey] =
             CheckStringField($Error[$RoomKey], $Name[$RoomKey], 1, 16);
         } // while
@@ -148,7 +159,7 @@
           if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
             if ( @mysql_select_db(DB_NAME, $lnk) ) {
-              while ( list($ErrKey, $ErrVal) = each($Error) ) {
+              while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE rooms SET ";
                 $query .= "RoomName='".$Name[$ErrKey]."',";
                 $query .= "Descr='".$Descr[$ErrKey]."',";
@@ -187,8 +198,6 @@
             MakeQueryList($RoomIds, $query);
             $res = @mysql_query($query, $lnk);
             if ( @mysql_num_rows($res) > 0 ) { ?>
-</table>
-</form>
 <p align="center"><span class="required">*</span> - задължително поле</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
@@ -199,24 +208,41 @@
 <b>Име</b> <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="16" size="16"<?php
   if ( $Error[$Index] ) {
-    print(" value=\"".$Name[$Index]."\" /><br />\n");
+    print(" value=\"".$Name[$Index]."\"");
+  }
+  else print(" value=\"".$RoomDetails['RoomName']."\""); ?> />
+<?php
+  if ( $Error[$Index] ) {
+    print("<br />\n");
     print($Name_Err[$Index]);
   }
-  else print(" value=\"".$RoomDetails['RoomName']."\" />"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top">
 <td align="right">Описание</td>
 <td><input type="text" name="Descr[]" maxlength="255" size="32"<?php
   if ( $Error[$Index] ) {
-    print(" value=\"".$Descr[$Index]."\" /><br />\n");
+    print(" value=\"".$Descr[$Index]."\"");
     print($Descr[$Index]);
   }
-  else print(" value=\"".$RoomDetails['Descr']."\" />"); ?></td></tr>
-<tr><td>&nbsp;</td></tr>
-<?php         } // while ?>
+  else print(" value=\"".$RoomDetails['Descr']."\""); ?> />
+<?php
+  if ( $Error[$Index] ) {
+    print("<br />\n");
+    print($Descr[$Index]);
+  }
+?>
+</td></tr>
+<tr><td>&nbsp;</td></tr><?php
+                $Index++;
+              } // while ?>
 <tr><td align="center" colspan="2">
 <input type="hidden" name="CheckForms" value="1" />
 <input type="submit" name="SubmitEdit" value="Редактирай" />
-<input type="submit" name="CancelEdit" value="Откажи" /></td></tr><?php
+<input type="submit" name="CancelEdit" value="Откажи" /></td></tr>
+</table>
+</form>
+<?php
             } // if ( num_rows > 0...
             @mysql_free_result($res);
             //@mysql_close($lnk);
@@ -246,8 +272,6 @@
           $query = "SELECT RoomID,RoomName FROM rooms WHERE RoomID";
           MakeQueryList($RoomIds, $query);
           $res = @mysql_query($query, $lnk); ?>
-</table>
-</form>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези стаи?</td></tr>
@@ -264,7 +288,10 @@
 <tr><td align="center">
 <input type="submit" name="Delete" value="Да" />
 <input type="submit" name="CancelDelete" value="Не" />
-</td></tr><?php
+</td></tr>
+</table>
+</form>
+<?php
         }
         else {
           PrintError(202);
@@ -311,7 +338,6 @@
     }
     else Redirect("adm_rooms.php");
   } // elseif ?>
-</table></form>
 </td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
 <p align="center"><a href="https://validator.w3.org/check/referer">
