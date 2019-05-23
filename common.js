@@ -28,7 +28,7 @@ function inArray(arr, val) {
 function focusFirst() {
     var i = 0;
     // list of allowed for focus element types
-    allowedTypes = new Array("checkbox", "file", "password", "radio", "text");
+    var allowedTypes = new Array("checkbox", "file", "password", "radio", "text");
     while ( i < document.forms.length ) {
         var j = 0;
         while ( j < document.forms[i].elements.length ) {
