@@ -1,43 +1,8 @@
-0.1.0
+0.3.5 (2019-05-24 19:31 EEST)
 ------------------------------------------------------------------------------
- - Initial realease.
-
-0.2.0
-------------------------------------------------------------------------------
- - First public test realease.
-
-0.2.1 (2003-05-07 16:21 EEST)
-------------------------------------------------------------------------------
- - First public release.
- - Some bug fiexes.
-
-0.2.2 (2003-06-10 15:00 EEST)
-------------------------------------------------------------------------------
- - Now when the user exits the administrative pages a 'yes/no' form asks
-   him whether to exit or not.
-
-0.2.3 (2003-06-12 14:00 EEST)
-------------------------------------------------------------------------------
- - A bug in the styles fixed.
- - Some links fixed.
-
-0.3.0 (2003-06-12 16:00 EEST)
-------------------------------------------------------------------------------
- - Dynamic color presentations added.
-
-0.3.1 (2003-06-12 22:00 EEST)
-------------------------------------------------------------------------------
- - mysql_* functions are now prepended with @. Thus they will not pring error
-   messages to the client. This is good for productive web sites.
-
-0.3.2 (2003-06-16 14:00 EEST)
-------------------------------------------------------------------------------
- - Some bug fixes in the PHP code.
- - Color preview now works for multi editing of colors and users.
-
-0.3.3 (2004-03-21 11:35 EST)
-------------------------------------------------------------------------------
- - Convert sources to UTF-8, change encoding and charset
+ - Fix problems with edit of multiple colors and rooms due to not incr. index
+ - Fix HTML validation errors
+ - Source code improvements
 
 0.3.4 (2005-05-08 22:59 EEST)
 ------------------------------------------------------------------------------
@@ -46,3 +11,43 @@
  - Change author name and email
  - Change valid XHTML icon with PNG, validate CSS by referer
 
+0.3.3 (2004-03-21 11:35 EST)
+------------------------------------------------------------------------------
+ - Convert sources to UTF-8, change encoding and charset
+
+0.3.2 (2003-06-16 14:00 EEST)
+------------------------------------------------------------------------------
+ - Some bug fixes in the PHP code.
+ - Color preview now works for multi editing of colors and users.
+
+0.3.1 (2003-06-12 22:00 EEST)
+------------------------------------------------------------------------------
+ - mysql_* functions are now prepended with @. Thus they will not print error
+   messages to the client. This is good for productive web sites.
+
+0.3.0 (2003-06-12 16:00 EEST)
+------------------------------------------------------------------------------
+ - Dynamic color presentations added.
+
+0.2.3 (2003-06-12 14:00 EEST)
+------------------------------------------------------------------------------
+ - A bug in the styles fixed.
+ - Some links fixed.
+
+0.2.2 (2003-06-10 15:00 EEST)
+------------------------------------------------------------------------------
+ - Now when the user exits the administrative pages a 'yes/no' form asks
+   him whether to exit or not.
+
+0.2.1 (2003-05-07 16:21 EEST)
+------------------------------------------------------------------------------
+ - First public release.
+ - Some bug fixes.
+
+0.2.0
+------------------------------------------------------------------------------
+ - First public test release.
+
+0.1.0
+------------------------------------------------------------------------------
+ - Initial release.
