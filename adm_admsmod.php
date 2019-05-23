@@ -122,52 +122,75 @@
 <span class="required">*</span></td>
 <td><input type="text" name="Username" maxlength="32" size="32"<?php
   if ( $Error ) {
-    print(" value=\"".$_POST['Username']."\" /><br />\n");
+    print(" value=\"".$_POST['Username']."\"");
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Username_Err);
   }
-  else print(" />"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top"><td align="right">Парола <span class="required">*</span></td>
-<td><input type="password" name="Password" maxlength="32" size="32"<?php
+<td><input type="password" name="Password" maxlength="32" size="32" />
+<?php
   if ( $Error ) {
-    print(" /><br />\n");
+    print("<br />\n");
     print($Password_Err);
   }
-  else print(" />"); ?></td></tr>
+?></td></tr>
 <tr valign="top">
 <td align="right">Парола (повторете) <span class="required">*</span></td>
-<td><input type="password" name="Password2" maxlength="32" size="32"<?php
+<td><input type="password" name="Password2" maxlength="32" size="32" />
+<?php
   if ( $Error ) {
-    print(" /><br />\n");
+    print("<br />\n");
     print($Password2_Err);
   }
-  else print(" />"); ?></td></tr>
+?></td></tr>
 <tr><th colspan="2">Лична информация</th></tr>
 <tr valign="top"><td align="right">Име <span class="required">*</span></td>
 <td><input type="text" name="Name" maxlength="96" size="32"<?php
   if ( $Error ) {
-    print(" value=\"".$_POST['Name']."\" /><br />\n");
+    print(" value=\"".$_POST['Name']."\"");
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Name_Err);
   }
-  else print(" />"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top"><td align="right">Е-поща <span class="required">*</span></td>
 <td><input type="text" name="Email" maxlength="255" size="32"<?php
   if ( $Error ) {
-    print(" value=\"".$_POST['Email']."\" /><br />\n");
+    print(" value=\"".$_POST['Email']."\"");
+  }
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Email_Err);
   }
-  else print(" />"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top"><td align="right">Телефон</td>
 <td><input type="text" name="Phone" maxlength="255" size="32"<?php
   if ( $Error )
-    print(" value=\"".$_POST['Phone']."\" />");
-  else print(" />"); ?></td></tr>
+    print(" value=\"".$_POST['Phone']."\"");
+?> /></td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr><td align="center" colspan="2">
 <input type="hidden" name="CheckForm" value="1" />
 <input type="submit" name="SubmitAdd" value="Добави" />
 <input type="reset" name="Reset" value="Изчисти" />
 <input type="submit" name="CancelAdd" value="Откажи" />
-</td></tr><?php
+</td></tr>
+</table>
+</form>
+<?php
     }
   }
   elseif ( isset($_POST['SubmitEdit']) ) { /* Process EDIT request */
@@ -194,7 +217,7 @@
         $Phone     = $_POST['Phone'];     /* phones array */
         reset($AdminIds);
         /* check values in arrays */
-        while ( list($AdmKey, $AdmID) = each($AdminIds) ) {
+        while ( list($AdmKey) = each($AdminIds) ) {
           if ( !empty($Password[$AdmKey]) || !empty($Password2[$AdmKey]) ) {
             $Pass_Err[$AdmKey]  =
               CheckStringField($Error[$AdmKey], $Password[$AdmKey], 6, 32, true);
@@ -206,9 +229,9 @@
             }
           }
           $Name_Err[$AdmKey]  =
-            CheckStringField($Error[$AdmKey], $Name[$AdmKey], 1, 96);
+            CheckStringField($Error[$AdmKey], $Name[$AdmKey], 1, 96, true);
           $Email_Err[$AdmKey] =
-            CheckStringField($Error[$AdmKey], $Email[$AdmKey], 2, 255, true);
+            CheckStringField($Error[$AdmKey], $Email[$AdmKey], 2, 255);
         } // while
         reset($Error);
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
@@ -217,7 +240,7 @@
           if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
             if ( @mysql_select_db(DB_NAME, $lnk) ) {
-              while ( list($ErrKey, $ErrVal) = each($Error) ) {
+              while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE administrators SET ";
                 if ( !empty($Password[$ErrKey]) ) {
                   $query .= "Password=password('".$Password[$ErrKey]."'),";
@@ -261,8 +284,6 @@
             MakeQueryList($AdminIds, $query);
             $res = @mysql_query($query, $lnk);
             if ( @mysql_num_rows($res) > 0 ) { ?>
-</table>
-</form>
 <p align="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
 парола е попълнено</p>
@@ -290,31 +311,47 @@
 <td align="right">Име <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="96" size="32"<?php
   if ( $Error[$Index] ) {
-    print(" value=\"".$Name[$Index]."\" /><br />\n");
+    print(" value=\"".$Name[$Index]."\"");
+  }
+  else print(" value=\"".$AdmDetails['AdmName']."\""); ?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Name_Err[$Index]);
   }
-  else print(" value=\"".$AdmDetails['AdmName']."\" />"); ?></td></tr>
+?>
+</td></tr>
 <tr valign="top">
 <td align="right">Е-поща <span class="required">*</span></td>
 <td><input type="text" name="Email[]" maxlength="255" size="32"<?php
   if ( $Error[$Index] ) {
-    print(" value=\"".$Email[$Index]."\" /><br />\n");
+    print(" value=\"".$Email[$Index]."\"");
+    
+  }
+  else print(" value=\"".$AdmDetails['Email']."\"");
+?> />
+<?php
+  if ( $Error ) {
+    print("<br />\n");
     print($Email_Err[$Index]);
   }
-  else print(" value=\"".$AdmDetails['Email']."\" />"); ?></td></tr>
+?></td></tr>
 <tr valign="top">
 <td align="right">Телефон</td>
 <td><input type="text" name="Phone[]" maxlength="255" size="32"<?php
   if ( $Error[$Index] )
-    print(" value=\"".$Phone[$Index]."\" />\n");
-  else print(" value=\"".$AdmDetails['Phone']."\" />\n"); ?></td></tr>
+    print(" value=\"".$Phone[$Index]."\"");
+  else print(" value=\"".$AdmDetails['Phone']."\""); ?> /></td></tr>
 <tr><td>&nbsp;</td></tr><?php
                 $Index++;
               } // while ?>
 <tr><td align="center" colspan="2">
 <input type="hidden" name="CheckForms" value="1" />
 <input type="submit" name="SubmitEdit" value="Редактирай" />
-<input type="submit" name="CancelEdit" value="Откажи" /></td></tr><?php
+<input type="submit" name="CancelEdit" value="Откажи" /></td></tr>
+</table>
+</form>
+<?php
             } // if ( num_rows > 0...
             @mysql_free_result($res);
             //@mysql_close($lnk);
@@ -352,8 +389,6 @@
           $query = "SELECT AdminID,Username FROM administrators WHERE AdminID";
           MakeQueryList($AdminIds, $query);
           $res = @mysql_query($query, $lnk); ?>
-</table>
-</form>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези администратори?</td></tr>
@@ -371,7 +406,10 @@
 <tr><td align="center">
 <input type="submit" name="Delete" value="Да" />
 <input type="submit" name="CancelDelete" value="Не" />
-</td></tr><?php
+</td></tr>
+</table>
+</form>
+<?php
         }
         else {
           PrintError(202);
@@ -426,7 +464,6 @@
     }
     else Redirect("adm_adms.php");
   } // elseif ?>
-</table></form>
 </td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
 <p align="center"><a href="https://validator.w3.org/check/referer">
