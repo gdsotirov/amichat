@@ -14,7 +14,9 @@
   if ( isset($_SESSION['USR_REFRESH']) ) {
     $REFRESH = $_SESSION['USR_REFRESH'];
   }
-  else $REFRESH = DEF_REFRESH;
+  else {
+    $REFRESH = DEF_REFRESH;
+  }
 
   echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 ?>
@@ -43,12 +45,18 @@ style="padding: 5px 5px 5px 5px;">
       $row = @mysql_fetch_array($res, MYSQL_ASSOC);
 
       $RowCount = $row['RowCount'];
-      if ( isset($_SESSION['USR_MSGCNT']) )
+      if ( isset($_SESSION['USR_MSGCNT']) ) {
         $MSGCOUNT = $_SESSION['USR_MSGCNT'];
-      else $MSGCOUNT = DEF_MSGCOUNT;
-      if ( $RowCount <= $MSGCOUNT )
+      }
+      else {
+        $MSGCOUNT = DEF_MSGCOUNT;
+      }
+      if ( $RowCount <= $MSGCOUNT ) {
         $Offset = 0;
-      else $Offset = $RowCount - $MSGCOUNT;
+      }
+      else {
+        $Offset = $RowCount - $MSGCOUNT;
+      }
 
       $query  = "SELECT messages.PostDate,messages.PostTime,messages.Message,";
       $query .= "users.Nickname,users.Teacher,";
@@ -66,13 +74,19 @@ style="padding: 5px 5px 5px 5px;">
         $USR_COLOR = MakeTriplet($row['Red'],$row['Green'],$row['Blue']);
         print("[".$row['PostDate']." ".$row['PostTime']."] ");
         print("<span style=\"color: $USR_COLOR;");
-        if ( $row['Teacher'] == '1' )
+        if ( $row['Teacher'] == '1' ) {
           print(" font-weight: bold;\">");
-        else print("\">");
+        }
+        else {
+          print("\">");
+        }
         print($row['Nickname']."</span> -> ");
-        if ( $row['Teacher'] == '1' )
+        if ( $row['Teacher'] == '1' ) {
           print("<b>".$row['Message']."</b><br />\n");
-        else print($row['Message']."<br />\n");
+        }
+        else {
+          print($row['Message']."<br />\n");
+        }
       } // while
       @mysql_close($lnk);
     }

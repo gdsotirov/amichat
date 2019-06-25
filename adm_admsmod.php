@@ -4,20 +4,25 @@
   include("common.inc.php");
   include("error.inc.php");
 
-  if ( !isset($_SESSION['ADM_ID']) )
+  if ( !isset($_SESSION['ADM_ID']) ) {
     Redirect("index.php?admin=1");
+  }
 
   /* if user cancels the request -> redirect */
-  if ( isset($_POST['CancelAdd']) || isset($_POST['CancelEdit']) || isset($_POST['CancelDelete']) )
+  if ( isset($_POST['CancelAdd']) || isset($_POST['CancelEdit']) || isset($_POST['CancelDelete']) ) {
     Redirect("adm_adms.php");
+  }
 
   function PrintAction() {
-    if ( isset($_POST['SubmitAdd']) )
+    if ( isset($_POST['SubmitAdd']) ) {
       echo "Добавяне";
-    elseif ( isset($_POST['SubmitEdit']) )
+    }
+    elseif ( isset($_POST['SubmitEdit']) ) {
       echo "Редакция";
-    elseif ( isset($_POST['SubmitDel']) || isset($_POST['Delete']) || isset($_POST['CancelDelete']) )
+    }
+    elseif ( isset($_POST['SubmitDel']) || isset($_POST['Delete']) || isset($_POST['CancelDelete']) ) {
       echo "Изтриване";
+    }
   }
 
   function PrintOK($msg) {
@@ -96,9 +101,12 @@
             $query .= "'".$_POST['Phone']."',";
             $query .= " CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
             @mysql_query($query, $lnk);
-            if ( @mysql_affected_rows($lnk) == 1 )
+            if ( @mysql_affected_rows($lnk) == 1 ) {
               PrintOK("Администратора ".$_POST['Username']." (".$_POST['Name'].") е добавен успешно.");
-            else PrintOK("Администратора НЕ е добавен!");
+            }
+            else {
+              PrintOK("Администратора НЕ е добавен!");
+            }
             @mysql_close($lnk);
           }
           else {
@@ -179,8 +187,9 @@
 </td></tr>
 <tr valign="top"><td align="right">Телефон</td>
 <td><input type="text" name="Phone" maxlength="255" size="32"<?php
-  if ( $Error )
+  if ( $Error ) {
     print(" value=\"".$_POST['Phone']."\"");
+  }
 ?> /></td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr><td align="center" colspan="2">
@@ -196,8 +205,9 @@
   }
   elseif ( isset($_POST['SubmitEdit']) ) { /* Process EDIT request */
     if ( isset($_POST['AdminIds']) ) {
-      if ( count($_POST['AdminIds']) == 0 )
+      if ( count($_POST['AdminIds']) == 0 ) {
         Redirect("adm_adms.php");
+      }
       if ( in_array(SUPERUSER_ID, $_POST['AdminIds'], TRUE) ) {
         PrintError(104);
         exit;
@@ -254,16 +264,20 @@
                 $query .= " WHERE AdminID=".$AdminIds[$ErrKey];
 
                 @mysql_query($query, $lnk);
-                if ( @mysql_affected_rows($lnk) == 1 )
+                if ( @mysql_affected_rows($lnk) == 1 ) {
                   $EditCount++;
+                }
               } // while
               @mysql_close($lnk);
-              if ( $EditCount == $AdmCount )
+              if ( $EditCount == $AdmCount ) {
                 PrintOK("Администраторите са редактирани успешно.");
-              elseif ( $EditCount > 0 && $EditCount < $AdmCount )
+              }
+              elseif ( $EditCount > 0 && $EditCount < $AdmCount ) {
                 PrintOK("Някои от администраторите са редактирани успешно!");
-              elseif ( $EditCount == 0 )
+              }
+              elseif ( $EditCount == 0 ) {
                 PrintOK("Администраторите НЕ са редактирани успешно!");
+              }
             }
             else {
               PrintError(202);
@@ -314,7 +328,10 @@
   if ( $Error[$Index] ) {
     print(" value=\"".$Name[$Index]."\"");
   }
-  else print(" value=\"".$AdmDetails['AdmName']."\""); ?> />
+  else {
+    print(" value=\"".$AdmDetails['AdmName']."\"");
+  }
+?> />
 <?php
   if ( $Error ) {
     print("<br />\n");
@@ -329,7 +346,9 @@
     print(" value=\"".$Email[$Index]."\"");
     
   }
-  else print(" value=\"".$AdmDetails['Email']."\"");
+  else {
+    print(" value=\"".$AdmDetails['Email']."\"");
+  }
 ?> />
 <?php
   if ( $Error ) {
@@ -340,9 +359,12 @@
 <tr valign="top">
 <td align="right">Телефон</td>
 <td><input type="text" name="Phone[]" maxlength="255" size="32"<?php
-  if ( $Error[$Index] )
+  if ( $Error[$Index] ) {
     print(" value=\"".$Phone[$Index]."\"");
-  else print(" value=\"".$AdmDetails['Phone']."\""); ?> /></td></tr>
+  }
+  else {
+    print(" value=\"".$AdmDetails['Phone']."\"");
+  } ?> /></td></tr>
 <tr><td>&nbsp;</td></tr><?php
                 $Index++;
               } // while ?>
@@ -355,7 +377,6 @@
 <?php
             } // if ( num_rows > 0...
             @mysql_free_result($res);
-            //@mysql_close($lnk);
           }
           else {
             PrintError(202);
@@ -368,12 +389,15 @@
         }
       }
     } // if ( isset(...
-    else Redirect("amd_adms.php");
+    else {
+      Redirect("amd_adms.php");
+    }
   }
   elseif ( isset($_POST['SubmitDel']) ) { /* Process delete request */
     if ( isset($_POST['AdminIds']) ) {
-      if ( count($_POST['AdminIds']) == 0 )
+      if ( count($_POST['AdminIds']) == 0 ) {
         Redirect("adm_adms.php");
+      }
       $AdminIds = $_POST['AdminIds'];
       if ( in_array(SUPERUSER_ID, $AdminIds, TRUE) ) {
         PrintError(105);
@@ -400,8 +424,7 @@
             print(" value=\"".$AdminDetails['AdminID']."\" /></li>\n");
           }
 
-          @mysql_free_result($res);
-          //@mysql_close($lnk); ?>
+          @mysql_free_result($res); ?>
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td align="center">
@@ -422,12 +445,15 @@
         exit;
       }
     } // if ( isset
-    else Redirect("adm_adms.php");
+    else {
+      Redirect("adm_adms.php");
+    }
   }
   elseif ( isset($_POST['Delete']) ) { /* Delete */
     if ( isset($_POST['AdminIds']) ) {
-      if ( count($_POST['AdminIds']) == 0 )
+      if ( count($_POST['AdminIds']) == 0 ) {
         Redirect("adm_adms.php");
+      }
       if ( in_array(SUPERUSER_ID, $_POST['AdminIds'], TRUE) ) {
         PrintError(105);
         exit;
@@ -446,12 +472,15 @@
           @mysql_query($query, $lnk);
           $DelCount = @mysql_affected_rows($lnk);
           @mysql_close($lnk);
-          if ( $DelCount == $AdmCount )
+          if ( $DelCount == $AdmCount ) {
             PrintOK("Администраторите са изтрити успешно.");
-          elseif ( $DelCount > 0 && $DelCount < $AdmCount )
+          }
+          elseif ( $DelCount > 0 && $DelCount < $AdmCount ) {
             PrintOK("Някои от администраторите са изтрити успешно!");
-          elseif ( $DelCount == 0 )
+          }
+          elseif ( $DelCount == 0 ) {
             PrintOK("Администраторите НЕ са изтрити успешно!");
+          }
         }
         else {
           PrintError(202);
@@ -463,7 +492,9 @@
         exit;
       }
     }
-    else Redirect("adm_adms.php");
+    else {
+      Redirect("adm_adms.php");
+    }
   } // elseif ?>
 </td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->

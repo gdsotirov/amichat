@@ -39,20 +39,27 @@
   }
 
   function PrintBool($Bool) {
-    if ( !isset($Bool) || $Bool == '' )
-      return "n/a";
-    else if ( $Bool == 1 || $Bool == '1' || strtolower($Bool) == 'yes' || strtolower($Bool) == 'y' )
-      return "Да";
-    else if ( $Bool == 0 || $Bool == '0' || strtolower($Bool) == 'no' || strtolower($Bool) == 'n' )
-      return "Не";
-    else return "";
+    $res = "";
+
+    if ( !isset($Bool) || $Bool == '' ) {
+      $res = "n/a";
+    }
+    else if ( $Bool == 1 || $Bool == '1' || strtolower($Bool) == 'yes' || strtolower($Bool) == 'y' ) {
+      $res = "Да";
+    }
+    else if ( $Bool == 0 || $Bool == '0' || strtolower($Bool) == 'no' || strtolower($Bool) == 'n' ) {
+      $res = "Не";
+    }
+
+    return $res;
   }
 
   function CheckValidChars($String) {
     $i = 0;
     while ( $i < strlen($String) ) {
-      if ( !preg_match("/[_a-zA-z0-9]/", $String[$i]) )
+      if ( !preg_match("/[_a-zA-z0-9]/", $String[$i]) ) {
         return false;
+      }
       $i++;
     }
     return true;
@@ -61,14 +68,12 @@
   function CheckStringField(&$Error, $Value, $Min, $Max, $CheckCorrectInput = false) {
     $FieldErr = "";
     if ( isset($Value) && strlen($Value) > 0 ) {
-      if ( $CheckCorrectInput == true ) {
-        if ( !CheckValidChars($Value) ) {
-          $FieldErr = "<span class=\"error\">Полето съдържа неразрешени ";
-          $FieldErr .= "символи! Разрешените символи са _ (долно тире), ";
-          $FieldErr .= "малки и големи английски букви (a-z, A-Z) и арабските ";
-          $FieldErr .= "цифри (0-9).</span><br />";
-          $Error = TRUE;
-        }
+      if ( $CheckCorrectInput && !CheckValidChars($Value) ) {
+        $FieldErr = "<span class=\"error\">Полето съдържа неразрешени ";
+        $FieldErr .= "символи! Разрешените символи са _ (долно тире), ";
+        $FieldErr .= "малки и големи английски букви (a-z, A-Z) и арабските ";
+        $FieldErr .= "цифри (0-9).</span><br />";
+        $Error = TRUE;
       }
       if ( strlen($Value) < $Min || strlen($Value) > $Max ) {
         $FieldErr .= "<span class=\"error\">Дължината на това поле трябва";

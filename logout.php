@@ -7,8 +7,9 @@
   // Process administrator logout
   if ( isset($_SESSION['ADM_ID']) ) {
     // close @mysql persistent link
-    if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) )
+    if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
       @mysql_close($lnk);
+    }
     /* *** finalize administrative session *** */
     session_unset();
     session_destroy();

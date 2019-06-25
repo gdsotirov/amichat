@@ -4,20 +4,25 @@
   include("common.inc.php");
   include("error.inc.php");
 
-  if ( !isset($_SESSION['ADM_ID']) )
+  if ( !isset($_SESSION['ADM_ID']) ) {
     Redirect("index.php?admin=1");
+  }
 
   /* if user cancels the request -> redirect */
-  if ( isset($_POST['CancelAdd']) || isset($_POST['CancelEdit']) || isset($_POST['CancelDelete']) )
+  if ( isset($_POST['CancelAdd']) || isset($_POST['CancelEdit']) || isset($_POST['CancelDelete']) ) {
     Redirect("adm_clrs.php");
+  }
 
   function PrintAction() {
-    if ( isset($_POST['SubmitAdd']) )
+    if ( isset($_POST['SubmitAdd']) ) {
       echo "Добавяне";
-    elseif ( isset($_POST['SubmitEdit']) )
+    }
+    elseif ( isset($_POST['SubmitEdit']) ) {
       echo "Редакция";
-    elseif ( isset($_POST['SubmitDel']) || isset($_POST['Delete']) || isset($_POST['CancelDelete']) )
+    }
+    elseif ( isset($_POST['SubmitDel']) || isset($_POST['Delete']) || isset($_POST['CancelDelete']) ) {
       echo "Изтриване";
+    }
   }
 
   function PrintOK($msg) {
@@ -110,9 +115,12 @@
             $query .= "'".$Blue."',";
             $query .= "CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
             @mysql_query($query, $lnk);
-            if ( @mysql_affected_rows($lnk) == 1 )
+            if ( @mysql_affected_rows($lnk) == 1 ) {
               PrintOK("Цветът ".$Name." е добавен успешно.");
-            else PrintOK("Цветът НЕ е добавен!");
+            }
+            else {
+              PrintOK("Цветът НЕ е добавен!");
+            }
             @mysql_close($lnk);
           }
           else {
@@ -204,8 +212,9 @@
   }
   elseif ( isset($_POST['SubmitEdit']) ) { /* Process EDIT request */
     if ( isset($_POST['ColorIds']) ) {
-      if ( count($_POST['ColorIds']) == 0 )
+      if ( count($_POST['ColorIds']) == 0 ) {
         Redirect("adm_clrs.php");
+      }
       $ColorIds  = $_POST['ColorIds'];
       $ClrCount  = count($ColorIds);
       $Error     = array_fill(0, $ClrCount, 0);
@@ -244,16 +253,20 @@
                 $query .= "AdminID=".$_SESSION['ADM_ID'];
                 $query .= " WHERE ColorID=".$ColorIds[$ErrKey];
                 @mysql_query($query, $lnk);
-                if ( @mysql_affected_rows($lnk) == 1 )
+                if ( @mysql_affected_rows($lnk) == 1 ) {
                   $EditCount++;
+                }
               } // while
               @mysql_close($lnk);
-              if ( $EditCount == $ClrCount )
+              if ( $EditCount == $ClrCount ) {
                 PrintOK("Цветовете са редактирани успешно.");
-              elseif ( $EditCount > 0 && $EditCount < $ClrCount )
+              }
+              elseif ( $EditCount > 0 && $EditCount < $ClrCount ) {
                 PrintOK("Някои от цветовете са редактирани успешно!");
-              elseif ( $EditCount == 0 )
+              }
+              elseif ( $EditCount == 0 ) {
                 PrintOK("Цветовете НЕ са редактирани успешно!");
+              }
             }
             else {
               PrintError(202);
@@ -291,8 +304,10 @@
   if ( $Error[$Index] ) {
     print(" value=\"".$Name[$Index]."\"");
   }
-  else print(" value=\"".$ClrDetails['ClrName']."\""); ?>
-/>
+  else {
+    print(" value=\"".$ClrDetails['ClrName']."\"");
+  }
+?> />
 <?php
   if ( $Error[$Index] ) {
     print("<br />\n");
@@ -309,7 +324,10 @@
   if ( $Error[$Index] ) {
     print(" value=\"".$Red[$Index]."\"");
   }
-  else print(" value=\"".$ClrDetails['Red']."\""); ?> />
+  else {
+    print(" value=\"".$ClrDetails['Red']."\"");
+  }
+?> />
 <?php
   if ( $Error[$Index] ) {
     print("<br />\n");
@@ -324,7 +342,10 @@
   if ( $Error[$Index] ) {
     print(" value=\"".$Green[$Index]."\"");
   }
-  else print(" value=\"".$ClrDetails['Green']."\""); ?> />
+  else {
+    print(" value=\"".$ClrDetails['Green']."\"");
+  }
+?> />
 <?php
   if ( $Error[$Index] ) {
     print("<br />\n");
@@ -339,7 +360,10 @@
   if ( $Error[$Index] ) {
     print(" value=\"".$Blue[$Index]."\"");
   }
-  else print(" value=\"".$ClrDetails['Blue']."\""); ?> />
+  else {
+    print(" value=\"".$ClrDetails['Blue']."\"");
+  }
+?> />
 <?php
   if ( $Error[$Index] ) {
     print("<br />\n");
@@ -359,7 +383,6 @@
 <?php
             } // if ( num_rows > 0...
             @mysql_free_result($res);
-            //@mysql_close($lnk);
           }
           else {
             PrintError(202);
@@ -372,12 +395,15 @@
         }
       }
     } // if ( isset(...
-    else Redirect("adm_clrs.php");
+    else {
+      Redirect("adm_clrs.php");
+    }
   }
   elseif( isset($_POST['SubmitDel']) ) { /* Process delete request */
     if ( isset($_POST['ColorIds']) ) {
-      if ( count($_POST['ColorIds']) == 0 )
+      if ( count($_POST['ColorIds']) == 0 ) {
         Redirect("adm_clrs.php");
+      }
       $ColorIds = $_POST['ColorIds'];
       $ClrCount = count($ColorIds);
       include("passwd.inc.php");
@@ -397,7 +423,6 @@
             print(" value=\"".$ClrDetails['ColorID']."\" /></li>\n");
           }
           @mysql_free_result($res);
-          //@mysql_close($lnk);
 ?>
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
@@ -419,12 +444,15 @@
         exit;
       }
     } // if ( isset
-    else Redirect("adm_clrs.php");
+    else {
+      Redirect("adm_clrs.php");
+    }
   }
   elseif( isset($_POST['Delete']) ) { /* Delete */
     if ( isset($_POST['ColorIds']) ) {
-      if ( count($_POST['ColorIds']) == 0 )
+      if ( count($_POST['ColorIds']) == 0 ) {
         Redirect("adm_clrs.php");
+      }
       $ColorIds = $_POST['ColorIds'];
       include("passwd.inc.php");
       if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
@@ -435,12 +463,15 @@
           @mysql_query($query, $lnk);
           $DelCount = @mysql_affected_rows($lnk);
           @mysql_close($lnk);
-          if ( $DelCount == $ClrCount )
+          if ( $DelCount == $ClrCount ) {
             PrintOK("Цветовете са изтрити успешно.");
-          elseif( $DelCount > 0 && $DelCount < $ClrCount )
+          }
+          elseif( $DelCount > 0 && $DelCount < $ClrCount ) {
             PrintOK("Някои от цветовете са изтрити успешно!");
-          elseif( $DelCount == 0 )
+          }
+          elseif( $DelCount == 0 ) {
             PrintOK("Цветовете НЕ са изтрити успешно!");
+          }
         }
         else {
           PrintError(202);
@@ -452,7 +483,9 @@
         exit;
       }
     }
-    else Redirect("adm_clrs.php");
+    else {
+      Redirect("adm_clrs.php");
+    }
   } // elseif
 ?>
 </td></tr></table>

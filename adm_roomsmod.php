@@ -4,20 +4,25 @@
   include("common.inc.php");
   include("error.inc.php");
 
-  if ( !isset($_SESSION['ADM_ID']) )
+  if ( !isset($_SESSION['ADM_ID']) ) {
     Redirect("index.php?admin=1");
+  }
 
   /* if user cancels the request -> redirect */
-  if ( isset($_POST['CancelAdd']) || isset($_POST['CancelEdit']) || isset($_POST['CancelDelete']) )
+  if ( isset($_POST['CancelAdd']) || isset($_POST['CancelEdit']) || isset($_POST['CancelDelete']) ) {
     Redirect("adm_rooms.php");
+  }
 
   function PrintAction() {
-    if ( isset($_POST['SubmitAdd']) )
-        echo "Добавяне";
-    elseif( isset($_POST['SubmitEdit']) )
-        echo "Редакция";
-    elseif( isset($_POST['SubmitDel']) || isset($_POST['Delete']) || isset($_POST['CancelDelete']) )
-        echo "Изтриване";
+    if ( isset($_POST['SubmitAdd']) ) {
+      echo "Добавяне";
+    }
+    elseif( isset($_POST['SubmitEdit']) ) {
+      echo "Редакция";
+    }
+    elseif( isset($_POST['SubmitDel']) || isset($_POST['Delete']) || isset($_POST['CancelDelete']) ) {
+      echo "Изтриване";
+    }
   }
 
   function PrintOK($msg) {
@@ -81,9 +86,12 @@
             $query .= "'".$_POST['Descr']."',";
             $query .= " CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
             @mysql_query($query, $lnk);
-            if ( @mysql_affected_rows($lnk) == 1 )
+            if ( @mysql_affected_rows($lnk) == 1 ) {
               PrintOK("Стаята ".$_POST['Name']." е добавена успешно.");
-            else PrintOK("Стаята НЕ е добавенa!");
+            }
+            else {
+              PrintOK("Стаята НЕ е добавенa!");
+            }
             @mysql_close($lnk);
           }
           else {
@@ -118,8 +126,9 @@
 </td></tr>
 <tr valign="top"><td align="right">Описание</td>
 <td><input type="text" name="Descr" maxlength="255" size="32"<?php
-  if ( $Error )
+  if ( $Error ) {
     print(" value=\"".$_POST['Descr']."\"");
+  }
 ?> />
 </td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
@@ -136,8 +145,9 @@
   }
   elseif( isset($_POST['SubmitEdit']) ) { /* Process EDIT request */
     if ( isset($_POST['RoomIds']) ) {
-      if ( count($_POST['RoomIds']) == 0 )
+      if ( count($_POST['RoomIds']) == 0 ) {
         Redirect("adm_rooms.php");
+      }
       $RoomIds   = $_POST['RoomIds'];
       $RoomCount = count($RoomIds);
       $Error     = array_fill(0, $RoomCount, 0);
@@ -167,16 +177,20 @@
                 $query .= "AdminID=".$_SESSION['ADM_ID'];
                 $query .= " WHERE RoomID=".$RoomIds[$ErrKey];
                 @mysql_query($query, $lnk);
-                if ( @mysql_affected_rows($lnk) == 1 )
+                if ( @mysql_affected_rows($lnk) == 1 ) {
                   $EditCount++;
+                }
               } // while
               @mysql_close($lnk);
-              if ( $EditCount == $RoomCount )
+              if ( $EditCount == $RoomCount ) {
                 PrintOK("Стаите са редактирани успешно.");
-              elseif( $EditCount > 0 && $EditCount < $RoomCount )
+              }
+              elseif( $EditCount > 0 && $EditCount < $RoomCount ) {
                 PrintOK("Някои от стаите са редактирани успешно!");
-              elseif( $EditCount == 0 )
+              }
+              elseif( $EditCount == 0 ) {
                 PrintOK("Стаите НЕ са редактирани успешно!");
+              }
             }
             else {
               PrintError(202);
@@ -210,7 +224,10 @@
   if ( $Error[$Index] ) {
     print(" value=\"".$Name[$Index]."\"");
   }
-  else print(" value=\"".$RoomDetails['RoomName']."\""); ?> />
+  else {
+    print(" value=\"".$RoomDetails['RoomName']."\"");
+  }
+?> />
 <?php
   if ( $Error[$Index] ) {
     print("<br />\n");
@@ -225,7 +242,10 @@
     print(" value=\"".$Descr[$Index]."\"");
     print($Descr[$Index]);
   }
-  else print(" value=\"".$RoomDetails['Descr']."\""); ?> />
+  else {
+    print(" value=\"".$RoomDetails['Descr']."\"");
+  }
+?> />
 <?php
   if ( $Error[$Index] ) {
     print("<br />\n");
@@ -245,7 +265,6 @@
 <?php
             } // if ( num_rows > 0...
             @mysql_free_result($res);
-            //@mysql_close($lnk);
           }
           else {
             PrintError(202);
@@ -258,12 +277,15 @@
         }
       }
     } // if ( isset(...
-    else Redirect("adm_rooms.php");
+    else {
+      Redirect("adm_rooms.php");
+    }
   }
   elseif( isset($_POST['SubmitDel']) ) { /* Process delete request */
     if ( isset($_POST['RoomIds']) ) {
-      if ( count($_POST['RoomIds']) == 0 )
+      if ( count($_POST['RoomIds']) == 0 ) {
         Redirect("adm_rooms.php");
+      }
       $RoomIds   = $_POST['RoomIds'];
       $RoomCount = count($RoomIds);
       include("passwd.inc.php");
@@ -282,7 +304,7 @@
             print(" value=\"".$RoomDetails['RoomID']."\" /></li>\n");
           }
           @mysql_free_result($res);
-          //@mysql_close($lnk); ?>
+?>
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td align="center">
@@ -303,12 +325,15 @@
         exit;
       }
     } // if ( isset
-    else Redirect("adm_rooms.php");
+    else {
+      Redirect("adm_rooms.php");
+    }
   }
   elseif( isset($_POST['Delete']) ) { /* Delete */
     if ( isset($_POST['RoomIds']) ) {
-      if ( count($_POST['RoomIds']) == 0 )
+      if ( count($_POST['RoomIds']) == 0 ) {
         Redirect("adm_rooms.php");
+      }
       $RoomIds = $_POST['RoomIds'];
       include("passwd.inc.php");
       if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
@@ -319,12 +344,15 @@
           @mysql_query($query, $lnk);
           $DelCount = @mysql_affected_rows($lnk);
           @mysql_close($lnk);
-          if ( $DelCount == $RoomCount )
+          if ( $DelCount == $RoomCount ) {
             PrintOK("Стаите са изтрити успешно.");
-          elseif( $DelCount > 0 && $DelCount < $RoomCount )
+          }
+          elseif( $DelCount > 0 && $DelCount < $RoomCount ) {
             PrintOK("Някои от стаите са изтрити успешно!");
-          elseif( $DelCount == 0 )
+          }
+          elseif( $DelCount == 0 ) {
             PrintOK("Стаите НЕ са изтрити успешно!");
+          }
         }
         else {
           PrintError(202);
@@ -336,7 +364,9 @@
         exit;
       }
     }
-    else Redirect("adm_rooms.php");
+    else {
+      Redirect("adm_rooms.php");
+    }
   } // elseif ?>
 </td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->

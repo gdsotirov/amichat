@@ -4,8 +4,9 @@
   include("common.inc.php");
   include("error.inc.php");
 
-  if ( !isset($_SESSION['ADM_ID']) )
+  if ( !isset($_SESSION['ADM_ID']) ) {
     Redirect("index.php?admin=1");
+  }
 
   include("admin.inc.php");
 
@@ -52,9 +53,12 @@
       if ( @mysql_num_rows($res) > 0 ) {
         $RowNum = 1;
         while ( $RoomDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
-          if ( $RowNum++ % 2 )
+          if ( $RowNum++ % 2 ) {
             print("<tr class=\"trOdd\">\n");
-          else print("<tr>\n");
+          }
+          else {
+            print("<tr>\n");
+          }
           print("<td><input name=\"RoomIds[]\" type=\"checkbox\" value=\"");
           print($RoomDetails['RoomID']."\" /></td>\n");
           print("<td>".$RoomDetails['RoomName']."</td>\n");
@@ -65,7 +69,6 @@
         } // while
       }
       @mysql_free_result($res);
-      //@mysql_close($lnk);
     }
     else {
       PrintError(202);

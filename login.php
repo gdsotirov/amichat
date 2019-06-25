@@ -2,14 +2,16 @@
   include("common.inc.php");
   include("error.inc.php");
 
-  if ( !isset($_POST['Submit']) || !isset($_POST['Username']) || !isset($_POST['Password']) )
+  if ( !isset($_POST['Submit']) || !isset($_POST['Username']) || !isset($_POST['Password']) ) {
     Redirect("index.php");
+  }
 
   $Username = $_POST['Username'];
   $Password = $_POST['Password'];
 
-  if ( isset($_POST['Admin']) )
+  if ( isset($_POST['Admin']) ) {
     $ADMIN = $_POST['Admin'];
+  }
 
   include("passwd.inc.php");
 
@@ -83,8 +85,12 @@
         }
       } // else - process user login
     }
-    else PrintError(202); // can't use database
+    else {
+      PrintError(202); // can't use database
+    }
   }
-  else PrintError(201); // can't connect to server
+  else {
+    PrintError(201); // can't connect to server
+  }
 ?>
 

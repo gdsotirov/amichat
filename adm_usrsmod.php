@@ -4,20 +4,25 @@
   include("common.inc.php");
   include("error.inc.php");
 
-  if ( !isset($_SESSION['ADM_ID']) )
+  if ( !isset($_SESSION['ADM_ID']) ) {
     Redirect("index.php?admin=1");
+  }
 
   /* if user cancels the request -> redirect */
-  if ( isset($_POST['CancelAdd']) || isset($_POST['CancelEdit']) || isset($_POST['CancelDelete']) )
+  if ( isset($_POST['CancelAdd']) || isset($_POST['CancelEdit']) || isset($_POST['CancelDelete']) ) {
     Redirect("adm_usrs.php");
+  }
 
   function PrintAction() {
-    if ( isset($_POST['SubmitAdd']) )
+    if ( isset($_POST['SubmitAdd']) ) {
       echo "Добавяне";
-    elseif( isset($_POST['SubmitEdit']) )
+    }
+    elseif( isset($_POST['SubmitEdit']) ) {
       echo "Редакция";
-    elseif( isset($_POST['SubmitDel']) || isset($_POST['Delete']) || isset($_POST['CancelDelete']) )
+    }
+    elseif( isset($_POST['SubmitDel']) || isset($_POST['Delete']) || isset($_POST['CancelDelete']) ) {
       echo "Изтриване";
+    }
   }
 
   function PrintOK($msg) {
@@ -89,8 +94,9 @@
       $Nick      = $_POST['Nick'][0];
       $Name      = $_POST['Name'][0];
       $Email     = $_POST['Email'][0];
-      if ( isset($_POST['Teacher']) )
+      if ( isset($_POST['Teacher']) ) {
         $Teacher = $_POST['Teacher'];
+      }
       $Color     = $_POST['Color'][0];
       $Username_Err  = CheckStringField($Error, $Username, 6, 32, true);
       $Password_Err  = CheckStringField($Error, $Password, 6, 32, true);
@@ -102,8 +108,9 @@
       $Nick_Err  = CheckStringField($Error, $Nick, 1, 32);
       $Name_Err  = CheckStringField($Error, $Name, 1, 96);
       //$Email_Err = CheckStringField($Error, $_POST['Email'], 2, 255);
-      if ( empty($Color) )
+      if ( empty($Color) ) {
         $Color = DEF_COLORID;
+      }
       if ( !$Error ) {
         include("passwd.inc.php");
         if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
@@ -138,9 +145,12 @@
             $query .= "".$Color.",";
             $query .= "CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
             @mysql_query($query, $lnk);
-            if ( @mysql_affected_rows($lnk) == 1 )
+            if ( @mysql_affected_rows($lnk) == 1 ) {
               PrintOK("Потребителя ".$Username." (".$Name.") е добавен успешно.");
-            else PrintOK("Потребителя НЕ е добавен!");
+            }
+            else {
+              PrintOK("Потребителя НЕ е добавен!");
+            }
             @mysql_close($lnk);
           }
           else {
@@ -238,8 +248,9 @@
 </td></tr>
 <tr valign="top"><td align="right">Учител</td>
 <td><input type="checkbox" name="Teacher[]"<?php
-  if ( $Error && isset($Teacher) )
+  if ( $Error && isset($Teacher) ) {
     print(" checked=\"checked\"");
+  }
 ?> /></td></tr>
 <tr valign="top"><td align="right">Цвят</td>
 <td>
@@ -253,19 +264,19 @@
 
         $res = @mysql_query($query, $lnk);
 
-        if ( @mysql_num_rows($res) > 0 )
+        if ( @mysql_num_rows($res) > 0 ) {
           while ( $Clr = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
             print("<option");
-            if ( isset($Color) )
-              if ( $Color == $Clr['ColorID'] )
-                print(" selected=\"selected\"");
+            if ( isset($Color) && $Color == $Clr['ColorID'] ) {
+              print(" selected=\"selected\"");
+            }
             print(" value=\"".$Clr['ColorID']."\"");
             print(" title=\"".MakeTriplet($Clr['Red'], $Clr['Green'], $Clr['Blue'])."\">");
             print($Clr['ClrName']."</option>\n");
           }
+        }
 
         @mysql_free_result($res);
-        //@mysql_close($lnk);
       }
     }
 ?></select></td></tr>
@@ -283,8 +294,9 @@
   }
   elseif( isset($_POST['SubmitEdit']) ) { /* Process EDIT request */
     if ( isset($_POST['UserIds']) ) {
-      if ( count($_POST['UserIds']) == 0 )
+      if ( count($_POST['UserIds']) == 0 ) {
         Redirect("adm_usrs.php");
+      }
       $UserIds  = $_POST['UserIds'];  /* Admin id's array */
       $UsrCount  = count($UserIds);
       $Error     = array_fill(0, $UsrCount, 0);
@@ -300,9 +312,9 @@
         $Nick      = $_POST['Nick'];
         $Name      = $_POST['Name'];
         $Email     = $_POST['Email'];
-        //$Color     = $_POST['Color'];
-        if ( isset($_POST['Teacher']) )
-            $Teacher = $_POST['Teacher'];
+        if ( isset($_POST['Teacher']) ) {
+          $Teacher = $_POST['Teacher'];
+        }
         $Color     = $_POST['Color'];
         reset($UserIds);
         /* check values in arrays */
@@ -345,16 +357,20 @@
                 $query .= "AdminID=".$_SESSION['ADM_ID'];
                 $query .= " WHERE UserID=".$UserIds[$ErrKey];
                 @mysql_query($query, $lnk);
-                if ( @mysql_affected_rows($lnk) == 1 )
+                if ( @mysql_affected_rows($lnk) == 1 ) {
                   $EditCount++;
+                }
               } // while
               @mysql_close($lnk);
-              if ( $EditCount == $UsrCount )
+              if ( $EditCount == $UsrCount ) {
                 PrintOK("Потребителите са редактирани успешно.");
-              elseif( $EditCount > 0 && $EditCount < $UsrCount )
+              }
+              elseif( $EditCount > 0 && $EditCount < $UsrCount ) {
                 PrintOK("Някои от потребителите са редактирани успешно!");
-              elseif( $EditCount == 0 )
+              }
+              elseif( $EditCount == 0 ) {
                 PrintOK("Потребителите НЕ са редактирани успешно!");
+              }
             }
             else {
               PrintError(202);
@@ -420,7 +436,10 @@
   if ( $Error[$Index] ) {
     print(" value=\"".$Nick[$Index]."\"");
   }
-  else print(" value=\"".$UsrDetails['Nickname']."\""); ?> />
+  else {
+    print(" value=\"".$UsrDetails['Nickname']."\"");
+  }
+?> />
 <?php
   if ( $Error[$Index] ) {
     print("<br />\n");
@@ -435,7 +454,10 @@
     print(" value=\"".$Name[$Index]."\"");
     
   }
-  else print(" value=\"".$UsrDetails['UsrName']."\""); ?> />
+  else {
+    print(" value=\"".$UsrDetails['UsrName']."\"");
+  }
+?> />
 <?php
   if ( $Error[$Index] ) {
     print("<br />\n");
@@ -449,7 +471,10 @@
   if ( $Error[$Index] ) {
     print(" value=\"".$Email[$Index]."\"");
   }
-  else print(" value=\"".$UsrDetails['Email']."\""); ?> />
+  else {
+    print(" value=\"".$UsrDetails['Email']."\"");
+  }
+?> />
 <?php
   if ( $Error[$Index] ) {
     print("<br />\n");
@@ -460,8 +485,9 @@
 <tr valign="top">
 <td align="right">Учител</td>
 <td><input type="checkbox" name="Teacher[]"<?php
-  if ( $Error[$Index] && isset($Teacher[$Index]) )
+  if ( $Error[$Index] && isset($Teacher[$Index]) ) {
     print(" checked=\"checked\"");
+  }
 ?> /></td></tr>
 <tr valign="top"><td align="right">Цвят</td>
 <td>
@@ -472,11 +498,15 @@
                   @mysql_data_seek($ClrRes, 0);
                   while ( $Clr = @mysql_fetch_array($ClrRes, MYSQL_ASSOC) ) {
                     print("<option");
-                    if ( $Error[$Index] )
+                    if ( $Error[$Index] ) {
                       $CompareID = $Color[$Index];
-                    else $CompareID = $UsrDetails['ColorID'];
-                    if ( $CompareID == $Clr['ColorID'] )
-                        print(" selected=\"selected\"");
+                    }
+                    else {
+                      $CompareID = $UsrDetails['ColorID'];
+                    }
+                    if ( $CompareID == $Clr['ColorID'] ) {
+                      print(" selected=\"selected\"");
+                    }
                     print(" value=\"".$Clr['ColorID']."\"");
                     print(" title=\"".MakeTriplet($Clr['Red'], $Clr['Green'], $Clr['Blue'])."\">");
                     print($Clr['ClrName']."</option>\n");
@@ -499,7 +529,6 @@
             } // if ( num_rows > 0...
             @mysql_free_result($UsrRes);
             @mysql_free_result($ClrRes);
-            //@mysql_close($lnk);
           }
           else {
             PrintError(202);
@@ -512,12 +541,15 @@
         }
       }
     } // if ( isset(...
-    else Redirect("adm_usrs.php");
+    else {
+      Redirect("adm_usrs.php");
+    }
   }
   elseif( isset($_POST['SubmitDel']) ) { /* Process delete request */
     if ( isset($_POST['UserIds']) ) {
-      if ( count($_POST['UserIds']) == 0 )
+      if ( count($_POST['UserIds']) == 0 ) {
         Redirect("adm_usrs.php");
+      }
       $UserIds = $_POST['UserIds'];
       $UserCount = count($UserIds);
       include("passwd.inc.php");
@@ -539,7 +571,7 @@
           }
 
           @mysql_free_result($res);
-          //@mysql_close($lnk); ?>
+?>
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td align="center">
@@ -560,12 +592,15 @@
         exit;
       }
     } // if ( isset
-    else Redirect("adm_usrs.php");
+    else {
+      Redirect("adm_usrs.php");
+    }
   }
   elseif( isset($_POST['Delete']) ) { /* Delete */
     if ( isset($_POST['UserIds']) ) {
-      if ( count($_POST['UserIds']) == 0 )
+      if ( count($_POST['UserIds']) == 0 ) {
         Redirect();
+      }
       $UserIds = $_POST['UserIds'];
       include("passwd.inc.php");
       if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
@@ -576,12 +611,15 @@
           @mysql_query($query, $lnk);
           $DelCount = @mysql_affected_rows($lnk);
           @mysql_close($lnk);
-          if ( $DelCount == $UserCount )
+          if ( $DelCount == $UserCount ) {
             PrintOK("Потребителите са изтрити успешно.");
-          elseif( $DelCount > 0 && $DelCount < $UserCount )
+          }
+          elseif( $DelCount > 0 && $DelCount < $UserCount ) {
             PrintOK("Някои от потребителите са изтрити успешно!");
-          elseif( $DelCount == 0 )
+          }
+          elseif( $DelCount == 0 ) {
             PrintOK("Потребителите НЕ са изтрити успешно!");
+          }
         }
         else {
           PrintError(202);
@@ -593,7 +631,9 @@
         exit;
       }
     }
-    else Redirect("adm_usrs.php");
+    else {
+      Redirect("adm_usrs.php");
+    }
   } // elseif
 ?>
 </td></tr></table>

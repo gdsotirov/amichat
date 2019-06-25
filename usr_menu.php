@@ -50,8 +50,9 @@
   print("Псевдоним: <b>$USR_NICK</b>&nbsp;");
   $USR_ROOMNAME = "няма";
   while ( $RoomDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
-    if ( $_SESSION['USR_ROOMID'] == $RoomDetails['RoomID'] )
+    if ( $_SESSION['USR_ROOMID'] == $RoomDetails['RoomID'] ) {
       $USR_ROOMNAME = $RoomDetails['RoomName'];
+    }
   } // while
   print("Стая: <b>$USR_ROOMNAME</b>\n");
 
@@ -62,10 +63,12 @@
       print("<select id=\"Room\" name=\"Room\">\n");
       while ( $RoomDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
         print("<option value=\"".$RoomDetails['RoomID']."\"");
-        if ( $_SESSION['USR_ROOMID'] == $RoomDetails['RoomID'] )
+        if ( $_SESSION['USR_ROOMID'] == $RoomDetails['RoomID'] ) {
           print(" selected=\"selected\">\n");
-        else
+        }
+        else {
           print(">\n");
+        }
         print($RoomDetails['RoomName']."</option>\n");
       } // while
       print("</select>\n");

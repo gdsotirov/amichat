@@ -4,8 +4,9 @@
   include("common.inc.php");
   include("error.inc.php");
 
-  if ( !isset($_SESSION['ADM_ID']) )
+  if ( !isset($_SESSION['ADM_ID']) ) {
     Redirect("index.php?admin=1");
+  }
 
   include("admin.inc.php");
   include("color.inc.php");
@@ -62,9 +63,12 @@
       if ( @mysql_num_rows($res) > 0 ) {
         $RowNum = 1;
         while ( $UserDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
-          if ( $RowNum++ % 2 )
+          if ( $RowNum++ % 2 ) {
             print("<tr class=\"trOdd\">\n");
-          else print("<tr>\n");
+          }
+          else {
+            print("<tr>\n");
+          }
           print("<td><input name=\"UserIds[]\" type=\"checkbox\" value=\"");
           print($UserDetails['UserID']."\" />\n</td>\n");
           print("<td>".$UserDetails['Username']."</td>\n");
@@ -74,7 +78,9 @@
             print("<td><a href=\"mailto:".$UserDetails['Email']."\">");
             print($UserDetails['Email']."</a></td>\n");
           }
-          else print("<td>&nbsp;</td>\n");
+          else {
+            print("<td>&nbsp;</td>\n");
+          }
           print("<td>".PrintBool($UserDetails['Teacher'])."</td>\n");
           print("<td style=\"background-color: ");
           print(MakeTriplet($UserDetails['Red'], $UserDetails['Green'], $UserDetails['Blue']));
@@ -87,7 +93,6 @@
         } // while
       }
       @mysql_free_result($res);
-      //@mysql_close($lnk);
     }
     else {
       PrintError(202);

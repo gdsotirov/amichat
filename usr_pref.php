@@ -21,8 +21,9 @@
 
   include("common.inc.php");
 
-  if ( isset($_POST['CancelEdit']) )
+  if ( isset($_POST['CancelEdit']) ) {
     Redirect("usrpage.php");
+  }
 
   include("color.inc.php");
 
@@ -76,8 +77,9 @@
       $Nick_Err  = CheckStringField($Error, $_POST['Nick'], 1, 32);
       $Name_Err  = CheckStringField($Error, $_POST['Name'], 1, 96);
       /*$Email_Err = CheckStringField($Error, $_POST['Email'], 2, 255);*/
-      if ( empty($_POST['Color']) )
+      if ( empty($_POST['Color']) ) {
         $_POST['Color'] = DEF_COLORID;
+      }
 
       if ( !$Error ) {
         include("passwd.inc.php");
@@ -111,12 +113,16 @@
               $_SESSION['USR_NICK'] = $_POST['Nick'];
               PrintOK("Вашите данни са променени успешно.");
             }
-            else PrintOK("Вашите данни НЕ са променени!");
+            else {
+              PrintOK("Вашите данни НЕ са променени!");
+            }
             @mysql_close($lnk);
-            if ( isset($_POST['Refresh']) )
+            if ( isset($_POST['Refresh']) ) {
               $_SESSION['USR_REFRESH'] = $_POST['Refresh'];
-            if ( isset($_POST['MsgCount']) )
+            }
+            if ( isset($_POST['MsgCount']) ) {
               $_SESSION['USR_MSGCNT'] = $_POST['MsgCount'];
+            }
           }
         }
       }
@@ -228,11 +234,15 @@
         if ( @mysql_num_rows($ClrRes) > 0 ) {
           while ( $Clr = @mysql_fetch_array($ClrRes, MYSQL_ASSOC) ) {
             print("<option");
-            if ( $Error )
+            if ( $Error ) {
               $CompareID = $_POST['Color'];
-            else $CompareID = $UsrDetails['ColorID'];
-            if ( $CompareID == $Clr['ColorID'] )
+            }
+            else {
+              $CompareID = $UsrDetails['ColorID'];
+            }
+            if ( $CompareID == $Clr['ColorID'] ) {
               print(" selected=\"selected\"");
+            }
             print(" value=\"".$Clr['ColorID']."\"");
             print(" title=\"".MakeTriplet($Clr['Red'], $Clr['Green'], $Clr['Blue'])."\">");
             print($Clr['ClrName']."</option>\n");
@@ -253,9 +263,9 @@
   reset($RefreshArr);
   while ( list($key, $val) = each($RefreshArr) ) {
     print("<option value=\"$key\"");
-    if ( isset($_SESSION['USR_REFRESH']) )
-      if ( $val == $_SESSION['USR_REFRESH'] )
-        print(" selected=\"selected\"");
+    if ( isset($_SESSION['USR_REFRESH']) && $val == $_SESSION['USR_REFRESH'] ) {
+      print(" selected=\"selected\"");
+    }
     print(">$val</option>\n");
   }
 ?>
@@ -269,9 +279,9 @@
   reset($MsgCntArr);
   while ( list($key, $val) = each($MsgCntArr) ) {
     print("<option value=\"$key\"");
-    if ( isset($_SESSION['USR_MSGCNT']) )
-      if ( $val == $_SESSION['USR_MSGCNT'] )
-        print(" selected=\"selected\"");
+    if ( isset($_SESSION['USR_MSGCNT']) && $val == $_SESSION['USR_MSGCNT'] ) {
+      print(" selected=\"selected\"");
+    }
     print(">$val</option>\n");
   }
 ?>

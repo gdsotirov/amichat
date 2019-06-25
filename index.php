@@ -1,13 +1,17 @@
 <?php
-  if ( isset($_GET['admin']) )
-     $ADMLOGIN = $_GET['admin'];
+  if ( isset($_GET['admin']) ) {
+    $ADMLOGIN = $_GET['admin'];
+  }
 
   include("common.inc.php");
 
   $TITLE = CHAT_NAME;
-  if ( isset($ADMLOGIN) )
+  if ( isset($ADMLOGIN) ) {
     $TITLE = $TITLE." - Вход за администратори ";
-  else $TITLE = $TITLE." - Вход за потребители ";
+  }
+  else {
+    $TITLE = $TITLE." - Вход за потребители ";
+  }
 
   print("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 ?>
@@ -41,8 +45,9 @@
 <input type="submit" name="Submit" value="Вход" />
 <input type="reset" name="Reset" value="Изчисти" />
 <?php
-  if ( isset($ADMLOGIN) )
+  if ( isset($ADMLOGIN) ) {
     print("<input type=\"hidden\" name=\"Admin\" value=\"1\" />");
+  }
 ?>
 </td>
 </tr>
@@ -50,9 +55,12 @@
 <td align="left" colspan="2">
 <?php
   print("<a href=\"".$_SERVER['PHP_SELF']);
-  if ( !isset($ADMLOGIN) )
+  if ( !isset($ADMLOGIN) ) {
     print("?admin=1\">Вход за администратори");
-  else print("?\">Вход за потребители");
+  }
+  else {
+    print("?\">Вход за потребители");
+  }
   print("</a><br />\n");
 ?>
 </td></tr></table></form>

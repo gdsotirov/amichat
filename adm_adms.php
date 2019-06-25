@@ -4,8 +4,9 @@
   include("common.inc.php");
   include("error.inc.php");
 
-  if ( !isset($_SESSION['ADM_ID']) )
+  if ( !isset($_SESSION['ADM_ID']) ) {
     Redirect("index.php?admin=1");
+  }
 
   include("admin.inc.php");
 
@@ -52,22 +53,29 @@
       if ( @mysql_num_rows($res) > 0 ) {
         $RowNum = 1;
         while ( $AdmDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
-          if ( $RowNum++ % 2 )
+          if ( $RowNum++ % 2 ) {
             print("<tr class=\"trOdd\">");
-          else print("<tr>\n");
+          }
+          else {
+            print("<tr>\n");
+          }
           $AdminID = $AdmDetails['AdminID'];
           if ( $AdminID != SUPERUSER_ID || ($AdminID == SUPERUSER_ID && $AdminID == $_SESSION['ADM_ID']) ) {
             print("<td><input name=\"AdminIds[]\" type=\"checkbox\" value=\"");
             print($AdminID."\" />\n</td>\n");
           }
-          else print("<td>&nbsp;</td>\n");
+          else {
+            print("<td>&nbsp;</td>\n");
+          }
           print("<td>".$AdmDetails['Username']."</td>\n");
           print("<td>".$AdmDetails['AdmName']."</td>\n");
           if ( $AdmDetails['Email'] != '' ) {
             print("<td><a href=\"mailto:".$AdmDetails['Email']."\">");
             print($AdmDetails['Email']."</a></td>\n");
           }
-          else print("<td>&nbsp;</td>\n");
+          else {
+            print("<td>&nbsp;</td>\n");
+          }
           print("<td>".$AdmDetails['Phone']."</td>\n");
           print("<td>".$AdmDetails['ModDate']." ".$AdmDetails['ModTime']."</td>\n");
           if ( $AdmDetails['AdminID'] == SUPERUSER_ID ) {
@@ -81,12 +89,13 @@
               $row = @mysql_fetch_array($tmpres, MYSQL_ASSOC);
               print("<td>".$row['Username']."</td>\n");
             }
-            else print("<td>n/a</td>\n");
+            else {
+              print("<td>n/a</td>\n");
+            }
           }
           print("</tr>\n");
         } // while
         @mysql_free_result($res);
-        //@mysql_close($lnk);
       }
       else {
         print("<tr>\n");
