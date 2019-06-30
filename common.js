@@ -1,11 +1,11 @@
 /* Function      : isEmpty
  * Purpose       : Check for empty string value.
- * Compatibility : JavaScript 1.2 (whiteout the first line JavaScript 1.0),
+ * Compatibility : JavaScript 1.2 (without the first line JavaScript 1.0),
  *                 ECMA-262
  */
 function isEmpty(str) {
-    s = String(str);
-    return ( (s == null) || (s.length == 0) )
+    var s = String(str);
+    return (s.length == 0);
 }
 
 /* Function      : inArray
