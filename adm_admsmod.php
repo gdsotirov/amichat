@@ -64,20 +64,20 @@
   if ( isset($_POST['SubmitAdd']) ) { /* Process add request */
     $Error         = FALSE;
     $Username_Err  = "";
-    $Password_Err  = "";
-    $Password2_Err = "";
+    $Pass_Err  = "";
+    $Pass2_Err = "";
     $Name_Err      = "";
     $Email_Err     = "";
     if ( isset($_POST['CheckForm']) ) {
       $Username_Err  = CheckStringField($Error, $_POST['Username'], 6, 32, true);
-      $Password_Err  = CheckStringField($Error, $_POST['Password'], 6, 32, true);
-      $Password2_Err = CheckStringField($Error, $_POST['Password2'], 6, 32, true);
+      $Pass_Err  = CheckStringField($Error, $_POST['Password'], 6, 32, true);
+      $Pass2_Err = CheckStringField($Error, $_POST['Password2'], 6, 32, true);
       if (strcmp($_POST['Password'],$_POST['Password2']) != 0) {
-        $Password2_Err = "<span class=\"error\">Паролите не съвпадат!</span>";
+        $Pass2_Err = "<span class=\"error\">Паролите не съвпадат!</span>";
         $Error = TRUE;
       }
       $Name_Err  = CheckStringField($Error, $_POST['Name'], 1, 96);
-      $Email_Err = CheckStringField($Error, $_POST['Email'], 2, 255);
+      $Email_Err = CheckEmailField($Error, $_POST['Email'], 2, 255);
       if ( !$Error ) {
         include("passwd.inc.php");
         if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
@@ -146,7 +146,7 @@
 <?php
   if ( $Error ) {
     print("<br />\n");
-    print($Password_Err);
+    print($Pass_Err);
   }
 ?></td></tr>
 <tr valign="top">
@@ -155,7 +155,7 @@
 <?php
   if ( $Error ) {
     print("<br />\n");
-    print($Password2_Err);
+    print($Pass2_Err);
   }
 ?></td></tr>
 <tr><th colspan="2">Лична информация</th></tr>
@@ -242,7 +242,7 @@
           $Name_Err[$AdmKey]  =
             CheckStringField($Error[$AdmKey], $Name[$AdmKey], 1, 96, true);
           $Email_Err[$AdmKey] =
-            CheckStringField($Error[$AdmKey], $Email[$AdmKey], 2, 255);
+            CheckEmailField($Error[$AdmKey], $Email[$AdmKey], 2, 255);
         } // while
         reset($Error);
         if ( !in_array(TRUE, $Error) ) { // if there are no errors

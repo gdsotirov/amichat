@@ -82,11 +82,11 @@
   if ( isset($_POST['SubmitAdd']) ) { /* Process add request */
     $Error         = FALSE;
     $Username_Err  = "";
-    $Password_Err  = "";
-    $Password2_Err = "";
+    $Pass_Err  = "";
+    $Pass2_Err = "";
     $Nick_Err      = "";
     $Name_Err      = "";
-    //$Email_Err     = "";
+    $Email_Err     = "";
     if ( isset($_POST['CheckForm']) ) {
       $Username  = $_POST['Username'][0];
       $Password  = $_POST['Password'][0];
@@ -99,15 +99,15 @@
       }
       $Color     = $_POST['Color'][0];
       $Username_Err  = CheckStringField($Error, $Username, 6, 32, true);
-      $Password_Err  = CheckStringField($Error, $Password, 6, 32, true);
-      $Password2_Err = CheckStringField($Error, $Password2, 6, 32, true);
+      $Pass_Err  = CheckStringField($Error, $Password, 6, 32, true);
+      $Pass2_Err = CheckStringField($Error, $Password2, 6, 32, true);
       if (strcmp($Password, $Password2) != 0) {
-        $Password2_Err = "<span class=\"error\">Паролите не съвпадат!</span>";
+        $Pass2_Err = "<span class=\"error\">Паролите не съвпадат!</span>";
         $Error = TRUE;
       }
       $Nick_Err  = CheckStringField($Error, $Nick, 1, 32);
       $Name_Err  = CheckStringField($Error, $Name, 1, 96);
-      //$Email_Err = CheckStringField($Error, $_POST['Email'], 2, 255);
+      $Email_Err = CheckEmailField($Error, $_POST['Email'], 2, 255);
       if ( empty($Color) ) {
         $Color = DEF_COLORID;
       }
@@ -191,7 +191,7 @@
 <?php
   if ( $Error ) {
     print("<br />\n");
-    print($Password_Err);
+    print($Pass_Err);
   }
 ?>
 </td></tr>
@@ -201,7 +201,7 @@
 <?php
   if ( $Error ) {
     print("<br />\n");
-    print($Password2_Err);
+    print($Pass2_Err);
   }
 ?>
 </td></tr>
@@ -242,7 +242,7 @@
 <?php
   if ( $Error ) {
     print("<br />\n");
-    //print($Email_Err);
+    print($Email_Err);
   }
 ?>
 </td></tr>
@@ -304,7 +304,7 @@
       $Pass2_Err = array_fill(0, $UsrCount, "");
       $Nick_Err  = array_fill(0, $UsrCount, "");
       $Name_Err  = array_fill(0, $UsrCount, "");
-      //$Email_Err = array_fill(0, $UsrCount, "");
+      $Email_Err = array_fill(0, $UsrCount, "");
       /* check forms ? */
       if ( isset($_POST['CheckForms']) ) {
         $Password  = $_POST['Password'];
@@ -333,8 +333,8 @@
             CheckStringField($Error[$UsrKey], $Nick[$UsrKey], 1, 32);
           $Name_Err[$UsrKey]  =
             CheckStringField($Error[$UsrKey], $Name[$UsrKey], 1, 96);
-          /*$Email_Err[$UsrKey] =
-            CheckStringField($Error[$UsrKey], $Email[$UsrKey], 2, 255);*/
+          $Email_Err[$UsrKey] =
+            CheckEmailField($Error[$UsrKey], $Email[$UsrKey], 2, 255);
         } // while
         reset($Error);
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
@@ -478,7 +478,7 @@
 <?php
   if ( $Error[$Index] ) {
     print("<br />\n");
-    //print($Email_Err[$Index]);
+    print($Email_Err[$Index]);
   }
 ?>
 </td></tr>

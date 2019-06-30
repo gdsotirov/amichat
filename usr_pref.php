@@ -58,25 +58,25 @@
 <p align="center" class="smlhdr">Редактиране на потребителски настройки</p>
 <?php
   $Error         = FALSE;
-  $Password_Err  = "";
-  $Password2_Err = "";
+  $Pass_Err  = "";
+  $Pass2_Err = "";
   $Nick_Err      = "";
   $Name_Err      = "";
-  //$Email_Err     = "";
+  $Email_Err     = "";
 
   if ( isset($_POST['SubmitEdit']) ) { /* Process Edit request */
     if ( isset($_POST['CheckForm']) ) {
       if ( !empty($_POST['Password']) || !empty($_POST['Password2']) ) {
-        $Password_Err  = CheckStringField($Error, $_POST['Password'], 6, 32, true);
-        $Password2_Err = CheckStringField($Error, $_POST['Password2'], 6, 32, true);
+        $Pass_Err  = CheckStringField($Error, $_POST['Password'], 6, 32, true);
+        $Pass2_Err = CheckStringField($Error, $_POST['Password2'], 6, 32, true);
         if ( strcmp($_POST['Password'],$_POST['Password2']) != 0 ) {
-          $Password2_Err = "<span class=\"error\">Паролите не съвпадат!</span>";
+          $Pass2_Err = "<span class=\"error\">Паролите не съвпадат!</span>";
           $Error = TRUE;
         }
       }
       $Nick_Err  = CheckStringField($Error, $_POST['Nick'], 1, 32);
       $Name_Err  = CheckStringField($Error, $_POST['Name'], 1, 96);
-      /*$Email_Err = CheckStringField($Error, $_POST['Email'], 2, 255);*/
+      $Email_Err = CheckEmailField($Error, $_POST['Email'], 2, 255);
       if ( empty($_POST['Color']) ) {
         $_POST['Color'] = DEF_COLORID;
       }
@@ -157,7 +157,7 @@
 <?php
   if ( $Error ) {
     print("<br />");
-    print($Password_Err);
+    print($Pass_Err);
   }
 ?></td></tr>
 <tr valign="top">
@@ -166,7 +166,7 @@
 <?php
   if ( $Error ) {
     print(" /><br />");
-    print($Password2_Err);
+    print($Pass2_Err);
   }
 ?></td></tr>
 <tr><th align="left" colspan="2">Лична информация</th></tr>
@@ -218,7 +218,8 @@
   } ?> />
 <?php
   if ( $Error ) {
-    //print($Email_err);
+    print("<br />\n");
+    print($Email_Err);
   }
   else {
     print("<input type=\"hidden\" name=\"OrigEmail\" value=\"");
