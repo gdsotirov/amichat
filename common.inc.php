@@ -65,6 +65,17 @@
     return true;
   }
 
+  function CheckValidEmailChars($String) {
+      $i = 0;
+      while ( $i < strlen($String) ) {
+          if ( !preg_match("/[_a-zA-z0-9@\.]/", $String[$i]) ) {
+              return false;
+          }
+          $i++;
+      }
+      return true;
+  }
+
   function CheckStringField(&$Error, $Value, $Min, $Max, $CheckCorrectInput = false) {
     $FieldErr = "";
     if ( isset($Value) && strlen($Value) > 0 ) {
@@ -86,6 +97,30 @@
       $Error = TRUE;
     }
     return $FieldErr;
+  }
+
+  function CheckEmailField(&$Error, $Value, $Min, $Max, $CheckCorrectInput = false) {
+      $FieldErr = "";
+      if ( isset($Value) && strlen($Value) > 0 ) {
+          if ( $CheckCorrectInput && !CheckValidEmailChars($Value) ) {
+              $FieldErr = "<span class=\"error\">Полето съдържа неразрешени ";
+              $FieldErr .= "символи! Разрешените символи са _ (долно тире), ";
+              $FieldErr .= "малки и големи английски букви (a-z, A-Z), ";
+              $FieldErr .= "кльомба (@), точка (.) и арабските цифри (0-9).";
+              $FieldErr .= "</span><br />";
+              $Error = TRUE;
+          }
+          if ( strlen($Value) < $Min || strlen($Value) > $Max ) {
+              $FieldErr .= "<span class=\"error\">Дължината на това поле трябва";
+              $FieldErr .= " да бъде между $Min и $Max символа.</span>";
+              $Error = TRUE;
+          }
+      }
+      else {
+          $FieldErr = "<span class=\"error\">Моля, попълнете това поле!</span>";
+          $Error = TRUE;
+      }
+      return $FieldErr;
   }
 
   /* TODO: Check here for valid numeric value in $Value */
