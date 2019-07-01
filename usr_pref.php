@@ -76,7 +76,7 @@
       }
       $Nick_Err  = CheckStringField($Error, $_POST['Nick'], 1, 32);
       $Name_Err  = CheckStringField($Error, $_POST['Name'], 1, 96);
-      $Email_Err = CheckEmailField($Error, $_POST['Email'], 2, 255);
+      $Email_Err = CheckEmailField($Error, $_POST['Email'], 2, 255, true);
       if ( empty($_POST['Color']) ) {
         $_POST['Color'] = DEF_COLORID;
       }

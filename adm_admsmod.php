@@ -77,7 +77,7 @@
         $Error = TRUE;
       }
       $Name_Err  = CheckStringField($Error, $_POST['Name'], 1, 96);
-      $Email_Err = CheckEmailField($Error, $_POST['Email'], 2, 255);
+      $Email_Err = CheckEmailField($Error, $_POST['Email'], 2, 255, true);
       if ( !$Error ) {
         include("passwd.inc.php");
         if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
@@ -242,7 +242,7 @@
           $Name_Err[$AdmKey]  =
             CheckStringField($Error[$AdmKey], $Name[$AdmKey], 1, 96, true);
           $Email_Err[$AdmKey] =
-            CheckEmailField($Error[$AdmKey], $Email[$AdmKey], 2, 255);
+            CheckEmailField($Error[$AdmKey], $Email[$AdmKey], 2, 255, true);
         } // while
         reset($Error);
         if ( !in_array(TRUE, $Error) ) { // if there are no errors

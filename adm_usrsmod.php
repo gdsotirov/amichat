@@ -107,7 +107,7 @@
       }
       $Nick_Err  = CheckStringField($Error, $Nick, 1, 32);
       $Name_Err  = CheckStringField($Error, $Name, 1, 96);
-      $Email_Err = CheckEmailField($Error, $_POST['Email'], 2, 255);
+      $Email_Err = CheckEmailField($Error, $Email, 2, 255, true);
       if ( empty($Color) ) {
         $Color = DEF_COLORID;
       }
@@ -334,7 +334,7 @@
           $Name_Err[$UsrKey]  =
             CheckStringField($Error[$UsrKey], $Name[$UsrKey], 1, 96);
           $Email_Err[$UsrKey] =
-            CheckEmailField($Error[$UsrKey], $Email[$UsrKey], 2, 255);
+            CheckEmailField($Error[$UsrKey], $Email[$UsrKey], 2, 255, true);
         } // while
         reset($Error);
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
