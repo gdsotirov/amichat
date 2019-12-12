@@ -1,0 +1,27 @@
+name: PHPComposer
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Validate composer.json
+      run: composer validate
+
+    - name: Diagnose system
+      run: composer diagnose
+
+    #- name: Install dependencies
+    #  run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Check syntax of sources
+      run: composer run-script lint
+
+    #- name: Run test suite
+    #  run: composer run-script test
+
