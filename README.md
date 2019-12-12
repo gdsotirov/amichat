@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/gdsotirov/amichat.svg?branch=master)](https://travis-ci.com/gdsotirov/amichat)
+[![Action Status](https://github.com/gdsotirov/amichat/workflows/PHPComposer/badge.svg)](https://github.com/gdsotirov/amichat/actions?query=workflow%3APHPComposer)
+
 # AMI Chat
 
 ## Summary
@@ -23,8 +26,4 @@ Administrators cannot log in as normal users and chat.
 
 Thanks to all people developing and supporting Mozilla project
 (www.mozilla.org). A great Web development suite that I used in my project!
-
-
-*2005-02-13 18:40 EST*  
-*Georgi D. Sotirov*
 
