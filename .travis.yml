@@ -6,6 +6,5 @@ php:
   - '7.4'
 before_script:
   - composer validate
-  - composer diagnose
 script: ./phplint.sh
 
