@@ -20,7 +20,7 @@
 
   // Common functions
   function Redirect($file) {
-    $location = "Location: http://";
+    $location = "Location: https://";
     $location .= $_SERVER['HTTP_HOST'];
     $location .= dirname($_SERVER['PHP_SELF']);
     $location .= "/$file";
