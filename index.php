@@ -23,7 +23,7 @@
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 <title><?php echo $TITLE ?></title>
 <meta name="Author" content="Georgi D. Sotirov" />
-<meta name="Contact" content="gdsotirov@dir.bg" />
+<meta name="Contact" content="gdsotirov@gmail.com" />
 <link href="chat.css" rel="stylesheet" type="text/css" />
 <script src="common.js" type="text/javascript" defer="defer"></script>
 </head>

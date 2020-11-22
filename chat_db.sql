@@ -1,5 +1,5 @@
 /* Chat DB SQL Script
- * Written by    : Georgi D. Sotirov <gdsotirov@dir.bg>
+ * Written by    : Georgi D. Sotirov <gdsotirov@gmail.com>
  * Last modified : $Date: 2010/12/18 19:38:41 $
  * Designed for  : MySQL 3.23 and above
  * Conformance   : SQL-92 (SQL-2)
@@ -25,7 +25,7 @@ CREATE TABLE administrators (
     INDEX (ModByID)
 );
 
-INSERT INTO administrators (Username,Password,AdmName,Email,Phone,ModDate,ModTime) VALUES ("root", password('chatadmin'), "Georgi D. Sotirov", "gdsotirov@dir.bg", "+35988371817", CURDATE(), CURTIME());
+INSERT INTO administrators (Username,Password,AdmName,Email,Phone,ModDate,ModTime) VALUES ("root", password('chatadmin'), "Georgi D. Sotirov", "gdsotirov@gmail.com", "+35988371817", CURDATE(), CURTIME());
 
 /* Table   : Colors
  * Purpose : Data for the available colors for messages.
@@ -89,7 +89,7 @@ CREATE TABLE users (
     INDEX (AdminID)
 );
 
-INSERT INTO users (Username,Password,Nickname,UsrName,Email,Teacher,ColorID,Active,ModDate,ModTime) VALUES ("chatbot", password('chatbot'), "ChatBot", "Chat Bot", "gdsotirov@dir.bg", '1', 2, '0', CURDATE(), CURTIME());
+INSERT INTO users (Username,Password,Nickname,UsrName,Email,Teacher,ColorID,Active,ModDate,ModTime) VALUES ("chatbot", password('chatbot'), "ChatBot", "Chat Bot", "gdsotirov@gmail.com", '1', 2, '0', CURDATE(), CURTIME());
 
 /* Table   : Messages
  * Purpose : Warehouse for the chat messages.

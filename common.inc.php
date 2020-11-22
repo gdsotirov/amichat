@@ -3,7 +3,7 @@
   define("CHAT_NAME", "AMI Chat");
 
   define("CHAT_AUTHOR", "Георги Д. Сотиров");
-  define("CHAT_CONTACT", "gdsotirov@dir.bg");
+  define("CHAT_CONTACT", "gdsotirov@gmail.com");
 
   define("CHAT_VER_MAJOR", 0);
   define("CHAT_VER_MINOR", 3);
