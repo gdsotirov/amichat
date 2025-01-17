@@ -84,7 +84,7 @@
       if ( !$Error ) {
         include("passwd.inc.php");
         if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+          if ( @mysqli_select_db($lnk, DB_NAME) ) {
             // check if nickname exists
             if ( strcmp($_POST['Nick'], $_POST['OrigNick']) != 0 ) {
               $query  = "SELECT UserID FROM users";
@@ -132,7 +132,7 @@
   if ( !isset($_POST['CheckForm']) || $Error ) {
     include("passwd.inc.php");
     if ( $lnk = @mysqli_connect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-      if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+      if ( @mysqli_select_db($lnk, DB_NAME) ) {
         $query  = "SELECT UserID,Username,Password,Nickname,UsrName,Email,";
         $query .= "ColorID";
         $query .= " FROM users";

@@ -47,7 +47,7 @@
 <?php
   include("passwd.inc.php");
   if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-    if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+    if ( @mysqli_select_db($lnk, DB_NAME) ) {
       $query  = "SELECT colors.ColorID,colors.ClrName,colors.Red,";
       $query .= "colors.Green,colors.Blue,colors.ModDate,colors.ModTime,";
       $query .= "administrators.Username AS ModByName";

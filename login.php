@@ -16,7 +16,7 @@
   include("passwd.inc.php");
 
   if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-    if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+    if ( @mysqli_select_db($lnk, DB_NAME) ) {
       if ( isset($ADMIN) ) { // Process administrator login
         $query  = "SELECT AdminID,AdmName,Password,LLDate,LLTime,LLHost,";
         $query .= "password('$Password') AS SuplPassword";

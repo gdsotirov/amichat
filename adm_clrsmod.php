@@ -96,7 +96,7 @@
       if ( !$Error ) {
         include("passwd.inc.php");
         if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+          if ( @mysqli_select_db($lnk, DB_NAME) ) {
             // check if color exists
             $query  = "SELECT ColorID FROM colors";
             $query .= " WHERE ClrName='".$Name."'";
@@ -242,7 +242,7 @@
           include("passwd.inc.php");
           if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
-            if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+            if ( @mysqli_select_db($lnk, DB_NAME) ) {
               while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE colors SET ";
                 $query .= "ClrName='".$Name[$ErrKey]."',";
@@ -282,7 +282,7 @@
       if ( !isset($_POST['CheckForms']) || in_array(TRUE, $Error) ) {
         include("passwd.inc.php");
         if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+          if ( @mysqli_select_db($lnk, DB_NAME) ) {
             $query  = "SELECT ColorID,ClrName,Red,Green,Blue";
             $query .= " FROM colors";
             $query .= " WHERE ColorID";
@@ -408,7 +408,7 @@
       $ClrCount = count($ColorIds);
       include("passwd.inc.php");
       if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+        if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "SELECT ColorID,ClrName FROM colors WHERE ColorID";
           MakeQueryList($ColorIds, $query);
           $res = @mysqli_query($query, $lnk); ?>
@@ -456,7 +456,7 @@
       $ColorIds = $_POST['ColorIds'];
       include("passwd.inc.php");
       if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+        if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "DELETE FROM colors WHERE ColorID";
           $ClrCount = count($ColorIds);
           MakeQueryList($ColorIds, $query);

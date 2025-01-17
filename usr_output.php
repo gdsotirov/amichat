@@ -39,7 +39,7 @@ style="padding: 5px 5px 5px 5px;">
   $USR_ROOMID = $_SESSION['USR_ROOMID'];
 
   if ( $lnk = @mysqli_connect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-    if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+    if ( @mysqli_select_db($lnk, DB_NAME) ) {
       $query = "SELECT COUNT(*) AS RowCount FROM messages";
       $res = @mysqli_query($query, $lnk);
       $row = @mysqli_fetch_array($res, MYSQL_ASSOC);

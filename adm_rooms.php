@@ -43,7 +43,7 @@
 <?php
   include("passwd.inc.php");
   if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-    if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+    if ( @mysqli_select_db($lnk, DB_NAME) ) {
       $query  = "SELECT rooms.RoomID,rooms.RoomName,rooms.Descr,";
       $query .= "rooms.ModDate,rooms.ModTime,";
       $query .= "administrators.Username AS ModByName";

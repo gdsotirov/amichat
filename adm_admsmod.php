@@ -81,7 +81,7 @@
       if ( !$Error ) {
         include("passwd.inc.php");
         if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+          if ( @mysqli_select_db($lnk, DB_NAME) ) {
             // check if user exist
             $query  = "SELECT AdminID FROM administrators";
             $query .= " WHERE Username='".$_POST['Username']."'";
@@ -250,7 +250,7 @@
           include("passwd.inc.php");
           if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
-            if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+            if ( @mysqli_select_db($lnk, DB_NAME) ) {
               while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE administrators SET ";
                 if ( !empty($Password[$ErrKey]) ) {
@@ -293,7 +293,7 @@
       if ( !isset($_POST['CheckForms']) || in_array(TRUE, $Error) ) {
         include("passwd.inc.php");
         if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+          if ( @mysqli_select_db($lnk, DB_NAME) ) {
             $query  = "SELECT AdminID,Username,Password,AdmName,Email,Phone";
             $query .= " FROM administrators WHERE AdminID";
             MakeQueryList($AdminIds, $query);
@@ -410,7 +410,7 @@
       $AdmCount = count($AdminIds);
       include("passwd.inc.php");
       if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+        if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "SELECT AdminID,Username FROM administrators WHERE AdminID";
           MakeQueryList($AdminIds, $query);
           $res = @mysqli_query($query, $lnk); ?>
@@ -465,7 +465,7 @@
       $AdminIds = $_POST['AdminIds'];
       include("passwd.inc.php");
       if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+        if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "DELETE FROM administrators WHERE AdminID";
           $AdmCount = count($AdminIds);
           MakeQueryList($AdminIds, $query);

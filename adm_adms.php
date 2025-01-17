@@ -45,7 +45,7 @@
 <?php
   include("passwd.inc.php");
   if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-    if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+    if ( @mysqli_select_db($lnk, DB_NAME) ) {
       $query  = "SELECT AdminID,Username,AdmName,Email,Phone,ModDate,ModTime,";
       $query .= "ModByID";
       $query .= " FROM administrators ORDER BY AdminID";

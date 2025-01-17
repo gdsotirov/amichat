@@ -49,7 +49,7 @@
 <?php
   include("passwd.inc.php");
   if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-    if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+    if ( @mysqli_select_db($lnk, DB_NAME) ) {
       $query  = "SELECT users.UserID,users.Username,users.Nickname,";
       $query .= "users.UsrName,users.Email,users.Teacher,colors.Red,";
       $query .= "colors.Green,colors.Blue,users.ModDate,users.ModTime,";

@@ -114,7 +114,7 @@
       if ( !$Error ) {
         include("passwd.inc.php");
         if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+          if ( @mysqli_select_db($lnk, DB_NAME) ) {
             // check if user exists
             $query  = "SELECT UserID FROM users";
             $query .= " WHERE Username='".$Username."'";
@@ -259,7 +259,7 @@
 <?php
     include("passwd.inc.php");
     if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-      if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+      if ( @mysqli_select_db($lnk, DB_NAME) ) {
         $query = "SELECT ColorID,ClrName,Red,Green,Blue from colors";
 
         $res = @mysqli_query($query, $lnk);
@@ -342,7 +342,7 @@
           include("passwd.inc.php");
           if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
-            if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+            if ( @mysqli_select_db($lnk, DB_NAME) ) {
               while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE users SET ";
                 if ( !empty($Password[$ErrKey]) ) {
@@ -386,7 +386,7 @@
       if ( !isset($_POST['CheckForms']) || in_array(TRUE, $Error) ) {
         include("passwd.inc.php");
         if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+          if ( @mysqli_select_db($lnk, DB_NAME) ) {
             $query  = "SELECT UserID,Username,Password,Nickname,UsrName,";
             $query .= "Email,Teacher,ColorID";
             $query .= " FROM users WHERE UserID";
@@ -554,7 +554,7 @@
       $UserCount = count($UserIds);
       include("passwd.inc.php");
       if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+        if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "SELECT UserID,Username FROM users WHERE UserID";
           MakeQueryList($UserIds, $query);
           $res = @mysqli_query($query, $lnk);
@@ -604,7 +604,7 @@
       $UserIds = $_POST['UserIds'];
       include("passwd.inc.php");
       if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+        if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "DELETE FROM users WHERE UserID";
           $UserCount = count($UserIds);
           MakeQueryList($UserIds, $query);

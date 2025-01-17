@@ -69,7 +69,7 @@
       if ( !$Error ) {
         include("passwd.inc.php");
         if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+          if ( @mysqli_select_db($lnk, DB_NAME) ) {
             // check if room exists
             $query  = "SELECT RoomID FROM rooms";
             $query .= " WHERE RoomName='".$_POST['Name']."'";
@@ -168,7 +168,7 @@
           include("passwd.inc.php");
           if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
-            if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+            if ( @mysqli_select_db($lnk, DB_NAME) ) {
               while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE rooms SET ";
                 $query .= "RoomName='".$Name[$ErrKey]."',";
@@ -206,7 +206,7 @@
       if ( !isset($_POST['CheckForms']) || in_array(TRUE, $Error) ) {
         include("passwd.inc.php");
         if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+          if ( @mysqli_select_db($lnk, DB_NAME) ) {
             $query = "SELECT RoomID,RoomName,Descr FROM rooms WHERE RoomID";
             // TODO: Print error message if this function returns false
             MakeQueryList($RoomIds, $query);
@@ -290,7 +290,7 @@
       $RoomCount = count($RoomIds);
       include("passwd.inc.php");
       if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+        if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "SELECT RoomID,RoomName FROM rooms WHERE RoomID";
           MakeQueryList($RoomIds, $query);
           $res = @mysqli_query($query, $lnk); ?>
@@ -337,7 +337,7 @@
       $RoomIds = $_POST['RoomIds'];
       include("passwd.inc.php");
       if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
+        if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "DELETE FROM rooms WHERE RoomID";
           $RoomCount = count($RoomIds);
           MakeQueryList($RoomIds, $query);
