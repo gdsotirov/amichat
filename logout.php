@@ -19,7 +19,7 @@
   else { // Process user logout
     include("passwd.inc.php");
     if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-      if ( @mysqli_select_db(DB_NAME) ) {
+      if ( @mysqli_select_db($lnk, DB_NAME) ) {
         $query  = "UPDATE users SET Active='0'";
         $query .= " WHERE UserID=".$_SESSION['USR_ID'];
         @mysqli_query($query, $lnk);
