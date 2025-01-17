@@ -24,7 +24,7 @@
         $query .= " (PostDate,PostTime,RoomID,AuthorID,RecipientID,Message)";
         $query .= " VALUES (CURDATE(), CURTIME(), $USR_ROOMID, $USR_ID, 0,";
         $query .= " '$Msg')";
-        @mysqli_query($query, $lnk);
+        @mysqli_query($lnk, $query);
         @mysqli_close($lnk);
       }
       else {

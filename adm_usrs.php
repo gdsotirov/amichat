@@ -59,7 +59,7 @@
       $query .= " AND";
       $query .= " users.AdminID=administrators.AdminID";
       $query .= " ORDER BY users.UserID";
-      $res = @mysqli_query($query, $lnk);
+      $res = @mysqli_query($lnk, $query);
       if ( @mysqli_num_rows($res) > 0 ) {
         $RowNum = 1;
         while ( $UserDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {

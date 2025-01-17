@@ -100,7 +100,7 @@
             // check if color exists
             $query  = "SELECT ColorID FROM colors";
             $query .= " WHERE ClrName='".$Name."'";
-            $res = @mysqli_query($query, $lnk);
+            $res = @mysqli_query($lnk, $query);
             if ( @mysqli_num_rows($res) > 0 ) {
               PrintError(109); // name exists
               exit;
@@ -114,7 +114,7 @@
             $query .= "'".$Green."',";
             $query .= "'".$Blue."',";
             $query .= "CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
-            @mysqli_query($query, $lnk);
+            @mysqli_query($lnk, $query);
             if ( @mysqli_affected_rows($lnk) == 1 ) {
               PrintOK("Цветът ".$Name." е добавен успешно.");
             }
@@ -252,7 +252,7 @@
                 $query .= "ModDate=CURDATE(),ModTime=CURTIME(),";
                 $query .= "AdminID=".$_SESSION['ADM_ID'];
                 $query .= " WHERE ColorID=".$ColorIds[$ErrKey];
-                @mysqli_query($query, $lnk);
+                @mysqli_query($lnk, $query);
                 if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
@@ -288,7 +288,7 @@
             $query .= " WHERE ColorID";
             // TODO: Print error message if this function returns false
             MakeQueryList($ColorIds, $query);
-            $res = @mysqli_query($query, $lnk);
+            $res = @mysqli_query($lnk, $query);
 
             if ( @mysqli_num_rows($res) > 0 ) {
 ?>
@@ -411,7 +411,7 @@
         if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "SELECT ColorID,ClrName FROM colors WHERE ColorID";
           MakeQueryList($ColorIds, $query);
-          $res = @mysqli_query($query, $lnk); ?>
+          $res = @mysqli_query($lnk, $query); ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези цветове?</td></tr>
@@ -460,7 +460,7 @@
           $query = "DELETE FROM colors WHERE ColorID";
           $ClrCount = count($ColorIds);
           MakeQueryList($ColorIds, $query);
-          @mysqli_query($query, $lnk);
+          @mysqli_query($lnk, $query);
           $DelCount = @mysqli_affected_rows($lnk);
           @mysqli_close($lnk);
           if ( $DelCount == $ClrCount ) {

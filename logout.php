@@ -22,7 +22,7 @@
       if ( @mysqli_select_db($lnk, DB_NAME) ) {
         $query  = "UPDATE users SET Active='0'";
         $query .= " WHERE UserID=".$_SESSION['USR_ID'];
-        @mysqli_query($query, $lnk);
+        @mysqli_query($lnk, $query);
         @mysqli_close($lnk);
       }
     }

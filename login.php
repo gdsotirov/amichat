@@ -22,7 +22,7 @@
         $query .= "password('$Password') AS SuplPassword";
         $query .= " FROM administrators";
         $query .= " WHERE Username='$Username'";
-        $res = @mysqli_query($query, $lnk);
+        $res = @mysqli_query($lnk, $query);
         if ( @mysqli_num_rows($res) > 0 ) {
           $AdmDetails = @mysqli_fetch_array($res, MYSQL_ASSOC);
           @mysqli_free_result($res);
@@ -39,7 +39,7 @@
             $query .= "LLTime='".date("H:i:s")."',";
             $query .= "LLHost='".$_SERVER['REMOTE_ADDR']."'";
             $query .= " WHERE AdminID=".$AdmDetails['AdminID'];
-            @mysqli_query($query, $lnk);
+            @mysqli_query($lnk, $query);
             @mysqli_close($lnk);
             Redirect("admpage.php");
             exit;
@@ -56,7 +56,7 @@
       }
       else { // Process user login
         $query = "SELECT UserID,Password,Nickname,password('$Password') AS SuplPassword FROM users WHERE Username='$Username'";
-        $res = @mysqli_query($query, $lnk);
+        $res = @mysqli_query($lnk, $query);
         if ( @mysqli_num_rows($res) > 0 ) {
           $UsrDetails = @mysqli_fetch_array($res, MYSQL_ASSOC);
           @mysqli_free_result($res);
@@ -64,7 +64,7 @@
             session_start(); // *** Start user chat session ***
             $query = "UPDATE users SET LLDate='".date("Y-m-d")."',LLTime='".date("H:i:s")."',LLHost='".$_SERVER['REMOTE_ADDR']."',Active='1' WHERE UserID=".$UsrDetails['UserID'];
             /* NOTE: Did I need error reporting here? */
-            @mysqli_query($query, $lnk);
+            @mysqli_query($lnk, $query);
             @mysqli_close($lnk);
             // set session variables
             $_SESSION['USR_ID']     = $UsrDetails['UserID'];

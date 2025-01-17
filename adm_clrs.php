@@ -53,7 +53,7 @@
       $query .= "administrators.Username AS ModByName";
       $query .= " FROM colors,administrators";
       $query .= " WHERE colors.AdminID=administrators.AdminID";
-      $res = @mysqli_query($query, $lnk);
+      $res = @mysqli_query($lnk, $query);
       if ( @mysqli_num_rows($res) > 0 ) {
         $RowNum = 1;
         while ( $ColorDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {

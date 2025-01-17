@@ -49,7 +49,7 @@
       $query .= "administrators.Username AS ModByName";
       $query .= " FROM rooms,administrators";
       $query .= " WHERE rooms.AdminID=administrators.AdminID";
-      $res = @mysqli_query($query, $lnk);
+      $res = @mysqli_query($lnk, $query);
       if ( @mysqli_num_rows($res) > 0 ) {
         $RowNum = 1;
         while ( $RoomDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {

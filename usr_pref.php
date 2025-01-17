@@ -89,7 +89,7 @@
             if ( strcmp($_POST['Nick'], $_POST['OrigNick']) != 0 ) {
               $query  = "SELECT UserID FROM users";
               $query .= " WHERE Nickname='".$_POST['Nick']."'";
-              $res = @mysqli_query($query, $lnk);
+              $res = @mysqli_query($lnk, $query);
               if ( @mysqli_num_rows($res) > 0 ) {
                 PrintError(108); // nickname exists
                 exit;
@@ -108,7 +108,7 @@
             $query .= "ModDate=CURDATE(),ModTime=CURTIME(),";
             $query .= "AdminID=".SUPERUSER_ID;
             $query .= " WHERE UserID=".$_SESSION['USR_ID'];
-            @mysqli_query($query, $lnk);
+            @mysqli_query($lnk, $query);
             if ( @mysqli_affected_rows($lnk) == 1 ) {
               $_SESSION['USR_NICK'] = $_POST['Nick'];
               PrintOK("Вашите данни са променени успешно.");
@@ -137,9 +137,9 @@
         $query .= "ColorID";
         $query .= " FROM users";
         $query .= " WHERE UserID=".$_SESSION['USR_ID'];
-        $UsrRes = @mysqli_query($query, $lnk);
+        $UsrRes = @mysqli_query($lnk, $query);
         $query = "SELECT ColorID,ClrName,Red,Green,Blue FROM colors";
-        $ClrRes = @mysqli_query($query, $lnk);
+        $ClrRes = @mysqli_query($lnk, $query);
 
         $UsrDetails = @mysqli_fetch_array($UsrRes, MYSQL_ASSOC);
 ?>

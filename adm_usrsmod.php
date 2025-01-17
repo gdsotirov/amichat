@@ -118,7 +118,7 @@
             // check if user exists
             $query  = "SELECT UserID FROM users";
             $query .= " WHERE Username='".$Username."'";
-            $res = @mysqli_query($query, $lnk);
+            $res = @mysqli_query($lnk, $query);
             if ( @mysqli_num_rows($res) > 0 ) {
               PrintError(107); // username exists
               exit;
@@ -126,7 +126,7 @@
             // check if nickname exists
             $query  = "SELECT UserID FROM users";
             $query .= " WHERE Nickname='".$Nick."'";
-            $res = @mysqli_query($query, $lnk);
+            $res = @mysqli_query($lnk, $query);
             if ( @mysqli_num_rows($res) > 0 ) {
               PrintError(108); // nickname exists
               exit;
@@ -144,7 +144,7 @@
             $query .= "'".(isset($Teacher)?1:0)."',";
             $query .= "".$Color.",";
             $query .= "CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
-            @mysqli_query($query, $lnk);
+            @mysqli_query($lnk, $query);
             if ( @mysqli_affected_rows($lnk) == 1 ) {
               PrintOK("Потребителя ".$Username." (".$Name.") е добавен успешно.");
             }
@@ -262,7 +262,7 @@
       if ( @mysqli_select_db($lnk, DB_NAME) ) {
         $query = "SELECT ColorID,ClrName,Red,Green,Blue from colors";
 
-        $res = @mysqli_query($query, $lnk);
+        $res = @mysqli_query($lnk, $query);
 
         if ( @mysqli_num_rows($res) > 0 ) {
           while ( $Clr = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
@@ -356,7 +356,7 @@
                 $query .= "ModDate=CURDATE(),ModTime=CURTIME(),";
                 $query .= "AdminID=".$_SESSION['ADM_ID'];
                 $query .= " WHERE UserID=".$UserIds[$ErrKey];
-                @mysqli_query($query, $lnk);
+                @mysqli_query($lnk, $query);
                 if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
@@ -392,10 +392,10 @@
             $query .= " FROM users WHERE UserID";
             // TODO: Print error message if this function returns false
             MakeQueryList($UserIds, $query);
-            $UsrRes = @mysqli_query($query, $lnk);
+            $UsrRes = @mysqli_query($lnk, $query);
 
             $query = "SELECT ColorID,ClrName,Red,Green,Blue from colors";
-            $ClrRes = @mysqli_query($query, $lnk);
+            $ClrRes = @mysqli_query($lnk, $query);
 
             if ( @mysqli_num_rows($UsrRes) > 0 ) {
 ?>
@@ -557,7 +557,7 @@
         if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "SELECT UserID,Username FROM users WHERE UserID";
           MakeQueryList($UserIds, $query);
-          $res = @mysqli_query($query, $lnk);
+          $res = @mysqli_query($lnk, $query);
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
@@ -608,7 +608,7 @@
           $query = "DELETE FROM users WHERE UserID";
           $UserCount = count($UserIds);
           MakeQueryList($UserIds, $query);
-          @mysqli_query($query, $lnk);
+          @mysqli_query($lnk, $query);
           $DelCount = @mysqli_affected_rows($lnk);
           @mysqli_close($lnk);
           if ( $DelCount == $UserCount ) {

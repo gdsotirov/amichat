@@ -18,7 +18,7 @@
     if ( @mysqli_select_db($lnk, DB_NAME) ) {
       $query  = "SELECT rooms.RoomID,rooms.RoomName";
       $query .= "  FROM rooms";
-      $res = @mysqli_query($query, $lnk);
+      $res = @mysqli_query($lnk, $query);
     }
     else {
       PrintError(202);

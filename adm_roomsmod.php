@@ -73,7 +73,7 @@
             // check if room exists
             $query  = "SELECT RoomID FROM rooms";
             $query .= " WHERE RoomName='".$_POST['Name']."'";
-            $res = @mysqli_query($query, $lnk);
+            $res = @mysqli_query($lnk, $query);
             if ( @mysqli_num_rows($res) > 0 ) {
               PrintError(110); // room exists
               exit;
@@ -85,7 +85,7 @@
             $query .= " VALUES ('".$_POST['Name']."',";
             $query .= "'".$_POST['Descr']."',";
             $query .= " CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
-            @mysqli_query($query, $lnk);
+            @mysqli_query($lnk, $query);
             if ( @mysqli_affected_rows($lnk) == 1 ) {
               PrintOK("Стаята ".$_POST['Name']." е добавена успешно.");
             }
@@ -176,7 +176,7 @@
                 $query .= "ModDate=CURDATE(),ModTime=CURTIME(),";
                 $query .= "AdminID=".$_SESSION['ADM_ID'];
                 $query .= " WHERE RoomID=".$RoomIds[$ErrKey];
-                @mysqli_query($query, $lnk);
+                @mysqli_query($lnk, $query);
                 if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
@@ -210,7 +210,7 @@
             $query = "SELECT RoomID,RoomName,Descr FROM rooms WHERE RoomID";
             // TODO: Print error message if this function returns false
             MakeQueryList($RoomIds, $query);
-            $res = @mysqli_query($query, $lnk);
+            $res = @mysqli_query($lnk, $query);
             if ( @mysqli_num_rows($res) > 0 ) { ?>
 <p align="center"><span class="required">*</span> - задължително поле</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
@@ -293,7 +293,7 @@
         if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "SELECT RoomID,RoomName FROM rooms WHERE RoomID";
           MakeQueryList($RoomIds, $query);
-          $res = @mysqli_query($query, $lnk); ?>
+          $res = @mysqli_query($lnk, $query); ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези стаи?</td></tr>
@@ -341,7 +341,7 @@
           $query = "DELETE FROM rooms WHERE RoomID";
           $RoomCount = count($RoomIds);
           MakeQueryList($RoomIds, $query);
-          @mysqli_query($query, $lnk);
+          @mysqli_query($lnk, $query);
           $DelCount = @mysqli_affected_rows($lnk);
           @mysqli_close($lnk);
           if ( $DelCount == $RoomCount ) {

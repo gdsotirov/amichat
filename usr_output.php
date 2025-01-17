@@ -41,7 +41,7 @@ style="padding: 5px 5px 5px 5px;">
   if ( $lnk = @mysqli_connect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
     if ( @mysqli_select_db($lnk, DB_NAME) ) {
       $query = "SELECT COUNT(*) AS RowCount FROM messages";
-      $res = @mysqli_query($query, $lnk);
+      $res = @mysqli_query($lnk, $query);
       $row = @mysqli_fetch_array($res, MYSQL_ASSOC);
 
       $RowCount = $row['RowCount'];
@@ -69,7 +69,7 @@ style="padding: 5px 5px 5px 5px;">
       $query .= " users.ColorID=colors.ColorID";
       $query .= " ORDER BY messages.PostDate,messages.PostTime";
       $query .= " LIMIT $Offset,$MSGCOUNT";
-      $res = @mysqli_query($query, $lnk);
+      $res = @mysqli_query($lnk, $query);
       while ( $row = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
         $USR_COLOR = MakeTriplet($row['Red'],$row['Green'],$row['Blue']);
         print("[".$row['PostDate']." ".$row['PostTime']."] ");

@@ -38,7 +38,7 @@
       $query .= " AND";
       $query .= " users.ColorID=colors.ColorID";
       $query .= " ORDER BY Nickname";
-      $res = @mysqli_query($query, $lnk);
+      $res = @mysqli_query($lnk, $query);
       $Count = @mysqli_num_rows($res);
       print("<tr><th>Online: $Count</th></tr>");
       if ( $Count > 0 ) {        

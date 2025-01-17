@@ -49,7 +49,7 @@
       $query  = "SELECT AdminID,Username,AdmName,Email,Phone,ModDate,ModTime,";
       $query .= "ModByID";
       $query .= " FROM administrators ORDER BY AdminID";
-      $res = @mysqli_query($query, $lnk);
+      $res = @mysqli_query($lnk, $query);
       if ( @mysqli_num_rows($res) > 0 ) {
         $RowNum = 1;
         while ( $AdmDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
@@ -84,7 +84,7 @@
           else {
             $query  = "SELECT Username FROM administrators";
             $query .= " WHERE AdminID='".$AdmDetails['ModByID']."'";
-            $tmpres = @mysqli_query($query, $lnk);
+            $tmpres = @mysqli_query($lnk, $query);
             if ( @mysqli_num_rows($tmpres) > 0 ) {
               $row = @mysqli_fetch_array($tmpres, MYSQL_ASSOC);
               print("<td>".$row['Username']."</td>\n");

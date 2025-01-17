@@ -85,7 +85,7 @@
             // check if user exist
             $query  = "SELECT AdminID FROM administrators";
             $query .= " WHERE Username='".$_POST['Username']."'";
-            $res = @mysqli_query($query, $lnk);
+            $res = @mysqli_query($lnk, $query);
             if ( @mysqli_num_rows($res) > 0 ) {
               PrintError(107);
               exit;
@@ -100,7 +100,7 @@
             $query .= "'".$_POST['Email']."',";
             $query .= "'".$_POST['Phone']."',";
             $query .= " CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
-            @mysqli_query($query, $lnk);
+            @mysqli_query($lnk, $query);
             if ( @mysqli_affected_rows($lnk) == 1 ) {
               PrintOK("Администратора ".$_POST['Username']." (".$_POST['Name'].") е добавен успешно.");
             }
@@ -263,7 +263,7 @@
                 $query .= "ModByID=".$_SESSION['ADM_ID'];
                 $query .= " WHERE AdminID=".$AdminIds[$ErrKey];
 
-                @mysqli_query($query, $lnk);
+                @mysqli_query($lnk, $query);
                 if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
@@ -297,7 +297,7 @@
             $query  = "SELECT AdminID,Username,Password,AdmName,Email,Phone";
             $query .= " FROM administrators WHERE AdminID";
             MakeQueryList($AdminIds, $query);
-            $res = @mysqli_query($query, $lnk);
+            $res = @mysqli_query($lnk, $query);
             if ( @mysqli_num_rows($res) > 0 ) { ?>
 <p align="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
@@ -413,7 +413,7 @@
         if ( @mysqli_select_db($lnk, DB_NAME) ) {
           $query = "SELECT AdminID,Username FROM administrators WHERE AdminID";
           MakeQueryList($AdminIds, $query);
-          $res = @mysqli_query($query, $lnk); ?>
+          $res = @mysqli_query($lnk, $query); ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези администратори?</td></tr>
@@ -469,7 +469,7 @@
           $query = "DELETE FROM administrators WHERE AdminID";
           $AdmCount = count($AdminIds);
           MakeQueryList($AdminIds, $query);
-          @mysqli_query($query, $lnk);
+          @mysqli_query($lnk, $query);
           $DelCount = @mysqli_affected_rows($lnk);
           @mysqli_close($lnk);
           if ( $DelCount == $AdmCount ) {
