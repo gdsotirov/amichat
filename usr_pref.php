@@ -141,7 +141,7 @@
         $query = "SELECT ColorID,ClrName,Red,Green,Blue FROM colors";
         $ClrRes = @mysqli_query($lnk, $query);
 
-        $UsrDetails = @mysqli_fetch_array($UsrRes, MYSQL_ASSOC);
+        $UsrDetails = @mysqli_fetch_array($UsrRes, MYSQLI_ASSOC);
 ?>
 <p align="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
@@ -233,7 +233,7 @@
 <option value="">-- Моля, изберете цвят --</option>
 <?php
         if ( @mysqli_num_rows($ClrRes) > 0 ) {
-          while ( $Clr = @mysqli_fetch_array($ClrRes, MYSQL_ASSOC) ) {
+          while ( $Clr = @mysqli_fetch_array($ClrRes, MYSQLI_ASSOC) ) {
             print("<option");
             if ( $Error ) {
               $CompareID = $_POST['Color'];

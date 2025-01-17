@@ -62,7 +62,7 @@
       $res = @mysqli_query($lnk, $query);
       if ( @mysqli_num_rows($res) > 0 ) {
         $RowNum = 1;
-        while ( $UserDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+        while ( $UserDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
           if ( $RowNum++ % 2 ) {
             print("<tr class=\"trOdd\">\n");
           }

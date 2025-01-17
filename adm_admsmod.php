@@ -305,7 +305,7 @@
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
               $Index = 0;
-              while ( $AdmDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) { ?>
+              while ( $AdmDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) { ?>
 <tr><th align="center" colspan="2">Администратор: <?php echo $AdmDetails['Username']?>
 <input type="hidden" name="AdminIds[]" value="<?php echo $AdmDetails['AdminID'] ?>" /></th></tr>
 <tr><td align="right">Парола <span class="required">**</span></td>
@@ -418,7 +418,7 @@
 <table align="center">
 <tr><td>Желаете ли да изтриете тези администратори?</td></tr>
 <tr><td><ul><?php
-          while ( $AdminDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+          while ( $AdminDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
             print("<li>".$AdminDetails['Username']);
             print(" <input type=\"hidden\" name=\"AdminIds[]\"");
             print(" value=\"".$AdminDetails['AdminID']."\" /></li>\n");

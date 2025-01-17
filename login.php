@@ -24,7 +24,7 @@
         $query .= " WHERE Username='$Username'";
         $res = @mysqli_query($lnk, $query);
         if ( @mysqli_num_rows($res) > 0 ) {
-          $AdmDetails = @mysqli_fetch_array($res, MYSQL_ASSOC);
+          $AdmDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC);
           @mysqli_free_result($res);
           if ( $AdmDetails['SuplPassword'] == $AdmDetails['Password'] ) {
             session_start(); // *** Start administrative session ***
@@ -58,7 +58,7 @@
         $query = "SELECT UserID,Password,Nickname,SHA1('$Password') AS SuplPassword FROM users WHERE Username='$Username'";
         $res = @mysqli_query($lnk, $query);
         if ( @mysqli_num_rows($res) > 0 ) {
-          $UsrDetails = @mysqli_fetch_array($res, MYSQL_ASSOC);
+          $UsrDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC);
           @mysqli_free_result($res);
           if ( $UsrDetails['SuplPassword'] == $UsrDetails['Password'] ) {
             session_start(); // *** Start user chat session ***

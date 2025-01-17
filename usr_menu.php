@@ -49,7 +49,7 @@
   $USR_NICK = $_SESSION['USR_NICK'];
   print("Псевдоним: <b>$USR_NICK</b>&nbsp;");
   $USR_ROOMNAME = "няма";
-  while ( $RoomDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+  while ( $RoomDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
     if ( $_SESSION['USR_ROOMID'] == $RoomDetails['RoomID'] ) {
       $USR_ROOMNAME = $RoomDetails['RoomName'];
     }
@@ -61,7 +61,7 @@
       print("<form action=\"\" class=\"inline\" method=\"post\" name=\"RoomPost\">");
       print("<label for=\"Room\">Нова стая:&nbsp;</label>");
       print("<select id=\"Room\" name=\"Room\">\n");
-      while ( $RoomDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+      while ( $RoomDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
         print("<option value=\"".$RoomDetails['RoomID']."\"");
         if ( $_SESSION['USR_ROOMID'] == $RoomDetails['RoomID'] ) {
           print(" selected=\"selected\">\n");

@@ -52,7 +52,7 @@
       $res = @mysqli_query($lnk, $query);
       if ( @mysqli_num_rows($res) > 0 ) {
         $RowNum = 1;
-        while ( $AdmDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+        while ( $AdmDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
           if ( $RowNum++ % 2 ) {
             print("<tr class=\"trOdd\">");
           }
@@ -86,7 +86,7 @@
             $query .= " WHERE AdminID='".$AdmDetails['ModByID']."'";
             $tmpres = @mysqli_query($lnk, $query);
             if ( @mysqli_num_rows($tmpres) > 0 ) {
-              $row = @mysqli_fetch_array($tmpres, MYSQL_ASSOC);
+              $row = @mysqli_fetch_array($tmpres, MYSQLI_ASSOC);
               print("<td>".$row['Username']."</td>\n");
             }
             else {

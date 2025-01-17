@@ -296,7 +296,7 @@
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
               $Index = 0;
-              while ( $ClrDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) { ?>
+              while ( $ClrDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) { ?>
 <tr valign="top"><td align="right">
 <input type="hidden" name="ColorIds[]" value="<?php echo $ClrDetails['ColorID'] ?>" />
 <b>Име</b><span class="required">*</span></td>
@@ -417,7 +417,7 @@
 <tr><td>Желаете ли да изтриете тези цветове?</td></tr>
 <tr><td><ul>
 <?php
-          while ( $ClrDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+          while ( $ClrDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
             print("<li>".$ClrDetails['ClrName']);
             print(" <input type=\"hidden\" name=\"ColorIds[]\"");
             print(" value=\"".$ClrDetails['ColorID']."\" /></li>\n");

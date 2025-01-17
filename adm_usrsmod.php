@@ -265,7 +265,7 @@
         $res = @mysqli_query($lnk, $query);
 
         if ( @mysqli_num_rows($res) > 0 ) {
-          while ( $Clr = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+          while ( $Clr = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
             print("<option");
             if ( isset($Color) && $Color == $Clr['ColorID'] ) {
               print(" selected=\"selected\"");
@@ -406,7 +406,7 @@
 <table align="center">
 <?php
               $Index = 0;
-              while ( $UsrDetails = @mysqli_fetch_array($UsrRes, MYSQL_ASSOC) ) {
+              while ( $UsrDetails = @mysqli_fetch_array($UsrRes, MYSQLI_ASSOC) ) {
 ?>
 <tr><th align="center" colspan="2">Потребител: <?php echo $UsrDetails['Username']?>
 <input type="hidden" name="UserIds[]" value="<?php echo $UsrDetails['UserID'] ?>" /></th></tr>
@@ -496,7 +496,7 @@
 <?php
                 if ( @mysqli_num_rows($ClrRes) > 0 ) {
                   @mysqli_stmt_data_seek($ClrRes, 0);
-                  while ( $Clr = @mysqli_fetch_array($ClrRes, MYSQL_ASSOC) ) {
+                  while ( $Clr = @mysqli_fetch_array($ClrRes, MYSQLI_ASSOC) ) {
                     print("<option");
                     if ( $Error[$Index] ) {
                       $CompareID = $Color[$Index];
@@ -564,7 +564,7 @@
 <tr><td>Желаете ли да изтриете тези потребители?</td></tr>
 <tr><td><ul>
 <?php
-          while ( $UsrDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+          while ( $UsrDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
             print("<li>".$UsrDetails['Username']);
             print(" <input type=\"hidden\" name=\"UserIds[]\"");
             print(" value=\"".$UsrDetails['UserID']."\" /></li>\n");

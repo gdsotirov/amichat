@@ -42,7 +42,7 @@
       $Count = @mysqli_num_rows($res);
       print("<tr><th>Online: $Count</th></tr>");
       if ( $Count > 0 ) {        
-        while ( $row = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+        while ( $row = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
           print("<tr><td style=\"color: ");
           print(MakeTriplet($row['Red'], $row['Green'], $row['Blue']).";");
           print(" \">".$row['Nickname']."</td></tr>");

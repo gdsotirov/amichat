@@ -216,7 +216,7 @@
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
               $Index = 0;
-              while ( $RoomDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) { ?>
+              while ( $RoomDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) { ?>
 <tr valign="top"><td align="right">
 <input type="hidden" name="RoomIds[]" value="<?php echo $RoomDetails['RoomID'] ?>" />
 <b>Име</b> <span class="required">*</span></td>
@@ -298,7 +298,7 @@
 <table align="center">
 <tr><td>Желаете ли да изтриете тези стаи?</td></tr>
 <tr><td><ul><?php
-          while ( $RoomDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+          while ( $RoomDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
             print("<li>".$RoomDetails['RoomName']);
             print(" <input type=\"hidden\" name=\"RoomIds[]\"");
             print(" value=\"".$RoomDetails['RoomID']."\" /></li>\n");
