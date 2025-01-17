@@ -56,7 +56,7 @@
   } // while
   print("Стая: <b>$USR_ROOMNAME</b>\n");
 
-  if ( mysqli_stmt_data_seek($res, 0) ) {
+  if ( mysqli_data_seek($res, 0) ) {
     if ( @mysqli_num_rows($res) > 0 ) {
       print("<form action=\"\" class=\"inline\" method=\"post\" name=\"RoomPost\">");
       print("<label for=\"Room\">Нова стая:&nbsp;</label>");

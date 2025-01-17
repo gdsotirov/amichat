@@ -495,7 +495,7 @@
 <option value="">-- Моля, изберете цвят --</option>
 <?php
                 if ( @mysqli_num_rows($ClrRes) > 0 ) {
-                  @mysqli_stmt_data_seek($ClrRes, 0);
+                  @mysqli_data_seek($ClrRes, 0);
                   while ( $Clr = @mysqli_fetch_array($ClrRes, MYSQLI_ASSOC) ) {
                     print("<option");
                     if ( $Error[$Index] ) {
