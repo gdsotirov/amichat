@@ -83,18 +83,18 @@
 
       if ( !$Error ) {
         include("passwd.inc.php");
-        if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-          if ( @mysql_select_db(DB_NAME, $lnk) ) {
+        if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
             // check if nickname exists
             if ( strcmp($_POST['Nick'], $_POST['OrigNick']) != 0 ) {
               $query  = "SELECT UserID FROM users";
               $query .= " WHERE Nickname='".$_POST['Nick']."'";
-              $res = @mysql_query($query, $lnk);
-              if ( @mysql_num_rows($res) > 0 ) {
+              $res = @mysqli_query($query, $lnk);
+              if ( @mysqli_num_rows($res) > 0 ) {
                 PrintError(108); // nickname exists
                 exit;
               }
-              @mysql_free_result($res);
+              @mysqli_free_result($res);
             }
             // add the user
             $query = "UPDATE users SET ";
@@ -108,15 +108,15 @@
             $query .= "ModDate=CURDATE(),ModTime=CURTIME(),";
             $query .= "AdminID=".SUPERUSER_ID;
             $query .= " WHERE UserID=".$_SESSION['USR_ID'];
-            @mysql_query($query, $lnk);
-            if ( @mysql_affected_rows($lnk) == 1 ) {
+            @mysqli_query($query, $lnk);
+            if ( @mysqli_affected_rows($lnk) == 1 ) {
               $_SESSION['USR_NICK'] = $_POST['Nick'];
               PrintOK("Вашите данни са променени успешно.");
             }
             else {
               PrintOK("Вашите данни НЕ са променени!");
             }
-            @mysql_close($lnk);
+            @mysqli_close($lnk);
             if ( isset($_POST['Refresh']) ) {
               $_SESSION['USR_REFRESH'] = $_POST['Refresh'];
             }
@@ -131,17 +131,17 @@
 
   if ( !isset($_POST['CheckForm']) || $Error ) {
     include("passwd.inc.php");
-    if ( $lnk = @mysql_connect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-      if ( @mysql_select_db(DB_NAME, $lnk) ) {
+    if ( $lnk = @mysqli_connect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+      if ( @mysqli_select_db(DB_NAME, $lnk) ) {
         $query  = "SELECT UserID,Username,Password,Nickname,UsrName,Email,";
         $query .= "ColorID";
         $query .= " FROM users";
         $query .= " WHERE UserID=".$_SESSION['USR_ID'];
-        $UsrRes = @mysql_query($query, $lnk);
+        $UsrRes = @mysqli_query($query, $lnk);
         $query = "SELECT ColorID,ClrName,Red,Green,Blue FROM colors";
-        $ClrRes = @mysql_query($query, $lnk);
+        $ClrRes = @mysqli_query($query, $lnk);
 
-        $UsrDetails = @mysql_fetch_array($UsrRes, MYSQL_ASSOC);
+        $UsrDetails = @mysqli_fetch_array($UsrRes, MYSQL_ASSOC);
 ?>
 <p align="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
@@ -232,8 +232,8 @@
 <select id="ColorPicker" name="Color" onchange="javascript: previewColor();">
 <option value="">-- Моля, изберете цвят --</option>
 <?php
-        if ( @mysql_num_rows($ClrRes) > 0 ) {
-          while ( $Clr = @mysql_fetch_array($ClrRes, MYSQL_ASSOC) ) {
+        if ( @mysqli_num_rows($ClrRes) > 0 ) {
+          while ( $Clr = @mysqli_fetch_array($ClrRes, MYSQL_ASSOC) ) {
             print("<option");
             if ( $Error ) {
               $CompareID = $_POST['Color'];
@@ -296,9 +296,9 @@
 </table>
 </form>
 <?php
-        @mysql_free_result($ClrRes);
-        @mysql_free_result($UsrRes);
-        @mysql_close($lnk);
+        @mysqli_free_result($ClrRes);
+        @mysqli_free_result($UsrRes);
+        @mysqli_close($lnk);
       }
       else {
         PrintError(202); // can't use database

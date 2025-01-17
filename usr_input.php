@@ -18,14 +18,14 @@
 
     include("passwd.inc.php");
 
-    if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-      if ( @mysql_select_db(DB_NAME, $lnk) ) {
+    if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+      if ( @mysqli_select_db(DB_NAME, $lnk) ) {
         $query  = "INSERT INTO messages";
         $query .= " (PostDate,PostTime,RoomID,AuthorID,RecipientID,Message)";
         $query .= " VALUES (CURDATE(), CURTIME(), $USR_ROOMID, $USR_ID, 0,";
         $query .= " '$Msg')";
-        @mysql_query($query, $lnk);
-        @mysql_close($lnk);
+        @mysqli_query($query, $lnk);
+        @mysqli_close($lnk);
       }
       else {
         PrintError(202);

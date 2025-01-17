@@ -95,17 +95,17 @@
       $Blue_Err  = CheckNumField($Error, $Blue, 0, 255, "единици");
       if ( !$Error ) {
         include("passwd.inc.php");
-        if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-          if ( @mysql_select_db(DB_NAME, $lnk) ) {
+        if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
             // check if color exists
             $query  = "SELECT ColorID FROM colors";
             $query .= " WHERE ClrName='".$Name."'";
-            $res = @mysql_query($query, $lnk);
-            if ( @mysql_num_rows($res) > 0 ) {
+            $res = @mysqli_query($query, $lnk);
+            if ( @mysqli_num_rows($res) > 0 ) {
               PrintError(109); // name exists
               exit;
             }
-            @mysql_free_result($res);
+            @mysqli_free_result($res);
             // add the color
             $query  = "INSERT INTO colors";
             $query .= " (ClrName,Red,Green,Blue,ModDate,ModTime,AdminID)";
@@ -114,14 +114,14 @@
             $query .= "'".$Green."',";
             $query .= "'".$Blue."',";
             $query .= "CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
-            @mysql_query($query, $lnk);
-            if ( @mysql_affected_rows($lnk) == 1 ) {
+            @mysqli_query($query, $lnk);
+            if ( @mysqli_affected_rows($lnk) == 1 ) {
               PrintOK("Цветът ".$Name." е добавен успешно.");
             }
             else {
               PrintOK("Цветът НЕ е добавен!");
             }
-            @mysql_close($lnk);
+            @mysqli_close($lnk);
           }
           else {
             PrintError(202);
@@ -240,9 +240,9 @@
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
           // update color
           include("passwd.inc.php");
-          if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+          if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
-            if ( @mysql_select_db(DB_NAME, $lnk) ) {
+            if ( @mysqli_select_db(DB_NAME, $lnk) ) {
               while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE colors SET ";
                 $query .= "ClrName='".$Name[$ErrKey]."',";
@@ -252,12 +252,12 @@
                 $query .= "ModDate=CURDATE(),ModTime=CURTIME(),";
                 $query .= "AdminID=".$_SESSION['ADM_ID'];
                 $query .= " WHERE ColorID=".$ColorIds[$ErrKey];
-                @mysql_query($query, $lnk);
-                if ( @mysql_affected_rows($lnk) == 1 ) {
+                @mysqli_query($query, $lnk);
+                if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
               } // while
-              @mysql_close($lnk);
+              @mysqli_close($lnk);
               if ( $EditCount == $ClrCount ) {
                 PrintOK("Цветовете са редактирани успешно.");
               }
@@ -281,22 +281,22 @@
       } // if ( isset(CheckForm...
       if ( !isset($_POST['CheckForms']) || in_array(TRUE, $Error) ) {
         include("passwd.inc.php");
-        if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-          if ( @mysql_select_db(DB_NAME, $lnk) ) {
+        if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
             $query  = "SELECT ColorID,ClrName,Red,Green,Blue";
             $query .= " FROM colors";
             $query .= " WHERE ColorID";
             // TODO: Print error message if this function returns false
             MakeQueryList($ColorIds, $query);
-            $res = @mysql_query($query, $lnk);
+            $res = @mysqli_query($query, $lnk);
 
-            if ( @mysql_num_rows($res) > 0 ) {
+            if ( @mysqli_num_rows($res) > 0 ) {
 ?>
 <p align="center"><span class="required">*</span> - задължително поле</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
               $Index = 0;
-              while ( $ClrDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) { ?>
+              while ( $ClrDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) { ?>
 <tr valign="top"><td align="right">
 <input type="hidden" name="ColorIds[]" value="<?php echo $ClrDetails['ColorID'] ?>" />
 <b>Име</b><span class="required">*</span></td>
@@ -382,7 +382,7 @@
 </form>
 <?php
             } // if ( num_rows > 0...
-            @mysql_free_result($res);
+            @mysqli_free_result($res);
           }
           else {
             PrintError(202);
@@ -407,22 +407,22 @@
       $ColorIds = $_POST['ColorIds'];
       $ClrCount = count($ColorIds);
       include("passwd.inc.php");
-      if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-        if ( @mysql_select_db(DB_NAME, $lnk) ) {
+      if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
           $query = "SELECT ColorID,ClrName FROM colors WHERE ColorID";
           MakeQueryList($ColorIds, $query);
-          $res = @mysql_query($query, $lnk); ?>
+          $res = @mysqli_query($query, $lnk); ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези цветове?</td></tr>
 <tr><td><ul>
 <?php
-          while ( $ClrDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+          while ( $ClrDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
             print("<li>".$ClrDetails['ClrName']);
             print(" <input type=\"hidden\" name=\"ColorIds[]\"");
             print(" value=\"".$ClrDetails['ColorID']."\" /></li>\n");
           }
-          @mysql_free_result($res);
+          @mysqli_free_result($res);
 ?>
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
@@ -455,14 +455,14 @@
       }
       $ColorIds = $_POST['ColorIds'];
       include("passwd.inc.php");
-      if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-        if ( @mysql_select_db(DB_NAME, $lnk) ) {
+      if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
           $query = "DELETE FROM colors WHERE ColorID";
           $ClrCount = count($ColorIds);
           MakeQueryList($ColorIds, $query);
-          @mysql_query($query, $lnk);
-          $DelCount = @mysql_affected_rows($lnk);
-          @mysql_close($lnk);
+          @mysqli_query($query, $lnk);
+          $DelCount = @mysqli_affected_rows($lnk);
+          @mysqli_close($lnk);
           if ( $DelCount == $ClrCount ) {
             PrintOK("Цветовете са изтрити успешно.");
           }

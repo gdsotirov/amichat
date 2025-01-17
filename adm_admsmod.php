@@ -80,17 +80,17 @@
       $Email_Err = CheckEmailField($Error, $_POST['Email'], 2, 255, true);
       if ( !$Error ) {
         include("passwd.inc.php");
-        if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-          if ( @mysql_select_db(DB_NAME, $lnk) ) {
+        if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
             // check if user exist
             $query  = "SELECT AdminID FROM administrators";
             $query .= " WHERE Username='".$_POST['Username']."'";
-            $res = @mysql_query($query, $lnk);
-            if ( @mysql_num_rows($res) > 0 ) {
+            $res = @mysqli_query($query, $lnk);
+            if ( @mysqli_num_rows($res) > 0 ) {
               PrintError(107);
               exit;
             }
-            @mysql_free_result($res);
+            @mysqli_free_result($res);
             // add the user
             $query  = "INSERT INTO administrators (Username,Password,AdmName,";
             $query .= "Email,Phone,ModDate,ModTime,ModByID)";
@@ -100,14 +100,14 @@
             $query .= "'".$_POST['Email']."',";
             $query .= "'".$_POST['Phone']."',";
             $query .= " CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
-            @mysql_query($query, $lnk);
-            if ( @mysql_affected_rows($lnk) == 1 ) {
+            @mysqli_query($query, $lnk);
+            if ( @mysqli_affected_rows($lnk) == 1 ) {
               PrintOK("Администратора ".$_POST['Username']." (".$_POST['Name'].") е добавен успешно.");
             }
             else {
               PrintOK("Администратора НЕ е добавен!");
             }
-            @mysql_close($lnk);
+            @mysqli_close($lnk);
           }
           else {
             PrintError(202);
@@ -248,9 +248,9 @@
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
           // update administrator
           include("passwd.inc.php");
-          if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+          if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
-            if ( @mysql_select_db(DB_NAME, $lnk) ) {
+            if ( @mysqli_select_db(DB_NAME, $lnk) ) {
               while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE administrators SET ";
                 if ( !empty($Password[$ErrKey]) ) {
@@ -263,12 +263,12 @@
                 $query .= "ModByID=".$_SESSION['ADM_ID'];
                 $query .= " WHERE AdminID=".$AdminIds[$ErrKey];
 
-                @mysql_query($query, $lnk);
-                if ( @mysql_affected_rows($lnk) == 1 ) {
+                @mysqli_query($query, $lnk);
+                if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
               } // while
-              @mysql_close($lnk);
+              @mysqli_close($lnk);
               if ( $EditCount == $AdmCount ) {
                 PrintOK("Администраторите са редактирани успешно.");
               }
@@ -292,20 +292,20 @@
       } // if ( isset(CheckForm...
       if ( !isset($_POST['CheckForms']) || in_array(TRUE, $Error) ) {
         include("passwd.inc.php");
-        if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-          if ( @mysql_select_db(DB_NAME, $lnk) ) {
+        if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
             $query  = "SELECT AdminID,Username,Password,AdmName,Email,Phone";
             $query .= " FROM administrators WHERE AdminID";
             MakeQueryList($AdminIds, $query);
-            $res = @mysql_query($query, $lnk);
-            if ( @mysql_num_rows($res) > 0 ) { ?>
+            $res = @mysqli_query($query, $lnk);
+            if ( @mysqli_num_rows($res) > 0 ) { ?>
 <p align="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
 парола е попълнено</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
               $Index = 0;
-              while ( $AdmDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) { ?>
+              while ( $AdmDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) { ?>
 <tr><th align="center" colspan="2">Администратор: <?php echo $AdmDetails['Username']?>
 <input type="hidden" name="AdminIds[]" value="<?php echo $AdmDetails['AdminID'] ?>" /></th></tr>
 <tr><td align="right">Парола <span class="required">**</span></td>
@@ -376,7 +376,7 @@
 </form>
 <?php
             } // if ( num_rows > 0...
-            @mysql_free_result($res);
+            @mysqli_free_result($res);
           }
           else {
             PrintError(202);
@@ -409,22 +409,22 @@
       }
       $AdmCount = count($AdminIds);
       include("passwd.inc.php");
-      if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-        if ( @mysql_select_db(DB_NAME, $lnk) ) {
+      if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
           $query = "SELECT AdminID,Username FROM administrators WHERE AdminID";
           MakeQueryList($AdminIds, $query);
-          $res = @mysql_query($query, $lnk); ?>
+          $res = @mysqli_query($query, $lnk); ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези администратори?</td></tr>
 <tr><td><ul><?php
-          while ( $AdminDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+          while ( $AdminDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
             print("<li>".$AdminDetails['Username']);
             print(" <input type=\"hidden\" name=\"AdminIds[]\"");
             print(" value=\"".$AdminDetails['AdminID']."\" /></li>\n");
           }
 
-          @mysql_free_result($res); ?>
+          @mysqli_free_result($res); ?>
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td align="center">
@@ -464,14 +464,14 @@
       }
       $AdminIds = $_POST['AdminIds'];
       include("passwd.inc.php");
-      if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-        if ( @mysql_select_db(DB_NAME, $lnk) ) {
+      if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
           $query = "DELETE FROM administrators WHERE AdminID";
           $AdmCount = count($AdminIds);
           MakeQueryList($AdminIds, $query);
-          @mysql_query($query, $lnk);
-          $DelCount = @mysql_affected_rows($lnk);
-          @mysql_close($lnk);
+          @mysqli_query($query, $lnk);
+          $DelCount = @mysqli_affected_rows($lnk);
+          @mysqli_close($lnk);
           if ( $DelCount == $AdmCount ) {
             PrintOK("Администраторите са изтрити успешно.");
           }

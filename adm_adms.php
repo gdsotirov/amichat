@@ -44,15 +44,15 @@
 </tr>
 <?php
   include("passwd.inc.php");
-  if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-    if ( @mysql_select_db(DB_NAME, $lnk) ) {
+  if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+    if ( @mysqli_select_db(DB_NAME, $lnk) ) {
       $query  = "SELECT AdminID,Username,AdmName,Email,Phone,ModDate,ModTime,";
       $query .= "ModByID";
       $query .= " FROM administrators ORDER BY AdminID";
-      $res = @mysql_query($query, $lnk);
-      if ( @mysql_num_rows($res) > 0 ) {
+      $res = @mysqli_query($query, $lnk);
+      if ( @mysqli_num_rows($res) > 0 ) {
         $RowNum = 1;
-        while ( $AdmDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+        while ( $AdmDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
           if ( $RowNum++ % 2 ) {
             print("<tr class=\"trOdd\">");
           }
@@ -84,9 +84,9 @@
           else {
             $query  = "SELECT Username FROM administrators";
             $query .= " WHERE AdminID='".$AdmDetails['ModByID']."'";
-            $tmpres = @mysql_query($query, $lnk);
-            if ( @mysql_num_rows($tmpres) > 0 ) {
-              $row = @mysql_fetch_array($tmpres, MYSQL_ASSOC);
+            $tmpres = @mysqli_query($query, $lnk);
+            if ( @mysqli_num_rows($tmpres) > 0 ) {
+              $row = @mysqli_fetch_array($tmpres, MYSQL_ASSOC);
               print("<td>".$row['Username']."</td>\n");
             }
             else {
@@ -95,7 +95,7 @@
           }
           print("</tr>\n");
         } // while
-        @mysql_free_result($res);
+        @mysqli_free_result($res);
       }
       else {
         print("<tr>\n");

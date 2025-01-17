@@ -15,17 +15,17 @@
 
   include("passwd.inc.php");
 
-  if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-    if ( @mysql_select_db(DB_NAME, $lnk) ) {
+  if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+    if ( @mysqli_select_db(DB_NAME, $lnk) ) {
       if ( isset($ADMIN) ) { // Process administrator login
         $query  = "SELECT AdminID,AdmName,Password,LLDate,LLTime,LLHost,";
         $query .= "password('$Password') AS SuplPassword";
         $query .= " FROM administrators";
         $query .= " WHERE Username='$Username'";
-        $res = @mysql_query($query, $lnk);
-        if ( @mysql_num_rows($res) > 0 ) {
-          $AdmDetails = @mysql_fetch_array($res, MYSQL_ASSOC);
-          @mysql_free_result($res);
+        $res = @mysqli_query($query, $lnk);
+        if ( @mysqli_num_rows($res) > 0 ) {
+          $AdmDetails = @mysqli_fetch_array($res, MYSQL_ASSOC);
+          @mysqli_free_result($res);
           if ( $AdmDetails['SuplPassword'] == $AdmDetails['Password'] ) {
             session_start(); // *** Start administrative session ***
             // set session variables
@@ -39,8 +39,8 @@
             $query .= "LLTime='".date("H:i:s")."',";
             $query .= "LLHost='".$_SERVER['REMOTE_ADDR']."'";
             $query .= " WHERE AdminID=".$AdmDetails['AdminID'];
-            @mysql_query($query, $lnk);
-            @mysql_close($lnk);
+            @mysqli_query($query, $lnk);
+            @mysqli_close($lnk);
             Redirect("admpage.php");
             exit;
           }
@@ -56,16 +56,16 @@
       }
       else { // Process user login
         $query = "SELECT UserID,Password,Nickname,password('$Password') AS SuplPassword FROM users WHERE Username='$Username'";
-        $res = @mysql_query($query, $lnk);
-        if ( @mysql_num_rows($res) > 0 ) {
-          $UsrDetails = @mysql_fetch_array($res, MYSQL_ASSOC);
-          @mysql_free_result($res);
+        $res = @mysqli_query($query, $lnk);
+        if ( @mysqli_num_rows($res) > 0 ) {
+          $UsrDetails = @mysqli_fetch_array($res, MYSQL_ASSOC);
+          @mysqli_free_result($res);
           if ( $UsrDetails['SuplPassword'] == $UsrDetails['Password'] ) {
             session_start(); // *** Start user chat session ***
             $query = "UPDATE users SET LLDate='".date("Y-m-d")."',LLTime='".date("H:i:s")."',LLHost='".$_SERVER['REMOTE_ADDR']."',Active='1' WHERE UserID=".$UsrDetails['UserID'];
             /* NOTE: Did I need error reporting here? */
-            @mysql_query($query, $lnk);
-            @mysql_close($lnk);
+            @mysqli_query($query, $lnk);
+            @mysqli_close($lnk);
             // set session variables
             $_SESSION['USR_ID']     = $UsrDetails['UserID'];
             $_SESSION['USR_NICK']   = $UsrDetails['Nickname'];

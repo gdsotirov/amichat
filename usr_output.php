@@ -38,11 +38,11 @@ style="padding: 5px 5px 5px 5px;">
 
   $USR_ROOMID = $_SESSION['USR_ROOMID'];
 
-  if ( $lnk = @mysql_connect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-    if ( @mysql_select_db(DB_NAME, $lnk) ) {
+  if ( $lnk = @mysqli_connect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+    if ( @mysqli_select_db(DB_NAME, $lnk) ) {
       $query = "SELECT COUNT(*) AS RowCount FROM messages";
-      $res = @mysql_query($query, $lnk);
-      $row = @mysql_fetch_array($res, MYSQL_ASSOC);
+      $res = @mysqli_query($query, $lnk);
+      $row = @mysqli_fetch_array($res, MYSQL_ASSOC);
 
       $RowCount = $row['RowCount'];
       if ( isset($_SESSION['USR_MSGCNT']) ) {
@@ -69,8 +69,8 @@ style="padding: 5px 5px 5px 5px;">
       $query .= " users.ColorID=colors.ColorID";
       $query .= " ORDER BY messages.PostDate,messages.PostTime";
       $query .= " LIMIT $Offset,$MSGCOUNT";
-      $res = @mysql_query($query, $lnk);
-      while ( $row = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+      $res = @mysqli_query($query, $lnk);
+      while ( $row = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
         $USR_COLOR = MakeTriplet($row['Red'],$row['Green'],$row['Blue']);
         print("[".$row['PostDate']." ".$row['PostTime']."] ");
         print("<span style=\"color: $USR_COLOR;");
@@ -88,7 +88,7 @@ style="padding: 5px 5px 5px 5px;">
           print($row['Message']."<br />\n");
         }
       } // while
-      @mysql_close($lnk);
+      @mysqli_close($lnk);
     }
     else {
       PrintError(202);

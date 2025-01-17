@@ -14,11 +14,11 @@
 
   include("common.inc.php");
   include("passwd.inc.php");
-  if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-    if ( @mysql_select_db(DB_NAME, $lnk) ) {
+  if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+    if ( @mysqli_select_db(DB_NAME, $lnk) ) {
       $query  = "SELECT rooms.RoomID,rooms.RoomName";
       $query .= "  FROM rooms";
-      $res = @mysql_query($query, $lnk);
+      $res = @mysqli_query($query, $lnk);
     }
     else {
       PrintError(202);
@@ -49,19 +49,19 @@
   $USR_NICK = $_SESSION['USR_NICK'];
   print("Псевдоним: <b>$USR_NICK</b>&nbsp;");
   $USR_ROOMNAME = "няма";
-  while ( $RoomDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+  while ( $RoomDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
     if ( $_SESSION['USR_ROOMID'] == $RoomDetails['RoomID'] ) {
       $USR_ROOMNAME = $RoomDetails['RoomName'];
     }
   } // while
   print("Стая: <b>$USR_ROOMNAME</b>\n");
 
-  if ( mysql_data_seek($res, 0) ) {
-    if ( @mysql_num_rows($res) > 0 ) {
+  if ( mysqli_stmt_data_seek($res, 0) ) {
+    if ( @mysqli_num_rows($res) > 0 ) {
       print("<form action=\"\" class=\"inline\" method=\"post\" name=\"RoomPost\">");
       print("<label for=\"Room\">Нова стая:&nbsp;</label>");
       print("<select id=\"Room\" name=\"Room\">\n");
-      while ( $RoomDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+      while ( $RoomDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
         print("<option value=\"".$RoomDetails['RoomID']."\"");
         if ( $_SESSION['USR_ROOMID'] == $RoomDetails['RoomID'] ) {
           print(" selected=\"selected\">\n");
@@ -77,7 +77,7 @@
     }
   }
 
-  @mysql_free_result($res);
+  @mysqli_free_result($res);
 ?>
 </td>
 <td align="right">

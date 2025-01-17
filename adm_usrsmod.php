@@ -113,25 +113,25 @@
       }
       if ( !$Error ) {
         include("passwd.inc.php");
-        if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-          if ( @mysql_select_db(DB_NAME, $lnk) ) {
+        if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
             // check if user exists
             $query  = "SELECT UserID FROM users";
             $query .= " WHERE Username='".$Username."'";
-            $res = @mysql_query($query, $lnk);
-            if ( @mysql_num_rows($res) > 0 ) {
+            $res = @mysqli_query($query, $lnk);
+            if ( @mysqli_num_rows($res) > 0 ) {
               PrintError(107); // username exists
               exit;
             }
             // check if nickname exists
             $query  = "SELECT UserID FROM users";
             $query .= " WHERE Nickname='".$Nick."'";
-            $res = @mysql_query($query, $lnk);
-            if ( @mysql_num_rows($res) > 0 ) {
+            $res = @mysqli_query($query, $lnk);
+            if ( @mysqli_num_rows($res) > 0 ) {
               PrintError(108); // nickname exists
               exit;
             }
-            @mysql_free_result($res);
+            @mysqli_free_result($res);
             // add the user
             $query  = "INSERT INTO users";
             $query .= "(Username,Password,Nickname,UsrName,Email,Teacher,";
@@ -144,14 +144,14 @@
             $query .= "'".(isset($Teacher)?1:0)."',";
             $query .= "".$Color.",";
             $query .= "CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
-            @mysql_query($query, $lnk);
-            if ( @mysql_affected_rows($lnk) == 1 ) {
+            @mysqli_query($query, $lnk);
+            if ( @mysqli_affected_rows($lnk) == 1 ) {
               PrintOK("Потребителя ".$Username." (".$Name.") е добавен успешно.");
             }
             else {
               PrintOK("Потребителя НЕ е добавен!");
             }
-            @mysql_close($lnk);
+            @mysqli_close($lnk);
           }
           else {
             PrintError(202);
@@ -258,14 +258,14 @@
 <option value="">-- Моля, изберете цвят --</option>
 <?php
     include("passwd.inc.php");
-    if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-      if ( @mysql_select_db(DB_NAME, $lnk) ) {
+    if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+      if ( @mysqli_select_db(DB_NAME, $lnk) ) {
         $query = "SELECT ColorID,ClrName,Red,Green,Blue from colors";
 
-        $res = @mysql_query($query, $lnk);
+        $res = @mysqli_query($query, $lnk);
 
-        if ( @mysql_num_rows($res) > 0 ) {
-          while ( $Clr = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+        if ( @mysqli_num_rows($res) > 0 ) {
+          while ( $Clr = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
             print("<option");
             if ( isset($Color) && $Color == $Clr['ColorID'] ) {
               print(" selected=\"selected\"");
@@ -276,7 +276,7 @@
           }
         }
 
-        @mysql_free_result($res);
+        @mysqli_free_result($res);
       }
     }
 ?></select></td></tr>
@@ -340,9 +340,9 @@
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
           // update user
           include("passwd.inc.php");
-          if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+          if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
-            if ( @mysql_select_db(DB_NAME, $lnk) ) {
+            if ( @mysqli_select_db(DB_NAME, $lnk) ) {
               while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE users SET ";
                 if ( !empty($Password[$ErrKey]) ) {
@@ -356,12 +356,12 @@
                 $query .= "ModDate=CURDATE(),ModTime=CURTIME(),";
                 $query .= "AdminID=".$_SESSION['ADM_ID'];
                 $query .= " WHERE UserID=".$UserIds[$ErrKey];
-                @mysql_query($query, $lnk);
-                if ( @mysql_affected_rows($lnk) == 1 ) {
+                @mysqli_query($query, $lnk);
+                if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
               } // while
-              @mysql_close($lnk);
+              @mysqli_close($lnk);
               if ( $EditCount == $UsrCount ) {
                 PrintOK("Потребителите са редактирани успешно.");
               }
@@ -385,19 +385,19 @@
       } // if ( isset(CheckForm...
       if ( !isset($_POST['CheckForms']) || in_array(TRUE, $Error) ) {
         include("passwd.inc.php");
-        if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-          if ( @mysql_select_db(DB_NAME, $lnk) ) {
+        if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
             $query  = "SELECT UserID,Username,Password,Nickname,UsrName,";
             $query .= "Email,Teacher,ColorID";
             $query .= " FROM users WHERE UserID";
             // TODO: Print error message if this function returns false
             MakeQueryList($UserIds, $query);
-            $UsrRes = @mysql_query($query, $lnk);
+            $UsrRes = @mysqli_query($query, $lnk);
 
             $query = "SELECT ColorID,ClrName,Red,Green,Blue from colors";
-            $ClrRes = @mysql_query($query, $lnk);
+            $ClrRes = @mysqli_query($query, $lnk);
 
-            if ( @mysql_num_rows($UsrRes) > 0 ) {
+            if ( @mysqli_num_rows($UsrRes) > 0 ) {
 ?>
 <p align="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
@@ -406,7 +406,7 @@
 <table align="center">
 <?php
               $Index = 0;
-              while ( $UsrDetails = @mysql_fetch_array($UsrRes, MYSQL_ASSOC) ) {
+              while ( $UsrDetails = @mysqli_fetch_array($UsrRes, MYSQL_ASSOC) ) {
 ?>
 <tr><th align="center" colspan="2">Потребител: <?php echo $UsrDetails['Username']?>
 <input type="hidden" name="UserIds[]" value="<?php echo $UsrDetails['UserID'] ?>" /></th></tr>
@@ -494,9 +494,9 @@
 <select name="Color[]" onchange="javascript: previewColor();">
 <option value="">-- Моля, изберете цвят --</option>
 <?php
-                if ( @mysql_num_rows($ClrRes) > 0 ) {
-                  @mysql_data_seek($ClrRes, 0);
-                  while ( $Clr = @mysql_fetch_array($ClrRes, MYSQL_ASSOC) ) {
+                if ( @mysqli_num_rows($ClrRes) > 0 ) {
+                  @mysqli_stmt_data_seek($ClrRes, 0);
+                  while ( $Clr = @mysqli_fetch_array($ClrRes, MYSQL_ASSOC) ) {
                     print("<option");
                     if ( $Error[$Index] ) {
                       $CompareID = $Color[$Index];
@@ -527,8 +527,8 @@
 </form>
 <?php
             } // if ( num_rows > 0...
-            @mysql_free_result($UsrRes);
-            @mysql_free_result($ClrRes);
+            @mysqli_free_result($UsrRes);
+            @mysqli_free_result($ClrRes);
           }
           else {
             PrintError(202);
@@ -553,24 +553,24 @@
       $UserIds = $_POST['UserIds'];
       $UserCount = count($UserIds);
       include("passwd.inc.php");
-      if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-        if ( @mysql_select_db(DB_NAME, $lnk) ) {
+      if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
           $query = "SELECT UserID,Username FROM users WHERE UserID";
           MakeQueryList($UserIds, $query);
-          $res = @mysql_query($query, $lnk);
+          $res = @mysqli_query($query, $lnk);
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези потребители?</td></tr>
 <tr><td><ul>
 <?php
-          while ( $UsrDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+          while ( $UsrDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
             print("<li>".$UsrDetails['Username']);
             print(" <input type=\"hidden\" name=\"UserIds[]\"");
             print(" value=\"".$UsrDetails['UserID']."\" /></li>\n");
           }
 
-          @mysql_free_result($res);
+          @mysqli_free_result($res);
 ?>
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
@@ -603,14 +603,14 @@
       }
       $UserIds = $_POST['UserIds'];
       include("passwd.inc.php");
-      if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-        if ( @mysql_select_db(DB_NAME, $lnk) ) {
+      if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
           $query = "DELETE FROM users WHERE UserID";
           $UserCount = count($UserIds);
           MakeQueryList($UserIds, $query);
-          @mysql_query($query, $lnk);
-          $DelCount = @mysql_affected_rows($lnk);
-          @mysql_close($lnk);
+          @mysqli_query($query, $lnk);
+          $DelCount = @mysqli_affected_rows($lnk);
+          @mysqli_close($lnk);
           if ( $DelCount == $UserCount ) {
             PrintOK("Потребителите са изтрити успешно.");
           }

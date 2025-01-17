@@ -68,31 +68,31 @@
         CheckStringField($Error, $_POST['Name'], 1, 16);
       if ( !$Error ) {
         include("passwd.inc.php");
-        if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-          if ( @mysql_select_db(DB_NAME, $lnk) ) {
+        if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
             // check if room exists
             $query  = "SELECT RoomID FROM rooms";
             $query .= " WHERE RoomName='".$_POST['Name']."'";
-            $res = @mysql_query($query, $lnk);
-            if ( @mysql_num_rows($res) > 0 ) {
+            $res = @mysqli_query($query, $lnk);
+            if ( @mysqli_num_rows($res) > 0 ) {
               PrintError(110); // room exists
               exit;
             }
-            @mysql_free_result($res);
+            @mysqli_free_result($res);
             // add the user
             $query  = "INSERT INTO rooms";
             $query .= " (RoomName,Descr,ModDate,ModTime,AdminID)";
             $query .= " VALUES ('".$_POST['Name']."',";
             $query .= "'".$_POST['Descr']."',";
             $query .= " CURDATE(), CURTIME(), ".$_SESSION['ADM_ID'].")";
-            @mysql_query($query, $lnk);
-            if ( @mysql_affected_rows($lnk) == 1 ) {
+            @mysqli_query($query, $lnk);
+            if ( @mysqli_affected_rows($lnk) == 1 ) {
               PrintOK("Стаята ".$_POST['Name']." е добавена успешно.");
             }
             else {
               PrintOK("Стаята НЕ е добавенa!");
             }
-            @mysql_close($lnk);
+            @mysqli_close($lnk);
           }
           else {
             PrintError(202);
@@ -166,9 +166,9 @@
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
           // update color
           include("passwd.inc.php");
-          if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+          if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
-            if ( @mysql_select_db(DB_NAME, $lnk) ) {
+            if ( @mysqli_select_db(DB_NAME, $lnk) ) {
               while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE rooms SET ";
                 $query .= "RoomName='".$Name[$ErrKey]."',";
@@ -176,12 +176,12 @@
                 $query .= "ModDate=CURDATE(),ModTime=CURTIME(),";
                 $query .= "AdminID=".$_SESSION['ADM_ID'];
                 $query .= " WHERE RoomID=".$RoomIds[$ErrKey];
-                @mysql_query($query, $lnk);
-                if ( @mysql_affected_rows($lnk) == 1 ) {
+                @mysqli_query($query, $lnk);
+                if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
               } // while
-              @mysql_close($lnk);
+              @mysqli_close($lnk);
               if ( $EditCount == $RoomCount ) {
                 PrintOK("Стаите са редактирани успешно.");
               }
@@ -205,18 +205,18 @@
       } // if ( isset(CheckForm...
       if ( !isset($_POST['CheckForms']) || in_array(TRUE, $Error) ) {
         include("passwd.inc.php");
-        if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-          if ( @mysql_select_db(DB_NAME, $lnk) ) {
+        if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+          if ( @mysqli_select_db(DB_NAME, $lnk) ) {
             $query = "SELECT RoomID,RoomName,Descr FROM rooms WHERE RoomID";
             // TODO: Print error message if this function returns false
             MakeQueryList($RoomIds, $query);
-            $res = @mysql_query($query, $lnk);
-            if ( @mysql_num_rows($res) > 0 ) { ?>
+            $res = @mysqli_query($query, $lnk);
+            if ( @mysqli_num_rows($res) > 0 ) { ?>
 <p align="center"><span class="required">*</span> - задължително поле</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center"><?php
               $Index = 0;
-              while ( $RoomDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) { ?>
+              while ( $RoomDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) { ?>
 <tr valign="top"><td align="right">
 <input type="hidden" name="RoomIds[]" value="<?php echo $RoomDetails['RoomID'] ?>" />
 <b>Име</b> <span class="required">*</span></td>
@@ -264,7 +264,7 @@
 </form>
 <?php
             } // if ( num_rows > 0...
-            @mysql_free_result($res);
+            @mysqli_free_result($res);
           }
           else {
             PrintError(202);
@@ -289,21 +289,21 @@
       $RoomIds   = $_POST['RoomIds'];
       $RoomCount = count($RoomIds);
       include("passwd.inc.php");
-      if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-        if ( @mysql_select_db(DB_NAME, $lnk) ) {
+      if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
           $query = "SELECT RoomID,RoomName FROM rooms WHERE RoomID";
           MakeQueryList($RoomIds, $query);
-          $res = @mysql_query($query, $lnk); ?>
+          $res = @mysqli_query($query, $lnk); ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table align="center">
 <tr><td>Желаете ли да изтриете тези стаи?</td></tr>
 <tr><td><ul><?php
-          while ( $RoomDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+          while ( $RoomDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
             print("<li>".$RoomDetails['RoomName']);
             print(" <input type=\"hidden\" name=\"RoomIds[]\"");
             print(" value=\"".$RoomDetails['RoomID']."\" /></li>\n");
           }
-          @mysql_free_result($res);
+          @mysqli_free_result($res);
 ?>
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
@@ -336,14 +336,14 @@
       }
       $RoomIds = $_POST['RoomIds'];
       include("passwd.inc.php");
-      if ( $lnk = @mysql_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
-        if ( @mysql_select_db(DB_NAME, $lnk) ) {
+      if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
+        if ( @mysqli_select_db(DB_NAME, $lnk) ) {
           $query = "DELETE FROM rooms WHERE RoomID";
           $RoomCount = count($RoomIds);
           MakeQueryList($RoomIds, $query);
-          @mysql_query($query, $lnk);
-          $DelCount = @mysql_affected_rows($lnk);
-          @mysql_close($lnk);
+          @mysqli_query($query, $lnk);
+          $DelCount = @mysqli_affected_rows($lnk);
+          @mysqli_close($lnk);
           if ( $DelCount == $RoomCount ) {
             PrintOK("Стаите са изтрити успешно.");
           }

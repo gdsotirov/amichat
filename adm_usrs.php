@@ -48,8 +48,8 @@
 </tr>
 <?php
   include("passwd.inc.php");
-  if ( $lnk = @mysql_pconnect(DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
-    if ( @mysql_select_db(DB_NAME, $lnk) ) {
+  if ( $lnk = @mysqli_connect("p:" . DB_SERVER, DB_RO_USER, DB_RO_PWD) ) {
+    if ( @mysqli_select_db(DB_NAME, $lnk) ) {
       $query  = "SELECT users.UserID,users.Username,users.Nickname,";
       $query .= "users.UsrName,users.Email,users.Teacher,colors.Red,";
       $query .= "colors.Green,colors.Blue,users.ModDate,users.ModTime,";
@@ -59,10 +59,10 @@
       $query .= " AND";
       $query .= " users.AdminID=administrators.AdminID";
       $query .= " ORDER BY users.UserID";
-      $res = @mysql_query($query, $lnk);
-      if ( @mysql_num_rows($res) > 0 ) {
+      $res = @mysqli_query($query, $lnk);
+      if ( @mysqli_num_rows($res) > 0 ) {
         $RowNum = 1;
-        while ( $UserDetails = @mysql_fetch_array($res, MYSQL_ASSOC) ) {
+        while ( $UserDetails = @mysqli_fetch_array($res, MYSQL_ASSOC) ) {
           if ( $RowNum++ % 2 ) {
             print("<tr class=\"trOdd\">\n");
           }
@@ -92,7 +92,7 @@
           print("</tr>\n");
         } // while
       }
-      @mysql_free_result($res);
+      @mysqli_free_result($res);
     }
     else {
       PrintError(202);
