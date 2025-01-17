@@ -6,8 +6,8 @@
   define("CHAT_CONTACT", "gdsotirov@gmail.com");
 
   define("CHAT_VER_MAJOR", 0);
-  define("CHAT_VER_MINOR", 3);
-  define("CHAT_VER_PATCH", 4);
+  define("CHAT_VER_MINOR", 8);
+  define("CHAT_VER_PATCH", 0);
   define("CHAT_VERSTR", CHAT_VER_MAJOR.".".CHAT_VER_MINOR.".".CHAT_VER_PATCH);
 
   define("DB_SERVER", "localhost");
