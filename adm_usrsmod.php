@@ -137,7 +137,7 @@
             $query .= "(Username,Password,Nickname,UsrName,Email,Teacher,";
             $query .= "ColorID,ModDate,ModTime,AdminID)";
             $query .= " VALUES ('".$Username."',";
-            $query .= " password('".$Password."'),";
+            $query .= " SHA1('".$Password."'),";
             $query .= "'".$Nick."',";
             $query .= "'".$Name."',";
             $query .= "'".$Email."',";
@@ -346,7 +346,7 @@
               while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE users SET ";
                 if ( !empty($Password[$ErrKey]) ) {
-                  $query .= "Password=password('".$Password[$ErrKey]."'),";
+                  $query .= "Password=SHA1('".$Password[$ErrKey]."'),";
                 }
                 $query .= "Nickname='".$Nick[$ErrKey]."',";
                 $query .= "UsrName='".$Name[$ErrKey]."',";

@@ -99,7 +99,7 @@
             // add the user
             $query = "UPDATE users SET ";
             if ( !empty($_POST['Password']) ) {
-              $query .= "Password=password('".$_POST['Password']."'),";
+              $query .= "Password=SHA1('".$_POST['Password']."'),";
             }
             $query .= "Nickname='".$_POST['Nick']."',";
             $query .= "UsrName='".$_POST['Name']."',";

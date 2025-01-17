@@ -19,7 +19,7 @@
     if ( @mysqli_select_db($lnk, DB_NAME) ) {
       if ( isset($ADMIN) ) { // Process administrator login
         $query  = "SELECT AdminID,AdmName,Password,LLDate,LLTime,LLHost,";
-        $query .= "password('$Password') AS SuplPassword";
+        $query .= "SHA1('$Password') AS SuplPassword";
         $query .= " FROM administrators";
         $query .= " WHERE Username='$Username'";
         $res = @mysqli_query($lnk, $query);
@@ -55,7 +55,7 @@
         }
       }
       else { // Process user login
-        $query = "SELECT UserID,Password,Nickname,password('$Password') AS SuplPassword FROM users WHERE Username='$Username'";
+        $query = "SELECT UserID,Password,Nickname,SHA1('$Password') AS SuplPassword FROM users WHERE Username='$Username'";
         $res = @mysqli_query($lnk, $query);
         if ( @mysqli_num_rows($res) > 0 ) {
           $UsrDetails = @mysqli_fetch_array($res, MYSQL_ASSOC);

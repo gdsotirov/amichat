@@ -95,7 +95,7 @@
             $query  = "INSERT INTO administrators (Username,Password,AdmName,";
             $query .= "Email,Phone,ModDate,ModTime,ModByID)";
             $query .= " VALUES ('".$_POST['Username']."',";
-            $query .= " password('".$_POST['Password']."'),";
+            $query .= " SHA1('".$_POST['Password']."'),";
             $query .= "'".$_POST['Name']."',";
             $query .= "'".$_POST['Email']."',";
             $query .= "'".$_POST['Phone']."',";
@@ -254,7 +254,7 @@
               while ( list($ErrKey) = each($Error) ) {
                 $query = "UPDATE administrators SET ";
                 if ( !empty($Password[$ErrKey]) ) {
-                  $query .= "Password=password('".$Password[$ErrKey]."'),";
+                  $query .= "Password=SHA1('".$Password[$ErrKey]."'),";
                 }
                 $query .= "AdmName='".$Name[$ErrKey]."',";
                 $query .= "Email='".$Email[$ErrKey]."',";
