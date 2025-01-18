@@ -55,11 +55,11 @@
 </head>
 
 <body class="Admin" onload="javascript: focusFirst(); return true">
-<p align="center" class="midhdr">Административни страници:
+<p class="midhdr">Административни страници:
 <a href="adm_adms.php" class="aMidHdr">Администратори</a> -&gt; <?php PrintAction() ?></p>
-<table align="center" class="tbThinBorder" cellspacing="0" width="100%">
+<table class="tbThinBorder" cellspacing="0">
 <?php PrintTabs('admins') ?><tr><td colspan="6" class="tdData">
-<p align="center" class="smlhdr"><?php PrintAction() ?> на администратори</p>
+<p class="smlhdr"><?php PrintAction() ?> на администратори</p>
 <?php
   if ( isset($_POST['SubmitAdd']) ) { /* Process add request */
     $Error         = FALSE;
@@ -122,12 +122,12 @@
     }
     if ( !isset($_POST['CheckForm']) || $Error ) {
       // Print form with or without errors
-?><p align="center"><span class="required">*</span> - задължително поле</p>
+?><p class="center"><span class="required">*</span> - задължително поле</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-<table align="center">
+<table class="tbCenter">
 <tr><th colspan="2">Системна информация</th></tr>
 <tr valign="top">
-<td align="right" width="50%">Потребителско име
+<td class="right" width="50%">Потребителско име
 <span class="required">*</span></td>
 <td><input type="text" name="Username" maxlength="32" size="32"<?php
   if ( $Error ) {
@@ -141,7 +141,7 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Парола <span class="required">*</span></td>
+<tr valign="top"><td class="right">Парола <span class="required">*</span></td>
 <td><input type="password" name="Password" maxlength="32" size="32" />
 <?php
   if ( $Error ) {
@@ -150,7 +150,7 @@
   }
 ?></td></tr>
 <tr valign="top">
-<td align="right">Парола (повторете) <span class="required">*</span></td>
+<td class="right">Парола (повторете) <span class="required">*</span></td>
 <td><input type="password" name="Password2" maxlength="32" size="32" />
 <?php
   if ( $Error ) {
@@ -159,7 +159,7 @@
   }
 ?></td></tr>
 <tr><th colspan="2">Лична информация</th></tr>
-<tr valign="top"><td align="right">Име <span class="required">*</span></td>
+<tr valign="top"><td class="right">Име <span class="required">*</span></td>
 <td><input type="text" name="Name" maxlength="96" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Name']."\"");
@@ -172,7 +172,7 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Е-поща <span class="required">*</span></td>
+<tr valign="top"><td class="right">Е-поща <span class="required">*</span></td>
 <td><input type="text" name="Email" maxlength="255" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Email']."\"");
@@ -185,14 +185,14 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Телефон</td>
+<tr valign="top"><td class="right">Телефон</td>
 <td><input type="text" name="Phone" maxlength="255" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Phone']."\"");
   }
 ?> /></td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
-<tr><td align="center" colspan="2">
+<tr><td class="center" colspan="2">
 <input type="hidden" name="CheckForm" value="1" />
 <input type="submit" name="SubmitAdd" value="Добави" />
 <input type="reset" name="Reset" value="Изчисти" />
@@ -299,16 +299,16 @@
             MakeQueryList($AdminIds, $query);
             $res = @mysqli_query($lnk, $query);
             if ( @mysqli_num_rows($res) > 0 ) { ?>
-<p align="center"><span class="required">*</span> - задължително поле<br />
+<p class="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
 парола е попълнено</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-<table align="center"><?php
+<table class="tbCenter"><?php
               $Index = 0;
               while ( $AdmDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) { ?>
-<tr><th align="center" colspan="2">Администратор: <?php echo $AdmDetails['Username']?>
+<tr><th class="center" colspan="2">Администратор: <?php echo $AdmDetails['Username']?>
 <input type="hidden" name="AdminIds[]" value="<?php echo $AdmDetails['AdminID'] ?>" /></th></tr>
-<tr><td align="right">Парола <span class="required">**</span></td>
+<tr><td class="right">Парола <span class="required">**</span></td>
 <td><input type="password" name="Password[]" maxlength="32" size="32" /><?php
   if ( $Error[$Index] ) {
     print("<br />\n");
@@ -316,14 +316,14 @@
   } ?>
 </td></tr>
 <tr valign="top">
-<td align="right">Парола (повторете) <span class="required">**</span></td>
+<td class="right">Парола (повторете) <span class="required">**</span></td>
 <td><input type="password" name="Password2[]" maxlength="32" size="32" /><?php
   if ( $Error[$Index] ) {
     print("<br />\n");
     print($Pass2_Err[$Index]);
   } ?></td></tr>
 <tr valign="top">
-<td align="right">Име <span class="required">*</span></td>
+<td class="right">Име <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="96" size="32"<?php
   if ( $Error[$Index] ) {
     print(" value=\"".$Name[$Index]."\"");
@@ -340,7 +340,7 @@
 ?>
 </td></tr>
 <tr valign="top">
-<td align="right">Е-поща <span class="required">*</span></td>
+<td class="right">Е-поща <span class="required">*</span></td>
 <td><input type="text" name="Email[]" maxlength="255" size="32"<?php
   if ( $Error[$Index] ) {
     print(" value=\"".$Email[$Index]."\"");
@@ -357,7 +357,7 @@
   }
 ?></td></tr>
 <tr valign="top">
-<td align="right">Телефон</td>
+<td class="right">Телефон</td>
 <td><input type="text" name="Phone[]" maxlength="255" size="32"<?php
   if ( $Error[$Index] ) {
     print(" value=\"".$Phone[$Index]."\"");
@@ -368,7 +368,7 @@
 <tr><td>&nbsp;</td></tr><?php
                 $Index++;
               } // while ?>
-<tr><td align="center" colspan="2">
+<tr><td class="center" colspan="2">
 <input type="hidden" name="CheckForms" value="1" />
 <input type="submit" name="SubmitEdit" value="Редактирай" />
 <input type="submit" name="CancelEdit" value="Откажи" /></td></tr>
@@ -415,7 +415,7 @@
           MakeQueryList($AdminIds, $query);
           $res = @mysqli_query($lnk, $query); ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-<table align="center">
+<table class="tbCenter">
 <tr><td>Желаете ли да изтриете тези администратори?</td></tr>
 <tr><td><ul><?php
           while ( $AdminDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
@@ -427,7 +427,7 @@
           @mysqli_free_result($res); ?>
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
-<tr><td align="center">
+<tr><td class="center">
 <input type="submit" name="Delete" value="Да" />
 <input type="submit" name="CancelDelete" value="Не" />
 </td></tr>
@@ -498,14 +498,14 @@
   } // elseif ?>
 </td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center"><a href="https://validator.w3.org/check/referer">
+<p class="center"><a href="https://validator.w3.org/check/referer">
 <img border="0" src="valid-xhtml.png" alt="Valid XHTML 1.0!"
 height="31" width="88" /></a>
 <a class="right" href="https://jigsaw.w3.org/css-validator/check/referer">
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003-2005
+<p class="copyright">Автор &copy; 2003-2005
 <a href="mailto: <?php echo CHAT_CONTACT ?>" class="aCopyright">
 <?php echo CHAT_AUTHOR ?></a></p>
 </body>

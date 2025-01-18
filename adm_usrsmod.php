@@ -72,12 +72,12 @@
 </head>
 
 <body class="Admin" onload="javascript: focusFirst(); previewColor(); return true">
-<p align="center" class="midhdr">Административни страници:
+<p class="midhdr">Административни страници:
 <a href="adm_usrs.php" class="aMidHdr">Потребители</a> -&gt; <?php PrintAction() ?></p>
-<table align="center" class="tbThinBorder" cellspacing="0" width="100%">
+<table class="tbThinBorder" cellspacing="0">
 <?php PrintTabs('users') ?>
 <tr><td colspan="6" class="tdData">
-<p align="center" class="smlhdr"><?php PrintAction() ?> на потребители</p>
+<p class="smlhdr"><?php PrintAction() ?> на потребители</p>
 <?php
   if ( isset($_POST['SubmitAdd']) ) { /* Process add request */
     $Error         = FALSE;
@@ -167,12 +167,12 @@
     if ( !isset($_POST['CheckForm']) || $Error ) {
       // Print form with or without errors
 ?>
-<p align="center"><span class="required">*</span> - задължително поле</p>
+<p class="center"><span class="required">*</span> - задължително поле</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-<table align="center">
+<table class="tbCenter">
 <tr><th colspan="2">Системна информация</th></tr>
 <tr valign="top">
-<td align="right" width="50%">Потребителско име
+<td class="right" width="50%">Потребителско име
 <span class="required">*</span></td>
 <td><input type="text" name="Username[]" maxlength="32" size="32"<?php
   if ( $Error ) {
@@ -186,7 +186,7 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Парола <span class="required">*</span></td>
+<tr valign="top"><td class="right">Парола <span class="required">*</span></td>
 <td><input type="password" name="Password[]" maxlength="32" size="32" />
 <?php
   if ( $Error ) {
@@ -196,7 +196,7 @@
 ?>
 </td></tr>
 <tr valign="top">
-<td align="right">Парола (повторете) <span class="required">*</span></td>
+<td class="right">Парола (повторете) <span class="required">*</span></td>
 <td><input type="password" name="Password2[]" maxlength="32" size="32" />
 <?php
   if ( $Error ) {
@@ -206,7 +206,7 @@
 ?>
 </td></tr>
 <tr><th colspan="2">Лична информация</th></tr>
-<tr valign="top"><td align="right">Псевдоним <span class="required">*</span></td>
+<tr valign="top"><td class="right">Псевдоним <span class="required">*</span></td>
 <td><input type="text" name="Nick[]" maxlength="96" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$Nick."\"");
@@ -220,7 +220,7 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Име <span class="required">*</span></td>
+<tr valign="top"><td class="right">Име <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="96" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$Name."\"");
@@ -233,7 +233,7 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Е-поща <!-- <span class="required">*</span> --></td>
+<tr valign="top"><td class="right">Е-поща <!-- <span class="required">*</span> --></td>
 <td><input type="text" name="Email[]" maxlength="255" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$Email."\"");
@@ -246,13 +246,13 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Учител</td>
+<tr valign="top"><td class="right">Учител</td>
 <td><input type="checkbox" name="Teacher[]"<?php
   if ( $Error && isset($Teacher) ) {
     print(" checked=\"checked\"");
   }
 ?> /></td></tr>
-<tr valign="top"><td align="right">Цвят</td>
+<tr valign="top"><td class="right">Цвят</td>
 <td>
 <select name="Color[]" onchange="javascript: previewColor();">
 <option value="">-- Моля, изберете цвят --</option>
@@ -281,7 +281,7 @@
     }
 ?></select></td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
-<tr><td align="center" colspan="2">
+<tr><td class="center" colspan="2">
 <input type="hidden" name="CheckForm" value="1" />
 <input type="submit" name="SubmitAdd" value="Добави" />
 <input type="reset" name="Reset" value="Изчисти" />
@@ -399,18 +399,18 @@
 
             if ( @mysqli_num_rows($UsrRes) > 0 ) {
 ?>
-<p align="center"><span class="required">*</span> - задължително поле<br />
+<p class="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
 парола е попълнено</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-<table align="center">
+<table class="tbCenter">
 <?php
               $Index = 0;
               while ( $UsrDetails = @mysqli_fetch_array($UsrRes, MYSQLI_ASSOC) ) {
 ?>
-<tr><th align="center" colspan="2">Потребител: <?php echo $UsrDetails['Username']?>
+<tr><th class="center" colspan="2">Потребител: <?php echo $UsrDetails['Username']?>
 <input type="hidden" name="UserIds[]" value="<?php echo $UsrDetails['UserID'] ?>" /></th></tr>
-<tr><td align="right">Парола <span class="required">**</span></td>
+<tr><td class="right">Парола <span class="required">**</span></td>
 <td><input type="password" name="Password[]" maxlength="32" size="32" />
 <?php
   if ( $Error[$Index] ) {
@@ -420,7 +420,7 @@
 ?>
 </td></tr>
 <tr valign="top">
-<td align="right">Парола (повторете) <span class="required">**</span></td>
+<td class="right">Парола (повторете) <span class="required">**</span></td>
 <td><input type="password" name="Password2[]" maxlength="32" size="32" />
 <?php
   if ( $Error[$Index] ) {
@@ -430,7 +430,7 @@
 ?>
 </td></tr>
 <tr valign="top">
-<td align="right">Псевдоним <span class="required">*</span></td>
+<td class="right">Псевдоним <span class="required">*</span></td>
 <td><input type="text" name="Nick[]" maxlength="32" size="32"
 <?php
   if ( $Error[$Index] ) {
@@ -448,7 +448,7 @@
 ?>
 </td></tr>
 <tr valign="top">
-<td align="right">Име <span class="required">*</span></td>
+<td class="right">Име <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="96" size="32"<?php
   if ( $Error[$Index] ) {
     print(" value=\"".$Name[$Index]."\"");
@@ -466,7 +466,7 @@
 ?>
 </td></tr>
 <tr valign="top">
-<td align="right">Е-поща <!-- <span class="required">*</span> --></td>
+<td class="right">Е-поща <!-- <span class="required">*</span> --></td>
 <td><input type="text" name="Email[]" maxlength="255" size="32"<?php
   if ( $Error[$Index] ) {
     print(" value=\"".$Email[$Index]."\"");
@@ -483,13 +483,13 @@
 ?>
 </td></tr>
 <tr valign="top">
-<td align="right">Учител</td>
+<td class="right">Учител</td>
 <td><input type="checkbox" name="Teacher[]"<?php
   if ( $Error[$Index] && isset($Teacher[$Index]) ) {
     print(" checked=\"checked\"");
   }
 ?> /></td></tr>
-<tr valign="top"><td align="right">Цвят</td>
+<tr valign="top"><td class="right">Цвят</td>
 <td>
 <select name="Color[]" onchange="javascript: previewColor();">
 <option value="">-- Моля, изберете цвят --</option>
@@ -519,7 +519,7 @@
                 $Index++;
               } // while
 ?>
-<tr><td align="center" colspan="2">
+<tr><td class="center" colspan="2">
 <input type="hidden" name="CheckForms" value="1" />
 <input type="submit" name="SubmitEdit" value="Редактирай" />
 <input type="submit" name="CancelEdit" value="Откажи" /></td></tr>
@@ -560,7 +560,7 @@
           $res = @mysqli_query($lnk, $query);
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-<table align="center">
+<table class="tbCenter">
 <tr><td>Желаете ли да изтриете тези потребители?</td></tr>
 <tr><td><ul>
 <?php
@@ -574,7 +574,7 @@
 ?>
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
-<tr><td align="center">
+<tr><td class="center">
 <input type="submit" name="Delete" value="Да" />
 <input type="submit" name="CancelDelete" value="Не" />
 </td></tr>
@@ -638,14 +638,14 @@
 ?>
 </td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center"><a href="https://validator.w3.org/check/referer">
+<p class="center"><a href="https://validator.w3.org/check/referer">
 <img border="0" src="valid-xhtml.png" alt="Valid XHTML 1.0!"
 height="31" width="88" /></a>
 <a class="right" href="https://jigsaw.w3.org/css-validator/check/referer">
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003-2005
+<p class="copyright">Автор &copy; 2003-2005
 <a href="mailto: <?php echo CHAT_CONTACT ?>" class="aCopyright">
 <?php echo CHAT_AUTHOR ?></a></p>
 </body>

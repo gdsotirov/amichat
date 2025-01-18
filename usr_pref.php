@@ -55,7 +55,7 @@
 </head>
 
 <body class="User" onload="javascript: previewColor();">
-<p align="center" class="smlhdr">Редактиране на потребителски настройки</p>
+<p class="smlhdr">Редактиране на потребителски настройки</p>
 <?php
   $Error         = FALSE;
   $Pass_Err  = "";
@@ -143,16 +143,16 @@
 
         $UsrDetails = @mysqli_fetch_array($UsrRes, MYSQLI_ASSOC);
 ?>
-<p align="center"><span class="required">*</span> - задължително поле<br />
+<p class="center"><span class="required">*</span> - задължително поле<br />
 <span class="required">**</span> - задължително само ако другото поле за
 парола е попълнено</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-<table align="center">
-<tr><th align="left" colspan="2">Системна информация</th></tr>
-<tr><td align="right">Потребителско име</td>
+<table class="tbCenter">
+<tr><th class="left" colspan="2">Системна информация</th></tr>
+<tr><td class="right">Потребителско име</td>
 <td><b><?php echo $UsrDetails['Username'] ?></b></td>
 </tr>
-<tr valign="top"><td align="right">Парола <span class="required">**</span></td>
+<tr valign="top"><td class="right">Парола <span class="required">**</span></td>
 <td><input type="password" name="Password" maxlength="32" size="32" />
 <?php
   if ( $Error ) {
@@ -161,7 +161,7 @@
   }
 ?></td></tr>
 <tr valign="top">
-<td align="right">Парола (повторете) <span class="required">**</span></td>
+<td class="right">Парола (повторете) <span class="required">**</span></td>
 <td><input type="password" name="Password2" maxlength="32" size="32" />
 <?php
   if ( $Error ) {
@@ -169,8 +169,8 @@
     print($Pass2_Err);
   }
 ?></td></tr>
-<tr><th align="left" colspan="2">Лична информация</th></tr>
-<tr valign="top"><td align="right">Псевдоним <span class="required">*</span></td>
+<tr><th class="left" colspan="2">Лична информация</th></tr>
+<tr valign="top"><td class="right">Псевдоним <span class="required">*</span></td>
 <td><input id="Nickname" type="text" name="Nick" maxlength="96" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Nick']."\"");
@@ -189,7 +189,7 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Име <span class="required">*</span></td>
+<tr valign="top"><td class="right">Име <span class="required">*</span></td>
 <td><input type="text" name="Name" maxlength="96" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Name']."\"");
@@ -208,7 +208,7 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Е-поща</td>
+<tr valign="top"><td class="right">Е-поща</td>
 <td><input type="text" name="Email" maxlength="255" size="32"<?php
   if ( $Error ) {
     print(" value=\"".$_POST['Email']."\"");
@@ -227,7 +227,7 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Цвят</td>
+<tr valign="top"><td class="right">Цвят</td>
 <td>
 <select id="ColorPicker" name="Color" onchange="javascript: previewColor();">
 <option value="">-- Моля, изберете цвят --</option>
@@ -256,8 +256,8 @@
   print($UsrDetails['ColorID']."\" />\n");
 ?>
 </td></tr>
-<tr><th align="left" colspan="2">Настройки за текущата сесия</th></tr>
-<tr><td align="right">Опресняване на всеки</td>
+<tr><th class="left" colspan="2">Настройки за текущата сесия</th></tr>
+<tr><td class="right">Опресняване на всеки</td>
 <td><select name="Refresh">
 <?php
   $RefreshArr = array(5 => "5", 10 => "10", 15 => "15", 20 => "20");
@@ -271,7 +271,7 @@
   }
 ?>
 </select> секунди </td></tr>
-<tr><td align="right">Показвай</td>
+<tr><td class="right">Показвай</td>
 <td><select name="MsgCount">
 <?php
   $MsgCntArr = array(10 => "10", 15 => "15", 20 => "20", 25 => "25",
@@ -288,7 +288,7 @@
 ?>
 </select> съобщения</td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
-<tr><td align="center" colspan="2">
+<tr><td class="center" colspan="2">
 <input type="hidden" name="CheckForm" value="1" />
 <input type="submit" name="SubmitEdit" value="Редактирай" />
 <input type="submit" name="CancelEdit" value="Откажи" />

@@ -72,11 +72,11 @@
 </head>
 
 <body class="Admin" onload="javascript: focusFirst(); previewColor(); return true">
-<p align="center" class="midhdr">Административни страници:
+<p class="midhdr">Административни страници:
 <a href="adm_clrs.php" class="aMidHdr">Цветове</a> -&gt; <?php PrintAction() ?></p>
-<table align="center" class="tbThinBorder" cellspacing="0" width="100%">
+<table class="tbThinBorder" cellspacing="0">
 <?php PrintTabs('colors') ?><tr><td colspan="6" class="tdData">
-<p align="center" class="smlhdr"><?php PrintAction() ?> на цветове</p>
+<p class="smlhdr"><?php PrintAction() ?> на цветове</p>
 <?php
   if ( isset($_POST['SubmitAdd']) ) { /* Process add request */
     $Error     = FALSE;
@@ -137,11 +137,11 @@
     if ( !isset($_POST['CheckForm']) || $Error ) {
       // Print form with or without errors
 ?>
-<p align="center"><span class="required">*</span> - задължително поле</p>
+<p class="center"><span class="required">*</span> - задължително поле</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-<table align="center">
+<table class="tbCenter">
 <tr valign="top">
-<td align="right">Име <span class="required">*</span></td>
+<td class="right">Име <span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="16" size="16"<?php
   if ( $Error ) {
     print(" value=\"".$Name."\"");
@@ -156,7 +156,7 @@
 </td>
 <td class="ColorPreviewCell" id="ColorPreview0" rowspan="4">
 Представяне на цвета</td></tr>
-<tr valign="top"><td align="right">Червено <span class="required">*</span></td>
+<tr valign="top"><td class="right">Червено <span class="required">*</span></td>
 <td><input onkeypress="javascript: previewColor();" type="text" name="Red[]"
  maxlength="3" size="3"<?php
   if ( $Error ) {
@@ -170,7 +170,7 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Зелено <span class="required">*</span></td>
+<tr valign="top"><td class="right">Зелено <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Green[]"
  maxlength="3" size="3"<?php
   if ( $Error ) {
@@ -184,7 +184,7 @@
   }
 ?>
 </td></tr>
-<tr valign="top"><td align="right">Синьо <span class="required">*</span></td>
+<tr valign="top"><td class="right">Синьо <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Blue[]"
  maxlength="3" size="3"<?php
   if ( $Error ) {
@@ -199,7 +199,7 @@
 ?>
 </td></tr>
 <tr><td colspan="3">&nbsp;</td></tr>
-<tr><td align="center" colspan="3">
+<tr><td class="center" colspan="3">
 <input type="hidden" name="CheckForm" value="1" />
 <input type="submit" name="SubmitAdd" value="Добави" />
 <input type="reset" name="Reset" value="Изчисти" />
@@ -292,12 +292,12 @@
 
             if ( @mysqli_num_rows($res) > 0 ) {
 ?>
-<p align="center"><span class="required">*</span> - задължително поле</p>
+<p class="center"><span class="required">*</span> - задължително поле</p>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-<table align="center"><?php
+<table class="tbCenter"><?php
               $Index = 0;
               while ( $ClrDetails = @mysqli_fetch_array($res, MYSQLI_ASSOC) ) { ?>
-<tr valign="top"><td align="right">
+<tr valign="top"><td class="right">
 <input type="hidden" name="ColorIds[]" value="<?php echo $ClrDetails['ColorID'] ?>" />
 <b>Име</b><span class="required">*</span></td>
 <td><input type="text" name="Name[]" maxlength="16" size="16"<?php
@@ -318,7 +318,7 @@
 <td class="ColorPreviewCell" id="ColorPreview<?php print($Index) ?>" rowspan="4">
 Представяне на цвета</td></tr>
 <tr valign="top">
-<td align="right">Червено <span class="required">*</span></td>
+<td class="right">Червено <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Red[]"
  maxlength="3" size="3"<?php
   if ( $Error[$Index] ) {
@@ -336,7 +336,7 @@
 ?>
 </td></tr>
 <tr valign="top">
-<td align="right">Зелено <span class="required">*</span></td>
+<td class="right">Зелено <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Green[]"
  maxlength="3" size="3"<?php
   if ( $Error[$Index] ) {
@@ -354,7 +354,7 @@
 ?>
 </td></tr>
 <tr valign="top">
-<td align="right">Синьо <span class="required">*</span></td>
+<td class="right">Синьо <span class="required">*</span></td>
 <td><input onchange="javascript: previewColor();" type="text" name="Blue[]"
  maxlength="3" size="3"<?php
   if ( $Error[$Index] ) {
@@ -374,7 +374,7 @@
 <tr><td>&nbsp;</td></tr><?php         
                 $Index++;
               } // while ?>
-<tr><td align="center" colspan="3">
+<tr><td class="center" colspan="3">
 <input type="hidden" name="CheckForms" value="1" />
 <input type="submit" name="SubmitEdit" value="Редактирай" />
 <input type="submit" name="CancelEdit" value="Откажи" /></td></tr>
@@ -413,7 +413,7 @@
           MakeQueryList($ColorIds, $query);
           $res = @mysqli_query($lnk, $query); ?>
 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-<table align="center">
+<table class="tbCenter">
 <tr><td>Желаете ли да изтриете тези цветове?</td></tr>
 <tr><td><ul>
 <?php
@@ -426,7 +426,7 @@
 ?>
 </ul></td></tr>
 <tr><td>&nbsp;</td></tr>
-<tr><td align="center">
+<tr><td class="center">
 <input type="submit" name="Delete" value="Да" />
 <input type="submit" name="CancelDelete" value="Не" />
 </td></tr>
@@ -490,14 +490,14 @@
 ?>
 </td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center"><a href="https://validator.w3.org/check/referer">
+<p class="center"><a href="https://validator.w3.org/check/referer">
 <img border="0" src="valid-xhtml.png" alt="Valid XHTML 1.0!"
 height="31" width="88" /></a>
 <a class="right" href="https://jigsaw.w3.org/css-validator/check/referer">
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003-2005
+<p class="copyright">Автор &copy; 2003-2005
 <a class="aCopyright" href="mailto: <?php echo CHAT_CONTACT ?>">
 <?php echo CHAT_AUTHOR ?></a></p>
 </body>

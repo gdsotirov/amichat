@@ -27,13 +27,13 @@
 </head>
 
 <body class="Admin" onload="javascript: focusFirst(); return true">
-<p align="center" class="midhdr">Административни страници: Цветове</p>
-<table align="center" class="tbThinBorder" cellspacing="0" width="100%">
+<p class="midhdr">Административни страници: Цветове</p>
+<table class="tbThinBorder" cellspacing="0">
 <?php PrintTabs('colors'); ?>
 <tr><td colspan="6" class="tdData">
-<p align="center" class="smlhdr">Записани цветове</p>
+<p class="smlhdr">Записани цветове</p>
 <form action="adm_clrsmod.php" method="post">
-<table align="center" cellspacing="0" class="tbInfo" width="100%">
+<table class="tbCenter" cellspacing="0" class="tbInfo" width="100%">
 <tr>
 <th>Избор</th>
 <th>Име</th>
@@ -95,14 +95,14 @@
 <input name="SubmitDel" type="submit" value="Изтрий" />
 </td></tr></table></form></td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center"><a href="https://validator.w3.org/check/referer">
+<p class="center"><a href="https://validator.w3.org/check/referer">
 <img border="0" src="valid-xhtml.png" alt="Valid XHTML 1.0!"
 height="31" width="88" /></a>
 <a class="right" href="https://jigsaw.w3.org/css-validator/check/referer">
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003-2005
+<p class="copyright">Автор &copy; 2003-2005
 <a class="aCopyright" href="mailto: <?php echo CHAT_CONTACT ?>">
 <?php echo CHAT_AUTHOR ?></a></p>
 </body>

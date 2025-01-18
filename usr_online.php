@@ -25,7 +25,7 @@
 </head>
 
 <body class="User" style="padding: 5px 5px 5px 5px;">
-<table align="left" class="tbOnline" width="100%">
+<table class="tbOnline">
 <?php
   include("passwd.inc.php");
 

@@ -25,17 +25,17 @@
 </head>
 
 <body class="Admin">
-<p align="center" class="midhdr">Административни страници</p>
-<p align="center" class="smlhdr">Добре дошъл
+<p class="midhdr">Административни страници</p>
+<p class="smlhdr">Добре дошъл
 <?php echo $_SESSION['ADM_NAME'] ?>!</p>
-<p align="center" class="text">За последно сте влизали на
+<p class="text">За последно сте влизали на
 <?php
   print("<b>".$_SESSION['ADM_LLDATE']." ".$_SESSION['ADM_LLTIME']."</b> от <b>");
   print(gethostbyaddr($_SESSION['ADM_LLHOST']));
   print(" (".$_SESSION['ADM_LLHOST'].")</b>");
 ?>
 </p>
-<table align="center" class="tbThinBorder" cellspacing="0" width="100%">
+<table class="tbThinBorder" cellspacing="0">
 <?php PrintTabs(''); ?>
 <tr><td colspan="6" class="tdData">
 Моля, изберете бутон от списъка отгоре.<br /><br />
@@ -45,14 +45,14 @@
 <b>Стаи</b> - добавяне, изтриване и редакция на стаи.<br />
 </td></tr></table>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center"><a href="https://validator.w3.org/check/referer">
+<p class="center"><a href="https://validator.w3.org/check/referer">
 <img border="0" src="valid-xhtml.png" alt="Valid XHTML 1.0!"
 height="31" width="88" /></a>
 <a class="right" href="https://jigsaw.w3.org/css-validator/check/referer">
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003-2005 <a href="mailto: <?php
+<p class="copyright">Автор &copy; 2003-2005 <a href="mailto: <?php
 echo CHAT_CONTACT ?>" class="aCopyright"><?php echo CHAT_AUTHOR ?></a></p>
 </body>
 

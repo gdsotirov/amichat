@@ -14,7 +14,7 @@
 </head>
 
 <body class="User" style="padding: 10px 0px 0px 0px;">
-<center><span class="smlhdr"><?php echo CHAT_NAME." ".CHAT_VERSTR ?></span></center>
+<span class="smlhdr"><?php echo CHAT_NAME." ".CHAT_VERSTR ?></span>
 </body>
 
 </html>

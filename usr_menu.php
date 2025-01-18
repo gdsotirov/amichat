@@ -44,7 +44,7 @@
 
 <body class="User" style="padding: 5px 0px 0px 5px;">
 <table width="100%">
-<tr><td align="left">
+<tr><td class="left">
 <?php
   $USR_NICK = $_SESSION['USR_NICK'];
   print("Псевдоним: <b>$USR_NICK</b>&nbsp;");
@@ -80,7 +80,7 @@
   @mysqli_free_result($res);
 ?>
 </td>
-<td align="right">
+<td class="right">
 <a class="aButton" href="usr_pref.php" target="_top">Настройки</a>
 <a class="aButton" href="logout.php" target="_top">Изход</a></td></tr>
 </table>

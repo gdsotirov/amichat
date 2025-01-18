@@ -29,9 +29,9 @@
 </head>
 
 <body onload="javascript: focusFirst(); return true">
-<p align="center" class="midhdr"><?php echo $TITLE ?></p>
+<p class="midhdr"><?php echo $TITLE ?></p>
 <form action="login.php" name="LoginForm" method="post">
-<table align="center">
+<table class="tbCenter">
 <tr>
 <td>Потребителско име</td>
 <td><input type="text" name="Username" size="32" maxlength="32" /></td>
@@ -41,7 +41,7 @@
 <td><input type="password" name="Password" size="32" maxlength="32" /></td>
 </tr>
 <tr>
-<td align="center" colspan="2">
+<td class="center" colspan="2">
 <input type="submit" name="Submit" value="Вход" />
 <input type="reset" name="Reset" value="Изчисти" />
 <?php
@@ -52,7 +52,7 @@
 </td>
 </tr>
 <tr>
-<td align="left" colspan="2">
+<td class="left" colspan="2">
 <?php
   print("<a href=\"".$_SERVER['PHP_SELF']);
   if ( !isset($ADMLOGIN) ) {
@@ -65,14 +65,14 @@
 ?>
 </td></tr></table></form>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center"><a href="https://validator.w3.org/check/referer">
+<p class="center"><a href="https://validator.w3.org/check/referer">
 <img border="0" src="valid-xhtml.png" alt="Valid XHTML 1.0!"
 height="31" width="88" /></a>
 <a class="right" href="https://jigsaw.w3.org/css-validator/check/referer">
 <img alt="Valid CSS!" border="0" height="31" src="valid-css.png" width="88" />
 </a></p>
 <!-- Valid XHTML 1.0 Transitional, Valid CSS //-->
-<p align="center" class="copyright">Автор &copy; 2003-2005
+<p class="copyright">Автор &copy; 2003-2005
 <a href="mailto: <?php echo CHAT_CONTACT ?>" class="aCopyright">
 <?php echo CHAT_AUTHOR ?></a></p>
 </body>

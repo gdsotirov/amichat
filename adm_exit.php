@@ -12,8 +12,8 @@
 </head>
 
 <body class="Admin">
-<p align="center" class="midhdr">Административни страници: Изход</p>
-<table align="center" class="tbThinBorder" cellspacing="0" width="100%">
+<p class="midhdr">Административни страници: Изход</p>
+<table class="tbThinBorder" cellspacing="0">
 <tr>
 <td height="20px" width="20%" class="tdTabInactive">
 
@@ -26,9 +26,9 @@
 <a class="aTabInactive" href="adm_rooms.php">Стаи</a></td>
 <td height="20px" width="20%" class="tdTabActive">Изход</td>
 </tr><tr><td colspan="6" class="tdData">
-<p align="center" class="smlhdr">
+<p class="smlhdr">
 Наистина ли желате да излезете от административните страници?</p>
-<table align="center">
+<table class="tbCenter">
 <tr><td>
 <form action="logout.php" method="post">
 <input type="submit" name="Yes" value="Да" />

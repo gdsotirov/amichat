@@ -1,5 +1,5 @@
 /* Chat Styles
- * Written by Georgi D. Sotirov <gdsotirov@gmail.com
+ * Written by Georgi D. Sotirov <gdsotirov@gmail.com>
  */
 
 a, a:link, a:visited, a:hover,
@@ -77,6 +77,10 @@ table.tbThinBorder td.tdData {
     border-width: 0px 1px 1px 1px;
     background: transparent;
 }
+table.tbCenter, table.tbInfo, table.tbThinBorder {
+    margin: auto;
+    width: 100%;
+}
 table.tbInfo th, table.tbOnline th {
     background: #CCCCCC;
     font-weight: bold;
@@ -90,20 +94,35 @@ table.tbOnline td { padding: 3px 3px 3px 3px; }
 table.tbOnline td {
     font-weight: normal;
     font-size: 10pt;
+    text-align: left;
 }
+table.tbOnline { width: 100%; }
 
 .bighdr { font: normal normal bold 22pt Arial, Helvetica, sans-serif; }
-.midhdr { font: normal normal bold 18pt Arial, Helvetica, sans-serif; }
-.smlhdr { font: normal normal bold 14pt Arial, Helvetica, sans-serif; }
+.midhdr {
+    font: normal normal bold 18pt Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+.smlhdr {
+    font: normal normal bold 14pt Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+.center { text-align: center; }
 .copyright, .error, .required, .text {
     font: normal normal normal 12pt Arial, Helvetica, sans-serif;
 }
-.copyright { color: #C0C0C0; }
+.copyright {
+    color: #C0C0C0;
+    text-align: center;
+}
 .error { color: #FF0000; }
+.left { text-align: left; }
 .required {
     color: #FF0000;
     font-weight: bold;
 }
+.right { text-align: right; }
+.text { text-align: center; }
 .ColorPreviewCell {
     border: 1px solid #000000;
     text-align: center;
