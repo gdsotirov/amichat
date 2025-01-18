@@ -2,6 +2,7 @@
 ------------------------------------------------------------------------------
  - PHP 8: Replaced mysql with mysqli
  - MySQL 8: Replaced PASSWORD with SHA1
+ - XHTML1: Replaced align attributes with CSS
 
 0.3.5 (2019-05-24 19:31 EEST)
 ------------------------------------------------------------------------------
