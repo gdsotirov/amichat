@@ -1,6 +1,7 @@
 <?php
   include("common.inc.php");
   include("error.inc.php");
+  include("passwd.inc.php");
 
   session_start();
 
@@ -17,7 +18,6 @@
     Redirect("index.php?admin=1");
   }
   else { // Process user logout
-    include("passwd.inc.php");
     if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
       if ( @mysqli_select_db($lnk, DB_NAME) ) {
         $query  = "UPDATE users SET Active='0'";
