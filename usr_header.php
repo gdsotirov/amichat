@@ -13,8 +13,8 @@
 <link rel="stylesheet" type="text/css" href="chat.css" />
 </head>
 
-<body class="User" style="padding: 10px 0px 0px 0px;">
-<span class="smlhdr"><?php echo CHAT_NAME." ".CHAT_VERSTR ?></span>
+<body class="User" style="padding: 0;">
+<p class="smlhdr"><?php echo CHAT_NAME." ".CHAT_VERSTR ?></p>
 </body>
 
 </html>
