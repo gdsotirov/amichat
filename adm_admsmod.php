@@ -228,7 +228,7 @@
         $Phone     = $_POST['Phone'];     /* phones array */
         reset($AdminIds);
         /* check values in arrays */
-        while ( list($AdmKey) = each($AdminIds) ) {
+        foreach ( $AdminIds as $AdmKey ) {
           if ( !empty($Password[$AdmKey]) || !empty($Password2[$AdmKey]) ) {
             $Pass_Err[$AdmKey]  =
               CheckStringField($Error[$AdmKey], $Password[$AdmKey], 6, 32, true);
@@ -243,7 +243,7 @@
             CheckStringField($Error[$AdmKey], $Name[$AdmKey], 1, 96, true);
           $Email_Err[$AdmKey] =
             CheckEmailField($Error[$AdmKey], $Email[$AdmKey], 2, 255, true);
-        } // while
+        }
         reset($Error);
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
           // update administrator
@@ -251,7 +251,7 @@
           if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
             if ( @mysqli_select_db($lnk, DB_NAME) ) {
-              while ( list($ErrKey) = each($Error) ) {
+              foreach ( $Error as $ErrKey ) {
                 $query = "UPDATE administrators SET ";
                 if ( !empty($Password[$ErrKey]) ) {
                   $query .= "Password=SHA1('".$Password[$ErrKey]."'),";
@@ -267,7 +267,7 @@
                 if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
-              } // while
+              }
               @mysqli_close($lnk);
               if ( $EditCount == $AdmCount ) {
                 PrintOK("Администраторите са редактирани успешно.");

@@ -158,10 +158,10 @@
         $Descr = $_POST['Descr'];
         reset($RoomIds);
         /* check values in arrays */
-        while ( list($RoomKey) = each($RoomIds) ) {
+        foreach ( $RoomIds as $RoomKey ) {
           $Name_Err[$RoomKey] =
             CheckStringField($Error[$RoomKey], $Name[$RoomKey], 1, 16);
-        } // while
+        }
         reset($Error);
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
           // update color
@@ -169,7 +169,7 @@
           if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
             if ( @mysqli_select_db($lnk, DB_NAME) ) {
-              while ( list($ErrKey) = each($Error) ) {
+              foreach ( $Error as $ErrKey ) {
                 $query = "UPDATE rooms SET ";
                 $query .= "RoomName='".$Name[$ErrKey]."',";
                 $query .= "Descr='".$Descr[$ErrKey]."',";
@@ -180,7 +180,7 @@
                 if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
-              } // while
+              }
               @mysqli_close($lnk);
               if ( $EditCount == $RoomCount ) {
                 PrintOK("Стаите са редактирани успешно.");

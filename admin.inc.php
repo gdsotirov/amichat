@@ -21,7 +21,7 @@
     global $Tabs;
     print("<tr>\n");
     reset($Tabs);
-    while ( list($Index, $Value) = each($Tabs) ) {
+    foreach ( $Tabs as $Index => $Value ) {
       print("<td height=\"20px\" width=\"".(100/sizeof($Tabs))."%\" ");
       if ( $Value['name'] == $Active ) { // active tab
         if ( $Index == 0 ) {
@@ -51,7 +51,7 @@
     if ( $ArrCount > 1 ) {
       $Query .= " in (";
       reset($Arr);
-      while ( list($ArrKey, $ArrVal) = each($Arr) ) {
+      foreach ( $Arr as $ArrKey => $ArrVal ) {
         if ( $ArrKey < $ArrCount - 1 ) {
           if ( isset($ArrVal) ) {
             $Query .= $ArrVal.", ";
@@ -60,7 +60,7 @@
         else {
           $Query .= $ArrVal.")";
         }
-      } // while
+      }
     }
     elseif ( $ArrCount == 1 ) {
       $Query .= "=".$Arr[0];

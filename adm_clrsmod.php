@@ -230,12 +230,12 @@
         $Blue  = $_POST['Blue'];
         reset($ColorIds);
         /* check values in arrays */
-        while ( list($ClrKey) = each($ColorIds) ) {
+        foreach ( $ColorIds as $ClrKey ) {
           $Name_Err[$ClrKey]  = CheckStringField($Error[$ClrKey], $Name[$ClrKey], 1, 16);
           $Red_Err[$ClrKey]   = CheckNumField($Error[$ClrKey], $Red[$ClrKey], 0, 255, "единици");
           $Green_Err[$ClrKey] = CheckNumField($Error[$ClrKey], $Green[$ClrKey], 0, 255, "единици");
           $Blue_Err[$ClrKey]  = CheckNumField($Error[$ClrKey], $Blue[$ClrKey], 0, 255, "единици");
-        } // while
+        }
         reset($Error);
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
           // update color
@@ -243,7 +243,7 @@
           if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
             if ( @mysqli_select_db($lnk, DB_NAME) ) {
-              while ( list($ErrKey) = each($Error) ) {
+              foreach ( $Error as $ErrKey ) {
                 $query = "UPDATE colors SET ";
                 $query .= "ClrName='".$Name[$ErrKey]."',";
                 $query .= "Red=".$Red[$ErrKey].",";
@@ -256,7 +256,7 @@
                 if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
-              } // while
+              }
               @mysqli_close($lnk);
               if ( $EditCount == $ClrCount ) {
                 PrintOK("Цветовете са редактирани успешно.");

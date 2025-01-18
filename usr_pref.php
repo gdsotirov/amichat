@@ -262,7 +262,7 @@
 <?php
   $RefreshArr = array(5 => "5", 10 => "10", 15 => "15", 20 => "20");
   reset($RefreshArr);
-  while ( list($key, $val) = each($RefreshArr) ) {
+  foreach ($RefreshArr as $key => $val) {
     print("<option value=\"$key\"");
     if ( isset($_SESSION['USR_REFRESH']) && $val == $_SESSION['USR_REFRESH'] ) {
       print(" selected=\"selected\"");
@@ -278,7 +278,7 @@
                      30 => "30", 35 => "35", 40 => "40", 45 => "45",
                      50 => "50");
   reset($MsgCntArr);
-  while ( list($key, $val) = each($MsgCntArr) ) {
+  foreach ( $MsgCntArr as $key => $val ) {
     print("<option value=\"$key\"");
     if ( isset($_SESSION['USR_MSGCNT']) && $val == $_SESSION['USR_MSGCNT'] ) {
       print(" selected=\"selected\"");

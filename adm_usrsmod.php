@@ -318,7 +318,7 @@
         $Color     = $_POST['Color'];
         reset($UserIds);
         /* check values in arrays */
-        while ( list($UsrKey) = each($UserIds) ) {
+        foreach ( $UserIds as $UsrKey ) {
           if ( !empty($Password[$UsrKey]) || !empty($Password2[$UsrKey]) ) {
             $Pass_Err[$UsrKey]  =
               CheckStringField($Error[$UsrKey], $Password[$UsrKey], 6, 32, true);
@@ -335,7 +335,7 @@
             CheckStringField($Error[$UsrKey], $Name[$UsrKey], 1, 96);
           $Email_Err[$UsrKey] =
             CheckEmailField($Error[$UsrKey], $Email[$UsrKey], 2, 255, true);
-        } // while
+        }
         reset($Error);
         if ( !in_array(TRUE, $Error) ) { // if there are no errors
           // update user
@@ -343,7 +343,7 @@
           if ( $lnk = @mysqli_connect(DB_SERVER, DB_RW_USER, DB_RW_PWD) ) {
             $EditCount = 0;
             if ( @mysqli_select_db($lnk, DB_NAME) ) {
-              while ( list($ErrKey) = each($Error) ) {
+              foreach ( $Error as $ErrKey ) {
                 $query = "UPDATE users SET ";
                 if ( !empty($Password[$ErrKey]) ) {
                   $query .= "Password=SHA1('".$Password[$ErrKey]."'),";
@@ -360,7 +360,7 @@
                 if ( @mysqli_affected_rows($lnk) == 1 ) {
                   $EditCount++;
                 }
-              } // while
+              }
               @mysqli_close($lnk);
               if ( $EditCount == $UsrCount ) {
                 PrintOK("Потребителите са редактирани успешно.");
