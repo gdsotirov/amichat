@@ -77,11 +77,11 @@ table.tbThinBorder td.tdData {
     border-width: 0px 1px 1px 1px;
     background: transparent;
 }
-table.tbCenter, table.tbInfo, table.tbThinBorder {
+table.tbCenter {
     margin: auto;
-    width: 100%;
 }
-table.tbInfo th, table.tbOnline th {
+table.tbInfo, table.tbThinBorder { width: 100%; }
+table.tbCenter th, table.tbInfo th, table.tbOnline th {
     background: #CCCCCC;
     font-weight: bold;
     text-align: left;
